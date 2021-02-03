@@ -1,0 +1,36 @@
+*{
+    margin-right: 8px;
+}
+/* header */
+.logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.search-text-box{
+    width:300px;
+}
+.form-search{
+    margin-top:1rem;
+}
+.img-responsive{
+    margin-top:0.5rem;
+    width: 100%;
+}
+.banner-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* body */
+.product-item-box{
+    margin-top:1rem;
+}
+.sale-policy-block{
+    width: 100%;
+}
+/* footer */
+.scrollback{
+    visibility: hidden;
+}
