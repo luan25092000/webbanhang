@@ -1,7 +1,6 @@
 *{
     margin:0;
     padding:0;
-    box-sizing: border-box;
 }
 /* header */
 .header{
@@ -14,7 +13,7 @@ li.nav-item > a{
 li.nav-item > a:hover{
     background-color:white;
     color:  #F46164;
-}
+}   
 .cart-child:hover{
     text-decoration: none;
 }
@@ -143,6 +142,87 @@ li.nav-item > a:hover{
     text-align: center;
     line-height: 55px;
     margin:3rem 0;
+}
+/* introduce */
+h4{
+    border-bottom:2px solid #F46164;
+    color:white;
+    padding:0.2rem 0.2rem 0.2rem 0;
+}
+h4 > span{
+    background-color:#F46164;
+    padding:0.2rem;
+    font-size:1.2rem;
+}
+.menu-about ul{
+    list-style-type: none;
+}
+.menu-about ul li > a{
+    color: black;
+    font-size:0.8rem;
+    text-decoration: none;
+}
+.introduce{
+    color:#F46164;
+}
+/* new */
+.new-title{
+    border-bottom:1px solid black;
+    padding:0.6rem;
+    background-color:black;
+    color:white;
+    font-size:0.9rem;
+}
+.menu-news{
+    border: 1px solid black;
+}
+.menu-news ul{
+    list-style-type: none;
+    font-size:0.8rem;
+    padding-left:1rem;
+}
+.menu-news ul li > a{
+    color: black;
+    text-decoration: none;
+}
+.news-item{
+    margin-top:0.8rem;
+    border-bottom:1px dotted black;
+    padding:0.5rem 0;
+}
+.news-item:nth-child(5){
+    border-bottom:none;
+}
+.image-box-container-1{
+    width:100px;
+    height:60px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.image-box{
+    width:100%;
+}
+.image-box-container-1:hover{
+    transform: scale(1.2);  
+}
+.title-news > a{
+    font-size: 0.8rem; 
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+.title-news > a:hover{
+    color:#F46164;
+}
+.image-box-container-2{
+    width:190px;
+    height:150px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+/* check-order */
+.check-order-container{
+    margin-bottom:10rem;
 }
 /* footer */
 .items{

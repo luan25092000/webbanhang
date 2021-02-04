@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00 95</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><i class="far fa-edit"></i> Kiểm tra đơn hàng</a></li>
+                <li class="nav-item"><a href="./check-order.php" class="nav-link"><i class="far fa-edit"></i> Kiểm tra đơn hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
@@ -41,8 +41,8 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="product">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="" class="nav-link">TRANG CHỦ</a></li>
-                <li class="nav-item"><a href="" class="nav-link">GIỚI THIỆU</a></li>
+                <li class="nav-item"><a href="./index.php" class="nav-link">TRANG CHỦ</a></li>
+                <li class="nav-item"><a href="./introduce.php" class="nav-link">GIỚI THIỆU</a></li>
                 <li class="nav-item">
                     <div class="dropdown">
                         <a href="" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">SẢN PHẨM</a>
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item"><a href="" class="nav-link">TIN TỨC</a></li>
-                <li class="nav-item"><a href="" class="nav-link">LIÊN HỆ</a></li>
+                <li class="nav-item"><a href="./new.php" class="nav-link">TIN TỨC</a></li>
+                <li class="nav-item"><a href="./contact.php" class="nav-link">LIÊN HỆ</a></li>
             </ul>
         </div>
     </div>
