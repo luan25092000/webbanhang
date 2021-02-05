@@ -220,6 +220,19 @@ h4 > span{
     box-sizing: border-box;
     overflow: hidden;
 }
+.news-item-promotion:nth-child(2){
+    border-bottom:none;
+}
+.news-item-market:nth-child(3){
+    border-bottom:none;
+}
+.new-detail-content-child > div{
+    font-size:0.8rem;
+}
+.new-detail-content-child{
+    margin:1rem 0;
+    line-height: 1.5rem;
+}
 /* check-order */
 .check-order-container{
     margin-bottom:10rem;

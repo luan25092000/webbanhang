@@ -20,14 +20,14 @@
     <div class="wrapper">
         <?php include 'header.php'; ?>
             <div class="container mt-3 mb-3">
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-lg-3 col-md-12">
                         <div class="menu-news">
                             <h5 class="new-title">TIN TỨC</h5>
                             <ul>
-                                <li><i class="fas fa-arrow-circle-right"></i> <a href="">TIN KHUYẾN MÃI</a></li>
+                                <li><i class="fas fa-arrow-circle-right"></i> <a href="./new-promotion.php">TIN KHUYẾN MÃI</a></li>
                                 <hr />
-                                <li><i class="fas fa-arrow-circle-right"></i> <a href="">TIN THỊ TRƯỜNG</a></li>
+                                <li><i class="fas fa-arrow-circle-right"></i> <a href="./new-market.php">TIN THỊ TRƯỜNG</a></li>
                             </ul>
                         </div>
                         <div class="box-news mt-4">
@@ -40,7 +40,7 @@
                                                 <img src="./img/news/1.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
+                                                <a href="./new-detail.php">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
                                             </div>
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                                 <img src="./img/news/2.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                 <a href="">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO HOLLYWOOD</a>
+                                                 <a href="./new-detail.php">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO HOLLYWOOD</a>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
                                                 <img src="./img/news/3.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
+                                                <a href="./new-detail.php">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
                                             </div>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                                 <img src="./img/news/4.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
+                                                <a href="./new-detail.php">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                                 <img src="./img/news/5.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
+                                                <a href="./new-detail.php">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
                                                 <img src="./img/news/1.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
+                                                <a href="./new-detail.php">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
                                                 <p><small>04/02/2021</small></p>
                                                 <p>
                                                 Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. 
@@ -113,7 +113,7 @@
                                                 <img src="./img/news/2.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO HOLLYWOOD</a>
+                                                <a href="./new-detail.php">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO HOLLYWOOD</a>
                                                 <p><small>04/02/2021</small></p>
                                                 <p>
                                                 Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. 
@@ -128,7 +128,7 @@
                                                 <img src="./img/news/3.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
+                                                <a href="./new-detail.php">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
                                                 <p><small>04/02/2021</small></p>
                                                 <p>
                                                 Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. 
@@ -143,7 +143,7 @@
                                                 <img src="./img/news/4.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
+                                                <a href="./new-detail.php">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
                                                 <p><small>04/02/2021</small></p>
                                                 <p>
                                                 Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. 
@@ -158,7 +158,7 @@
                                                 <img src="./img/news/5.jpg" alt="" class="image-box"/>
                                             </div>
                                             <div class="col-lg-8 title-news">
-                                                <a href="">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
+                                                <a href="./new-detail.php">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
                                                 <p><small>04/02/2021</small></p>
                                                 <p>
                                                 Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. 
