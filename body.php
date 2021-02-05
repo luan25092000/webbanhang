@@ -90,7 +90,7 @@
                             <a href="">
                                 <img src="./img/product/1.jpg" alt="1" width="100%" height="100%" name="product-image" class="product-image" />
                             </a>
-                            <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
+                            <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                         </div>
                         <a href="" class="product-name mt-4" name="product-name">ÁO SƠ MI NỮ CÔNG SỞ</a>
                         <div class="price-new" name="price-new">157.500₫ <span class="price-old">175.000₫</span></div>
@@ -109,7 +109,7 @@
                                 <a href="">
                                     <img src="./img/product/2.jpg" alt="2" width="100%" height="100%" class="product-image"/>
                                 </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
+                                <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                             </div>
                             <a href="" class="product-name mt-4" name="product-name">COMBO 2 ÁO YẾM XUÂN HÈ</a>
                             <div class="price-new" name="price-new">202.500₫ <span class="price-old">225.000₫</span></div>
@@ -128,7 +128,7 @@
                                 <a href="">
                                     <img src="./img/product/3.jpg" alt="3" width="100%" height="100%" class="product-image" />
                                 </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
+                                <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                             </div>
                             <a href="" class="product-name mt-4" name="product-name">ĐẦM THÊU HOA THANH LỊCH</a>
                             <div class="price-new" name="price-new">247.500₫ <span class="price-old">275.000₫</span></div>
@@ -144,7 +144,7 @@
                     <div class="product-item-box">
                         <div class="product-item">
                             <div class="image">
-                                <a href="">
+                                <a href="./product-detail.php">
                                     <img src="./img/product/4.jpg" alt="4" width="100%" height="100%" class="product-image"/>
                                 </a>
                                 <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>

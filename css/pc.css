@@ -202,8 +202,9 @@ h4 > span{
 .image-box{
     width:100%;
 }
-.image-box-container-1:hover{
-    transform: scale(1.2);  
+.image-box-container-1 img:hover{
+    transform: scale(1.1);
+    transition: 0.6s; 
 }
 .title-news > a{
     font-size: 0.8rem; 
@@ -280,4 +281,110 @@ h4 > span{
 }
 .scrollback:hover{
     color: grey;
+}
+/* --------product detail--------- */
+.box-sales-policy li,.buy-guide-policy li{
+   margin :10px 0;
+   font-size: 0.8rem !important;
+}
+.box-sales-policy span:first-child{
+    padding: 5px 8px;
+    background-color: #F46164;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+}
+.color-pink{
+    color: #F46164 !important;
+}
+.buy-guide h3{
+    font-size: 1.8rem;
+    padding-bottom:5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #F46164;
+}
+.card-image,.card-image img{
+    width: 100%;
+    transform: scale(1);
+    transition: 0.6s;
+}
+.card-image{
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.card-image img{
+    padding:1px;
+}
+.card-image img:hover{
+    transform: scale(1.1);
+    transition: 0.6s;
+}
+.box-product-block .name a{
+    font-size: 0.8rem;
+    text-decoration: none;
+    color : black;
+}
+.box-product-block .price .price-new{
+    color : red;
+}
+.price-old{
+    font-size: 0.7rem;
+}
+.btn-buy i {
+    margin-right: 5px;
+}
+.btn-buy button{
+    background: black;
+    color : white;
+    width: 45%;
+    margin:5px 0;
+    transition: 0.6s;
+}
+.btn-buy button:hover{
+    background: #F46164;
+    color : white;
+    transition: 0.6s;
+}
+
+.sp-large img{
+    line-height: 0;
+    font-size: 0;
+    background: #eee;
+    border: 5px solid #eee;
+    border-radius: 3px;
+    position: relative;
+    margin: 0 25px 15px 0;
+    float: left;
+    max-width: 380px;
+    cursor: zoom-in;
+}
+.describe-detail{
+    padding: 10px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin:10px 0;
+}
+.describe .price span{
+    font-size: 1.5rem;
+}
+.describe p{
+    font-size: 0.9rem;
+}
+.quantity-input h5{
+    font-size: 0.9rem;
+}
+.btn-buynow{
+    background-color: #F46164 !important;
+    transition: 0.6s;
+}
+.btn-add-to-cart{
+    width: 50% !important;
+}
+.btn-buynow:hover{
+    background-color: black !important;
+    transition: 0.6s;
+}
+.content-describe {
+    padding: 10px;
+    font-size: 0.8rem;
 }
