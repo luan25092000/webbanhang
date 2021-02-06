@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Css -->
     <link rel="stylesheet" href="./css/pc.css" media="all" />
-	<link rel="stylesheet" href="./css/tablet.css" media="all and (max-width:1024px) and (min-width:768px)" />
-	<link rel="stylesheet" href="./css/mobile.css" media="all and (max-width:767px)" />
+    <link rel="stylesheet" href="./css/tablet.css" media="all and (max-width:1024px) and (min-width:768px)" />
+    <link rel="stylesheet" href="./css/mobile.css" media="all and (max-width:767px)" />
     <!-- Title -->
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico" />
     <!-- Owl carousel -->
     <link rel="stylesheet" href="./css/owl.carousel.min.css">
-	<link rel="stylesheet" href="./css/owl.theme.default.css">
+    <link rel="stylesheet" href="./css/owl.theme.default.css">
 </head>
+
 <body>
     <div class="wrapper">
         <?php 
@@ -24,7 +26,7 @@
             include 'footer.php'
         ?>
     </div>
-    
+
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
@@ -41,4 +43,5 @@
     <script src="./js/owl.carousel.min.js"></script>
     <script src="./js/script.js"></script>
 </body>
-</html> 
+
+</html>
