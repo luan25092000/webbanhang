@@ -1,15 +1,17 @@
 <!-- A grey horizontal navbar that becomes vertical on small screens -->
 <nav class="navbar navbar-expand-lg text-white header">
     <!-- Toggler/collapsibe Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-						aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-list text-white"></i>
-	</button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+            class="fas fa-list text-white"></i>
+    </button>
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00 95</a></li>
-                <li class="nav-item"><a href="./check-order.php" class="nav-link"><i class="far fa-edit"></i> Kiểm tra đơn hàng</a></li>
+                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
+                        95</a></li>
+                <li class="nav-item"><a href="./check-order.php" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
+                        đơn hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
@@ -21,7 +23,7 @@
     <a href="index.php"><img src="./img/logo/logo.png" alt="logo" /></a>
     <form method="POST" action="" enctype="multipart/form-data" class="form-search">
         <div class="form-group d-flex">
-            <input type="text" placeholder="Tìm kiếm..." class="search-text-box"/>
+            <input type="text" placeholder="Tìm kiếm..." class="search-text-box" />
             <button type="submit" class="button-search"><i class="fas fa-search"></i></button>
         </div>
     </form>
