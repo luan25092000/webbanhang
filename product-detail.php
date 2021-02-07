@@ -1,3 +1,4 @@
+<?php require 'connect.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,98 +82,36 @@
                             </span>
                         </h4>
                         <div class="row">
+                            <?php
+                            $sql = "SELECT * FROM product WHERE sex = 'Nữ'";
+                            $result = mysqli_query($conn, $sql);
+                            if(mysqli_num_rows($result) > 0)
+                                while($row = mysqli_fetch_assoc($result)):
+                            ?>
                             <div class="col-12 mt-3">
                                 <div class="card">
                                     <div class="card-image">
-                                        <a href="">
-                                            <img src="./img/product/1.jpg" class="card-img-top" alt="Chi tiết sản phẩm">
+                                        <a href="./product-detail.php?id=<?= $row['id'] ?>">
+                                            <img src=<?= $row['imgPath'] ?> class="card-img-top" alt="<?= $row['title'] ?>" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="box-product-block">
                                     <div class="name text-center">
-                                        <a href="" title="Áo Sơ Mi Nữ Công Sở">
-                                            <b>Áo Sơ Mi Nữ Công Sở</b>
+                                        <a href="./product-detail.php?id=<?= $row['id'] ?>" title="<?= $row['title'] ?>">
+                                            <b><?= $row['title'] ?></b>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="price text-center">
-                                    <span class="price-new">157.500&nbsp;₫</span>
-                                    <span class="price-old">175.000&nbsp;₫</span>
+                                    <span class="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
+                                    <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                                 </div>
                                 <div class="btn-buy text-center">
                                     <button class="btn btn-default">Mua ngay</button>
                                 </div>
                             </div>
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <a href="">
-                                            <img src="./img/product/2.jpg" class="card-img-top" alt="Chi tiết sản phẩm">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="box-product-block">
-                                    <div class="name text-center">
-                                        <a href="" title="Áo Sơ Mi Nữ Công Sở">
-                                            <b>Áo Sơ Mi Nữ Công Sở</b>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="price text-center">
-                                    <span class="price-new">157.500&nbsp;₫</span>
-                                    <span class="price-old">175.000&nbsp;₫</span>
-                                </div>
-                                <div class="btn-buy text-center">
-                                    <button class="btn btn-default">Mua ngay</button>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <a href="">
-                                            <img src="./img/product/3.jpg" class="card-img-top" alt="Chi tiết sản phẩm">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="box-product-block">
-                                    <div class="name text-center">
-                                        <a href="" title="Áo Sơ Mi Nữ Công Sở">
-                                            <b>Áo Sơ Mi Nữ Công Sở</b>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="price text-center">
-                                    <span class="price-new">157.500&nbsp;₫</span>
-                                    <span class="price-old">175.000&nbsp;₫</span>
-                                </div>
-                                <div class="btn-buy text-center">
-                                    <button class="btn btn-default">Mua ngay</button>
-                                </div>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <a href="">
-                                            <img src="./img/product/4.jpg" class="card-img-top" alt="Chi tiết sản phẩm">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="box-product-block">
-                                    <div class="name text-center">
-                                        <a href="" title="Áo Sơ Mi Nữ Công Sở">
-                                            <b>Áo Sơ Mi Nữ Công Sở</b>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="price text-center">
-                                    <span class="price-new">157.500&nbsp;₫</span>
-                                    <span class="price-old">175.000&nbsp;₫</span>
-                                </div>
-                                <div class="btn-buy text-center">
-                                    <button class="btn btn-default">Mua ngay</button>
-                                </div>
-                            </div>
+                            <?php endwhile; ?>
                         </div>
 
                     </div>
@@ -183,20 +122,26 @@
                         <i class="fas fa-angle-double-right"></i> <span class="introduce">Chi tiết sản
                             phẩm</span></small>
                     <div class="row mt-4">
+                        <?php
+                        $sql = "SELECT * FROM product WHERE id = ".$_GET['id'];
+                        $result = mysqli_query($conn, $sql);
+                        if(mysqli_num_rows($result) > 0)
+                            while($row = mysqli_fetch_assoc($result)):
+                        ?>
                         <div class="col-md-6 sp-large">
-                            <a href=""><img src="./img/product/8.jpg" alt=""></a>
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>"><img src=<?= $row['imgPath'] ?> alt="<?= $row['title'] ?>"></a>
                         </div>
                         <div class="col-md-6 describe">
-                            <h2 class="ng-binding">Áo Khoác Nam/Nữ Dạo Phố Spy</h2>
+                            <h2 class="ng-binding"><?= $row['title'] ?></h2>
                             <div class="price">
-                                <span class="price-new ng-binding">156,000đ</span>
-                                <span class="price-old ng-binding">195,000đ</span>
+                                <span class="price-new ng-binding"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
+                                <span class="price-old ng-binding"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                             </div>
                             <span class="product-code ng-binding"><b>Mã SP:</b> </span>
                             <p class="describe-detail">
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu
-                                Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. Giá 210.000 VNĐ, Còn
-                                125.000 VNĐ, Giảm 40%.&nbsp;</p>
+                                <?= $row['title'] ?> – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu
+                                Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. Giá <?= number_format($row['priceOld'], 0, '', ',') ?>₫, Còn
+                                <?= number_format($row['price'], 0, '', ',') ?>₫, Giảm 40%.&nbsp;</p>
                             <iframe
                                 src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fluankma&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=415196006363533"
                                 width="450" height="35" style="border:none;overflow:hidden" scrolling="no"
@@ -206,7 +151,7 @@
                                 <h5>Số lượng</h5>
                                 <input style="width:20%;" type="number" value="1"
                                     class="text ng-valid ng-dirty ng-valid-number ng-touched" ng-model="InputQuantity"
-                                    ng-init="InputQuantity=1">
+                                    ng-init="InputQuantity=1" name="qty">
                             </div>
                             <div class="btn-buy mt-4">
                                 <button class="btn btn-add-to-cart"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ
@@ -215,6 +160,7 @@
                             </div>
 
                         </div>
+                        <?php endwhile; ?>
                     </div>
                     <div class="col-md-12">
                         <div class="menu-about">
