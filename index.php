@@ -1,3 +1,4 @@
+<?php require 'connect.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +24,8 @@
         <?php 
             include 'header.php';
             include 'body.php';
-            include 'footer.php'
+            include 'footer.php';
+            require_once("connect.php");
         ?>
     </div>
 

@@ -49,8 +49,8 @@
                     <div class="dropdown">
                         <a href="" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">SẢN PHẨM</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">NAM</a>
-                            <a class="dropdown-item" href="#">NỮ</a>
+                            <a class="dropdown-item" href="./product.php">NAM</a>
+                            <a class="dropdown-item" href="./product.php">NỮ</a>
                         </div>
                     </div>
                 </li>

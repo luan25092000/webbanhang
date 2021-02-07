@@ -82,86 +82,36 @@
         </li>
     </ul>
     <div class="row">
+        <?php
+            $sql = "SELECT * FROM product WHERE sex = 'Nữ'";
+            $result = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($result) > 0)
+                while($row = mysqli_fetch_assoc($result)):
+        ?>
         <div class="col-lg-3">
-            <form action="" method="get">
+            <form action="" method="post">
                 <div class="product-item-box">
                     <div class="product-item">
                         <div class="image">
-                            <a href="">
-                                <img src="./img/product/1.jpg" alt="1" width="100%" height="100%" name="product-image"
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>">
+                                <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%" name="product-image"
                                     class="product-image" />
                             </a>
-                            <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                         </div>
-                        <a href="" class="product-name mt-4" name="product-name">ÁO SƠ MI NỮ CÔNG SỞ</a>
-                        <div class="price-new" name="price-new">157.500₫ <span class="price-old">175.000₫</span></div>
+                        <a href="./product-detail.php?id=<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
+                        <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
                     </div>
                 </div>
+                <input type="hidden" name="price" value="<?= $row['price'] ?>" />
+                <input type="hidden" name="title" value="<?= $row['title'] ?>" />
+                <input type="hidden" name="quantity" value="<?= $row['quantity'] ?>" />
                 <div class="col text-center">
                     <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
                 </div>
             </form>
         </div>
-        <div class="col-lg-3">
-            <form action="" method="get">
-                <div class="product-item-box">
-                    <div class="product-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="./img/product/2.jpg" alt="2" width="100%" height="100%"
-                                    class="product-image" />
-                            </a>
-                            <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                        </div>
-                        <a href="" class="product-name mt-4" name="product-name">COMBO 2 ÁO YẾM XUÂN HÈ</a>
-                        <div class="price-new" name="price-new">202.500₫ <span class="price-old">225.000₫</span></div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-3">
-            <form action="" method="get">
-                <div class="product-item-box">
-                    <div class="product-item">
-                        <div class="image">
-                            <a href="">
-                                <img src="./img/product/3.jpg" alt="3" width="100%" height="100%"
-                                    class="product-image" />
-                            </a>
-                            <a href="./product-detail.php" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                        </div>
-                        <a href="" class="product-name mt-4" name="product-name">ĐẦM THÊU HOA THANH LỊCH</a>
-                        <div class="price-new" name="price-new">247.500₫ <span class="price-old">275.000₫</span></div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-3">
-            <form action="" method="get">
-                <div class="product-item-box">
-                    <div class="product-item">
-                        <div class="image">
-                            <a href="./product-detail.php">
-                                <img src="./img/product/4.jpg" alt="4" width="100%" height="100%"
-                                    class="product-image" />
-                            </a>
-                            <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                        </div>
-                        <a href="" class="product-name mt-4" name="product-name">ÁO SƠ MI CELIO EMABATON</a>
-                        <div class="price-new" name="price-new">252.000₫ <span class="price-old">280.000₫</span></div>
-                    </div>
-                </div>
-                <div class="col text-center">
-                    <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                </div>
-            </form>
-        </div>
+        <?php endwhile; ?>
         <ul class="nav nav-tabs mb-4 mt-4">
             <li class="nav-item">
                 <a class="nav-link active female-product" data-toggle="tab" href="#">THỜI TRANG NAM</a>
@@ -180,90 +130,37 @@
             </li>
         </ul>
         <div class="row mb-4">
+            <?php
+                $sql = "SELECT * FROM product WHERE sex = 'Nam'";
+                $result = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($result) > 0)
+                    while($row = mysqli_fetch_assoc($result)):
+            ?>
             <div class="col-lg-3">
-                <form action="" method="get">
+                <form action="" method="post">
                     <div class="product-item-box">
                         <div class="product-item">
                             <div class="image">
-                                <a href="">
-                                    <img src="./img/product/5.jpg" alt="1" width="100%" height="100%"
+                                <a href="./product-detail.php?id=<?= $row['id'] ?>">
+                                    <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%"
                                         name="product-image" class="product-image" />
                                 </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
+                                <a href="./product-detail.php?id=<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                             </div>
-                            <a href="" class="product-name mt-4" name="product-name">ÁO THUN NAM TRẮNG</a>
-                            <div class="price-new" name="price-new">157.500₫ <span class="price-old">175.000₫</span>
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
+                            <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="price" value="<?= $row['price'] ?>" />
+                    <input type="hidden" name="title" value="<?= $row['title'] ?>" />
+                    <input type="hidden" name="quantity" value="<?= $row['quantity'] ?>" />
                     <div class="col text-center">
                         <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3">
-                <form action="" method="get">
-                    <div class="product-item-box">
-                        <div class="product-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="./img/product/6.jpg" alt="2" width="100%" height="100%"
-                                        class="product-image" />
-                                </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                            </div>
-                            <a href="" class="product-name mt-4" name="product-name">ÁO SƠ MI LỊCH LÃM</a>
-                            <div class="price-new" name="price-new">202.500₫ <span class="price-old">225.000₫</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="" method="get">
-                    <div class="product-item-box">
-                        <div class="product-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="./img/product/7.jpg" alt="3" width="100%" height="100%"
-                                        class="product-image" />
-                                </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                            </div>
-                            <a href="" class="product-name mt-4" name="product-name">ÁO KHOÁC NAM MÙA HÈ</a>
-                            <div class="price-new" name="price-new">247.500₫ <span class="price-old">275.000₫</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-3">
-                <form action="" method="get">
-                    <div class="product-item-box">
-                        <div class="product-item">
-                            <div class="image">
-                                <a href="">
-                                    <img src="./img/product/8.jpg" alt="4" width="100%" height="100%"
-                                        class="product-image" />
-                                </a>
-                                <a href="" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                            </div>
-                            <a href="" class="product-name mt-4" name="product-name">QUẦN JEAN LỖ GỐI</a>
-                            <div class="price-new" name="price-new">252.000₫ <span class="price-old">280.000₫</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
-                    </div>
-                </form>
-            </div>
+            <?php endwhile; ?>
             <div class="col-lg-3">
                 <div class="sale-policy-block">
                     <i class="fas fa-sync-alt"></i> HOÀN TRẢ TRONG VÒNG 30 NGÀY

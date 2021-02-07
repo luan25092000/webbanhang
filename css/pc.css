@@ -388,3 +388,32 @@ h4 > span{
     padding: 10px;
     font-size: 0.8rem;
 }
+.btn-buy_product{
+    border: 1px solid #F46164 !important;
+    background: white;
+    color : #F46164;
+}
+.btn-buy-product{
+    color: #F46164;
+    transition: 0.6s;
+    border:1px solid #F46164;
+}
+.btn-buy-product:hover{
+    color : white;
+    background-color: #F46164;
+    transition: 0.6s;
+}
+.product-item:hover .product-image360{
+    transform: rotateY(360deg);
+    transition: 0.6s;
+}
+.discount{
+    border:1px solid #F46164;
+    padding : 5px 10px;
+    display: inline-block;
+    color : #F46164;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    top:0;
+}
