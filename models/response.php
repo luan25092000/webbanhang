@@ -4,8 +4,8 @@ class Response {
     public $message;
 
     public function __construct($status, $message = "") {
-        $this->$status = $status;
-        $this->$message = $message;
+        $this->status = $status;
+        $this->message = $message;
     }
 
     public function to_json() {
