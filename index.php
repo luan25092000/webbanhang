@@ -1,48 +1,18 @@
-<?php require_once("./api/v1/products.php"); ?>
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// Autoload class trong PHP
+spl_autoload_register(function (string $class_name) {
+    include_once $class_name.'.php';
+});
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Css -->
-    <link rel="stylesheet" href="./css/pc.css" media="all" />
-    <link rel="stylesheet" href="./css/tablet.css" media="all and (max-width:1024px) and (min-width:768px)" />
-    <link rel="stylesheet" href="./css/mobile.css" media="all and (max-width:767px)" />
-    <!-- Title -->
-    <link rel="shortcut icon" type="image/png" href="./img/favicon.ico" />
-    <!-- Owl carousel -->
-    <link rel="stylesheet" href="./css/owl.carousel.min.css">
-    <link rel="stylesheet" href="./css/owl.theme.default.css">
-</head>
+// Create router instance
+$router = new route\Router();
 
-<body>
-    <div class="wrapper">
-        <?php 
-            include_once 'header.php';
-            include_once 'body.php';
-            include_once 'footer.php';
-        ?>
-    </div>
+// Get current url. Default is "/"
+$request_url = !empty($_GET['url']) ? '/'.$_GET['url'] : '/';
 
-    <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+// Get current method (GET|POST). Default is "GET"
+$method_url = !empty($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Owl carousel -->
-    <script src="./js/owl.carousel.min.js"></script>
-    <script src="./js/script.js"></script>
-</body>
-
-</html>
+// Map URL
+$router->map($request_url, $method_url);
+?>

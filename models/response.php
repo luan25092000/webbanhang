@@ -1,4 +1,6 @@
 <?php
+namespace models;
+
 class Response {
     public $status;
     public $message;

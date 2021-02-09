@@ -1,3 +1,14 @@
+<?php
+namespace vms\components;
+
+class HeaderComponent {
+    public function __construct() {
+        $this->render();
+    }
+
+    public function render() {
+?>
+
 <!-- A grey horizontal navbar that becomes vertical on small screens -->
 <nav class="navbar navbar-expand-lg text-white header">
     <!-- Toggler/collapsibe Button -->
@@ -52,3 +63,5 @@
         </div>
     </div>
 </nav>
+
+<?php }} ?>

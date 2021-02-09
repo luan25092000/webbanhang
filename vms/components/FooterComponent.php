@@ -1,3 +1,14 @@
+<?php
+namespace vms\components;
+
+class FooterComponent {
+    public function __construct() {
+        $this->render();
+    }
+
+    public function render() {
+?>
+
 <div class="row">
     <div class="col-lg-2">
         <img src="./img/brand/1.png" alt="" />
@@ -62,3 +73,5 @@
 <div class="scrollback" id="scrollback">
     <i class="fas fa-arrow-circle-up float-right"></i>
 </div>
+
+<?php }} ?>

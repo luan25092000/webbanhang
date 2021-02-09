@@ -1,4 +1,6 @@
 <?php
+namespace models;
+
 class Product {
     public $id;
     public $title;

@@ -1,8 +1,9 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/db/connect.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/libs/mysql.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/product.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
+namespace api\v1;
+use libs\Mysqllib;
+use db\Database;
+
+require_once ($_SERVER["DOCUMENT_ROOT"]."/models/product.php");
 
 class ProductAPI {
     public static function gets() {

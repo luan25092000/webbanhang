@@ -1,5 +1,6 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
+namespace libs;
+use models\Response;
 
 class Mysqllib {
     public static function mysql_get_data_from_query($conn, String $sql) {
