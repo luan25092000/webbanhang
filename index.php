@@ -1,4 +1,4 @@
-<?php require 'connect.php' ?>
+<?php require_once("./api/v1/products.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,10 +22,9 @@
 <body>
     <div class="wrapper">
         <?php 
-            include 'header.php';
-            include 'body.php';
-            include 'footer.php';
-            require_once("connect.php");
+            include_once 'header.php';
+            include_once 'body.php';
+            include_once 'footer.php';
         ?>
     </div>
 

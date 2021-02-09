@@ -82,11 +82,8 @@
         </li>
     </ul>
     <div class="row">
-        <?php
-            $sql = "SELECT * FROM product WHERE sex = 'Nữ'";
-            $result = mysqli_query($conn, $sql);
-            if(mysqli_num_rows($result) > 0)
-                while($row = mysqli_fetch_assoc($result)):
+        <?php $rows = ProductAPI::getBySex('Nữ');
+              foreach($rows->message as $row):
         ?>
         <div class="col-lg-3">
             <form action="" method="post">
@@ -111,7 +108,7 @@
                 </div>
             </form>
         </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
         <ul class="nav nav-tabs mb-4 mt-4">
             <li class="nav-item">
                 <a class="nav-link active female-product" data-toggle="tab" href="#">THỜI TRANG NAM</a>
@@ -130,11 +127,8 @@
             </li>
         </ul>
         <div class="row mb-4">
-            <?php
-                $sql = "SELECT * FROM product WHERE sex = 'Nam'";
-                $result = mysqli_query($conn, $sql);
-                if(mysqli_num_rows($result) > 0)
-                    while($row = mysqli_fetch_assoc($result)):
+            <?php $rows = ProductAPI::getBySex('Nam');
+                foreach($rows->message as $row):
             ?>
             <div class="col-lg-3">
                 <form action="" method="post">
@@ -147,7 +141,7 @@
                                 </a>
                                 <a href="./product-detail.php?id=<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                             </div>
-                            <a href="./product-detail.php?id=<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>" class="product-name mt-4"><?= $row['title'] ?></a>
                             <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                             </div>
                         </div>
@@ -160,7 +154,7 @@
                     </div>
                 </form>
             </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
             <div class="col-lg-3">
                 <div class="sale-policy-block">
                     <i class="fas fa-sync-alt"></i> HOÀN TRẢ TRONG VÒNG 30 NGÀY

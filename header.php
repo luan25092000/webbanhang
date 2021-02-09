@@ -21,9 +21,9 @@
 </nav>
 <div class="container mt-4 mb-4 logo">
     <a href="index.php"><img src="./img/logo/logo.png" alt="logo" /></a>
-    <form method="POST" action="" enctype="multipart/form-data" class="form-search">
+    <form method="get" action="./search.php" enctype="multipart/form-data" class="form-search">
         <div class="form-group d-flex">
-            <input type="text" placeholder="Tìm kiếm..." class="search-text-box" />
+            <input type="text" placeholder="Tìm kiếm..." class="search-text-box" name="key"/>
             <button type="submit" class="button-search"><i class="fas fa-search"></i></button>
         </div>
     </form>
@@ -45,15 +45,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="./index.php" class="nav-link">TRANG CHỦ</a></li>
                 <li class="nav-item"><a href="./introduce.php" class="nav-link">GIỚI THIỆU</a></li>
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a href="" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">SẢN PHẨM</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="./product.php">NAM</a>
-                            <a class="dropdown-item" href="./product.php">NỮ</a>
-                        </div>
-                    </div>
-                </li>
+                <li class="nav-item"><a href="./product.php" class="nav-link">SẢN PHẨM</a></li>
                 <li class="nav-item"><a href="./new.php" class="nav-link">TIN TỨC</a></li>
                 <li class="nav-item"><a href="./contact.php" class="nav-link">LIÊN HỆ</a></li>
             </ul>

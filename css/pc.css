@@ -238,6 +238,44 @@ h4 > span{
 .check-order-container{
     margin-bottom:10rem;
 }
+/* search */
+.image-search{
+    height:294px;
+    width:194px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.product-name-search{
+    font-size:0.8rem;
+    color:black;
+    text-decoration: none;
+}
+.product-name-search:hover{
+    color: #F46164;
+    text-decoration: none;
+}
+.more-info-search{
+    position: absolute;
+    color: white;
+    background-color: #F46164;
+    padding:0.3rem 0.4rem 0.3rem 0.5rem;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    text-decoration: none;
+    border-radius: 0.2rem;
+    visibility: hidden;
+    font-size:0.8rem;
+}
+.more-info-search:hover{
+    color: white;
+    background-color: #f04b4e;
+    text-decoration: none;
+}
+.product-item:hover .more-info-search{
+    visibility: visible;
+}
 /* footer */
 .items{
     display:flex;

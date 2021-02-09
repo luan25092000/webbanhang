@@ -1,13 +1,12 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/libs/string.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/models/response.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
 
 class Mysqllib {
     public static function mysql_get_data_from_query($conn, String $sql) {
         $result = $conn->query($sql);
         // Catch error
         if(!$result) {
-            return new Response(false, mysql_error());
+            return new Response(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
         }
         // Return data
         $rows = array();
@@ -24,7 +23,7 @@ class Mysqllib {
         $result = $conn->query($sql);
         // Catch error
         if(!$result) {
-            return new Response(false, mysql_error());
+            return new Response(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
         }
         // Return message
         return new Response(true);

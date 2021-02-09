@@ -1,4 +1,4 @@
-<?php require 'connect.php' ?>
+<?php require_once("./api/v1/products.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,23 +82,22 @@
                             </span>
                         </h4>
                         <div class="row">
-                            <?php
-                            $sql = "SELECT * FROM product WHERE sex = 'Nữ'";
-                            $result = mysqli_query($conn, $sql);
-                            if(mysqli_num_rows($result) > 0)
-                                while($row = mysqli_fetch_assoc($result)):
+                            <?php $rows = ProductAPI::getBySex('Nữ');
+                                  foreach($rows->message as $row):
                             ?>
                             <div class="col-12 mt-3">
                                 <div class="card">
                                     <div class="card-image">
                                         <a href="./product-detail.php?id=<?= $row['id'] ?>">
-                                            <img src=<?= $row['imgPath'] ?> class="card-img-top" alt="<?= $row['title'] ?>" />
+                                            <img src=<?= $row['imgPath'] ?> class="card-img-top"
+                                                alt="<?= $row['title'] ?>" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="box-product-block">
                                     <div class="name text-center">
-                                        <a href="./product-detail.php?id=<?= $row['id'] ?>" title="<?= $row['title'] ?>">
+                                        <a href="./product-detail.php?id=<?= $row['id'] ?>"
+                                            title="<?= $row['title'] ?>">
                                             <b><?= $row['title'] ?></b>
                                         </a>
                                     </div>
@@ -111,7 +110,7 @@
                                     <button class="btn btn-default">Mua ngay</button>
                                 </div>
                             </div>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </div>
 
                     </div>
@@ -122,25 +121,26 @@
                         <i class="fas fa-angle-double-right"></i> <span class="introduce">Chi tiết sản
                             phẩm</span></small>
                     <div class="row mt-4">
-                        <?php
-                        $sql = "SELECT * FROM product WHERE id = ".$_GET['id'];
-                        $result = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($result) > 0)
-                            while($row = mysqli_fetch_assoc($result)):
+                        <?php $rows = ProductAPI::getById($_GET['id']);
+                              foreach($rows->message as $row):
                         ?>
                         <div class="col-md-6 sp-large">
-                            <a href="./product-detail.php?id=<?= $row['id'] ?>"><img src=<?= $row['imgPath'] ?> alt="<?= $row['title'] ?>"></a>
+                            <a href="./product-detail.php?id=<?= $row['id'] ?>"><img src=<?= $row['imgPath'] ?>
+                                    alt="<?= $row['title'] ?>"></a>
                         </div>
                         <div class="col-md-6 describe">
                             <h2 class="ng-binding"><?= $row['title'] ?></h2>
                             <div class="price">
-                                <span class="price-new ng-binding"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
-                                <span class="price-old ng-binding"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
+                                <span
+                                    class="price-new ng-binding"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
+                                <span
+                                    class="price-old ng-binding"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                             </div>
                             <span class="product-code ng-binding"><b>Mã SP:</b> </span>
                             <p class="describe-detail">
                                 <?= $row['title'] ?> – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu
-                                Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. Giá <?= number_format($row['priceOld'], 0, '', ',') ?>₫, Còn
+                                Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. Giá
+                                <?= number_format($row['priceOld'], 0, '', ',') ?>₫, Còn
                                 <?= number_format($row['price'], 0, '', ',') ?>₫, Giảm 40%.&nbsp;</p>
                             <iframe
                                 src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fluankma&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=415196006363533"
@@ -160,7 +160,7 @@
                             </div>
 
                         </div>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </div>
                     <div class="col-md-12">
                         <div class="menu-about">

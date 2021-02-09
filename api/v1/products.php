@@ -1,8 +1,8 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/db/connect.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/libs/mysql.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/models/product.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/models/response.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/db/connect.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/libs/mysql.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/product.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
 
 class ProductAPI {
     public static function gets() {
@@ -17,7 +17,7 @@ class ProductAPI {
         return $res;
     }
     
-    public static function get(String $id) {
+    public static function getById(String $id) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -25,10 +25,22 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE id=".$id."");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE id=$id");
         return $res;
     }
     
+    public static function getBySex(String $sex){
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE sex='$sex'");
+        return $res;
+    }
+
     public static function post(Product $product) {
         // Connect db
         $conn_resp = Database::connect_db();
@@ -37,10 +49,8 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = `
-            INSERT INTO product(\`title\`, \`price\`, \`quantity\`, \`createdAt\`, \`updatedAt\`)
-                VALUES(\``.$product->title.`\`, \``.$product->price.`\`, \``.$product->quantity.`\`, \``.date("Y-m-d H:i:s").`\`, \``.date("Y-m-d H:i:s").`\`)
-        `;
+        $query = "INSERT INTO `product`(`title`, `price`, `quantity`, `createdAt`, `updatedAt`, `catId`, `imgPath`, `sex`, `priceOld`) 
+                  VALUES ('$product->title',$product->price,$product->quantity,'$product->createdAt','$product->updatedAt',$product->catId,'$product->imgPath','$product->sex',$product->priceOld)";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         print $res;
     }
@@ -53,11 +63,7 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = `
-            UPDATE product
-                SET \`title\`=\``.$product->title.`\`, \`price\`=\``.$product->price.`\`, \`quantity\`=\``.$product->quantity.`\`, \`updatedAt\`=\``.date("Y-m-d H:i:s").`\`
-                WHERE \`id\`=\``.$product->id.`\`
-        `;
+        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`quantity`=$product->quantity,`updatedAt`= date('Y-m-d H:i:s'),`catId`=$product->catId,`imgPath`=$product->imgPath,`sex`=$product->sex,`priceOld`=$product->priceOld WHERE `id`=$product->id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         print $res;
     }
@@ -70,22 +76,21 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = `
-            DELETE FROM product WHERE \`id\`=\``.$id.`\`
-        `;
+        $query = "DELETE FROM `product` WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         print $res;
     }
-}
 
-if(empty($_GET) && empty($_POST)) {
-    print "Hello";
-    die();
-}
-
-if(isset($_GET["getall"])) {
-    // error_reporting(E_ERROR | E_PARSE); // Hide warning
-    print ProductAPI::gets()->to_json();
-    die();
+    public static function getProductByKey(String $key){
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE title LIKE '%$key%'");
+        return $res;
+    }
 }
 ?>
