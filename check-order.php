@@ -1,11 +1,10 @@
-<?php require_once("./api/v1/products.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Kiểm tra đơn hàng</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Css -->
@@ -21,11 +20,26 @@
 
 <body>
     <div class="wrapper">
-        <?php 
-            include_once 'header.php';
-            include_once 'body.php';
-            include_once 'footer.php';
-        ?>
+        <?php include 'header.php'; ?>
+        <div class="container mt-3">
+            <div class="row check-order-container">
+                <div class="col-lg-10">
+                    <small><a href="./index.php" class="text-dark">Trang chủ</a> <i
+                            class="fas fa-angle-double-right"></i> <span class="introduce">Kiểm tra đơn
+                            hàng</span></small>
+                    <h5 class="mt-3">KIỂM TRA ĐƠN HÀNG</h5>
+                    <form action="" method="get">
+                        <div class="form-group">
+                            <label>Nhập mã đơn hàng</label>
+                            <input type="number" placeholder="Mã số đơn hàng" name="cartId"
+                                class="form-control form-control-sm" />
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">XEM NGAY</button>
+                    </form>
+                </div>
+            </div>
+            <?php include 'footer.php'; ?>
+        </div>
     </div>
 
     <!-- Fontawesome -->

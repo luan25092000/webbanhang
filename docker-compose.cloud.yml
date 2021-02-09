@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  php:
+    restart: always
+    image: kaitoryouga/shop_php:latest
+    expose:
+        - 8888
+    environment:
+      HTTP_PORT: 8888
+      VIRTUAL_HOST: shop.kaito.ninja
+      LETSENCRYPT_HOST: shop.kaito.ninja
+      LETSENCRYPT_EMAIL: "kaito1477800@gmail.com"
+    networks:
+      service_network:
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: kaito
+      MYSQL_DATABASE: shop
+    networks:
+      service_network:
+    volumes:
+      - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./.docker/mysql/shop.sql:/etc/shop.sql:ro
+      - mysqldata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5-fpm-alpine
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+    volumes:
+      - phpmyadmindata:/var/www/html
+    depends_on:
+      - mysql
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 5
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    container_name: nginx-proxy
+    networks:
+      service_network:
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+  web-redirect:
+    image: adamkdean/redirect
+    environment:
+      VIRTUAL_HOST: kaito.ninja
+      LETSENCRYPT_HOST: kaito.ninja
+      LETSENCRYPT_EMAIL: "kaito1477800@gmail.com"
+      REDIRECT_LOCATION: "https://kaito.ninja"
+    networks:
+      service_network:
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      NGINX_PROXY_CONTAINER: "nginx-proxy"
+    networks:
+      service_network:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs
+      - nginx-vhost:/etc/nginx/vhost.d
+      - nginx-html:/usr/share/nginx/html
+networks:
+  service_network:
+volumes:
+  mysqldata:
+  phpmyadmindata:
+  nginx-certs:
+  nginx-vhost:
+  nginx-html:
