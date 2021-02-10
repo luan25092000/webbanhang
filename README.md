@@ -103,7 +103,7 @@ End template
 #### 1.7. Tài nguyên static như favicon, images, js,... dùng cho front-end để trong thư mục `assets` nhằm quản lí tốt hơn  
 #### 1.8. Thư mục gốc của project nằm ở root của host  
 #### 1.9. Cách lấy query string  
-Do thay đổi trong cấu trúc bắt request ở file .htaccess nên việc lấy query string sẽ dùng code bên dưới:
+Do thay đổi trong cấu trúc bắt request ở file .htaccess nên việc lấy query string sẽ dùng code bên dưới (Đã thêm vào thư viện `models\Mysqllib`):
 ```php
 // Map queries to object
 $queries = array();
