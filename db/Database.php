@@ -1,5 +1,6 @@
 <?php
 namespace db;
+use models\ResponseModel;
 
 Class Database {
     public static function connect_db() {
@@ -7,7 +8,7 @@ Class Database {
         $username = "root";
         $password = "";
         $dbname = "shop";
-        $false_response = new \models\Response(false, "Connection failed: ".mysqli_connect_error());
+        $false_response = new ResponseModel(false, "Connection failed: ".mysqli_connect_error());
     
         try {
             $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -19,7 +20,7 @@ Class Database {
             return $false_response;
         }
     
-        return new \models\Response(true, $conn);
+        return new ResponseModel(true, $conn);
     }
 }
 ?>

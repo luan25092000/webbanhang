@@ -2,8 +2,7 @@
 namespace vms\components;
 
 class FooterComponent {
-    public function __construct() {
-        $this->render();
+    public function __construct($params = null) {
     }
 
     public function render() {
@@ -11,22 +10,22 @@ class FooterComponent {
 
 <div class="row">
     <div class="col-lg-2">
-        <img src="./img/brand/1.png" alt="" />
+        <img src="/assets/img/brand/1.png" alt="" />
     </div>
     <div class="col-lg-2">
-        <img src="./img/brand/2.png" alt="" />
+        <img src="/assets/img/brand/2.png" alt="" />
     </div>
     <div class="col-lg-2">
-        <img src="./img/brand/3.png" alt="" />
+        <img src="/assets/img/brand/3.png" alt="" />
     </div>
     <div class="col-lg-2">
-        <img src="./img/brand/4.png" alt="" />
+        <img src="/assets/img/brand/4.png" alt="" />
     </div>
     <div class="col-lg-2">
-        <img src="./img/brand/5.png" alt="" />
+        <img src="/assets/img/brand/5.png" alt="" />
     </div>
     <div class="col-lg-2">
-        <img src="./img/brand/6.png" alt="" />
+        <img src="/assets/img/brand/6.png" alt="" />
     </div>
 </div>
 <hr />
@@ -74,4 +73,4 @@ class FooterComponent {
     <i class="fas fa-arrow-circle-up float-right"></i>
 </div>
 
-<?php }} ?>
+<?php }}

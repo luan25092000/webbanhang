@@ -8,10 +8,8 @@ class Router {
         $this->__routes = [];
 
         // Routes
-        // $this->get('/', function() {
-        //     echo 'Home';
-        // });
-        $this->get('/', "Home");
+        $this->get('/', "HomePage");
+        $this->get('/search', "SearchPage");
     }
     
     public function get(string $url, $action) {
@@ -80,7 +78,7 @@ class Router {
         }
 
         // Nếu không khớp với bất kì route nào cả.
-        $this->__call_action_route("NotFound", []);
+        $this->__call_action_route("NotFoundPage", []);
         return;
     }
 
@@ -95,16 +93,12 @@ class Router {
      * 
      */
     private function __call_action_route($action, $params) {
-        // Nếu $action là một callback (một hàm)
-        if (is_callable($action)) {
-            call_user_func_array($action, $params);
-            return;
-        }
-
         // Nếu action là một view-model
         if(is_string($action)) {
-            $vm_name = 'vms\\' . $action;
-            $vm = new $vm_name();
+            $vm_name = 'vms\\'.$action;
+            $vm = new $vm_name($params);
+            $vm->render();
+            // Free variable after using
             $vm = null;
         }
     }
