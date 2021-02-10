@@ -155,14 +155,14 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `createdAt`, `updatedAt`, `catId`, `imgPath`, `sex`, `priceOld`) VALUES
-(1, 'ÁO SƠ MI NỮ CÔNG SỞ', 157500, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/1.jpg', 'Nữ', 175000),
-(2, 'COMBO 2 ÁO YẾM XUÂN HÈ', 202500, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/2.jpg', 'Nữ', 225000),
-(3, 'ĐẦM THÊU HOA THANH LỊCH', 247500, 100, '0000-00-00 00:00:00', NULL, 3, './img/product/3.jpg', 'Nữ', 275000),
-(4, 'ÁO SƠ MI CELIO EMABATON', 252000, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/4.jpg', 'Nữ', 200000),
-(5, 'ÁO THUN NAM TRẮNG', 157500, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/5.jpg', 'Nam', 175000),
-(6, 'ÁO SƠ MI LỊCH LÃM', 202500, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/6.jpg', 'Nam', 225000),
-(7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, '0000-00-00 00:00:00', NULL, 1, './img/product/7.jpg', 'Nam', 275000),
-(8, 'QUẦN JEAN LỖ GỐI', 252000, 100, '0000-00-00 00:00:00', NULL, 2, './img/product/8.jpg', 'Nam', 200000);
+(1, 'ÁO SƠ MI NỮ CÔNG SỞ', 157500, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/1.jpg', 'Nữ', 175000),
+(2, 'COMBO 2 ÁO YẾM XUÂN HÈ', 202500, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/2.jpg', 'Nữ', 225000),
+(3, 'ĐẦM THÊU HOA THANH LỊCH', 247500, 100, '0000-00-00 00:00:00', NULL, 3, '/assets/img/product/3.jpg', 'Nữ', 275000),
+(4, 'ÁO SƠ MI CELIO EMABATON', 252000, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/4.jpg', 'Nữ', 200000),
+(5, 'ÁO THUN NAM TRẮNG', 157500, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/5.jpg', 'Nam', 175000),
+(6, 'ÁO SƠ MI LỊCH LÃM', 202500, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/6.jpg', 'Nam', 225000),
+(7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, '0000-00-00 00:00:00', NULL, 1, '/assets/img/product/7.jpg', 'Nam', 275000),
+(8, 'QUẦN JEAN LỖ GỐI', 252000, 100, '0000-00-00 00:00:00', NULL, 2, '/assets/img/product/8.jpg', 'Nam', 200000);
 
 -- --------------------------------------------------------
 
