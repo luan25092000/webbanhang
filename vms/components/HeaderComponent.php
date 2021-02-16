@@ -1,3 +1,12 @@
+<?php
+namespace vms\components;
+
+class HeaderComponent {
+    public function __construct($params = null) {}
+
+    public function render() {
+?>
+
 <!-- A grey horizontal navbar that becomes vertical on small screens -->
 <nav class="navbar navbar-expand-lg text-white header">
     <!-- Toggler/collapsibe Button -->
@@ -10,7 +19,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
                         95</a></li>
-                <li class="nav-item"><a href="./check-order.php" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
+                <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
                         đơn hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
                 <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
@@ -20,8 +29,8 @@
     </div>
 </nav>
 <div class="container mt-4 mb-4 logo">
-    <a href="index.php"><img src="./img/logo/logo.png" alt="logo" /></a>
-    <form method="get" action="./search.php" enctype="multipart/form-data" class="form-search">
+    <a href="/"><img src="/assets/img/logo/logo.png" alt="logo" /></a>
+    <form method="get" action="/search" enctype="multipart/form-data" class="form-search">
         <div class="form-group d-flex">
             <input type="text" placeholder="Tìm kiếm..." class="search-text-box" name="key"/>
             <button type="submit" class="button-search"><i class="fas fa-search"></i></button>
@@ -29,7 +38,7 @@
     </form>
     <div class="cart">
         <a href="" class="text-dark cart-child">
-            <img src="./img/cart/cart.png" alt="cart" />
+            <img src="/assets/img/cart/cart.png" alt="cart" />
             <span id="cart-total" class="cart-total ml-2 mr-2 mt-2">0 sp - 0đ</span>
             <i class="fa fa-arrow-right mt-2"></i>
         </a>
@@ -43,12 +52,14 @@
     <div class="container">
         <div class="collapse navbar-collapse" id="product">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="./index.php" class="nav-link">TRANG CHỦ</a></li>
-                <li class="nav-item"><a href="./introduce.php" class="nav-link">GIỚI THIỆU</a></li>
-                <li class="nav-item"><a href="./product.php" class="nav-link">SẢN PHẨM</a></li>
-                <li class="nav-item"><a href="./new.php" class="nav-link">TIN TỨC</a></li>
-                <li class="nav-item"><a href="./contact.php" class="nav-link">LIÊN HỆ</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">TRANG CHỦ</a></li>
+                <li class="nav-item"><a href="/introduce" class="nav-link">GIỚI THIỆU</a></li>
+                <li class="nav-item"><a href="/product" class="nav-link">SẢN PHẨM</a></li>
+                <li class="nav-item"><a href="/new" class="nav-link">TIN TỨC</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">LIÊN HỆ</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
+<?php }}

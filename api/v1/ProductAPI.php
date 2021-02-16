@@ -1,8 +1,9 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/db/connect.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/libs/mysql.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/product.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
+namespace api\v1;
+
+use libs\Mysqllib;
+use db\Database;
+use models\ProductModel;
 
 class ProductAPI {
     public static function gets() {
@@ -41,7 +42,7 @@ class ProductAPI {
         return $res;
     }
 
-    public static function post(Product $product) {
+    public static function post(ProductModel $product) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -55,7 +56,7 @@ class ProductAPI {
         print $res;
     }
     
-    public static function update(Product $product) {
+    public static function update(ProductModel $product) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {

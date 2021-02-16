@@ -1,5 +1,7 @@
 <?php
-class Response {
+namespace models;
+
+class ResponseModel {
     public $status;
     public $message;
 

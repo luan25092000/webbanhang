@@ -1,12 +1,13 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"]."/webbanhang/models/response.php");
+namespace libs;
+use models\ResponseModel;
 
 class Mysqllib {
     public static function mysql_get_data_from_query($conn, String $sql) {
         $result = $conn->query($sql);
         // Catch error
         if(!$result) {
-            return new Response(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
+            return new ResponseModel(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
         }
         // Return data
         $rows = array();
@@ -16,17 +17,17 @@ class Mysqllib {
                 $rows[] = $row;
             }
         }
-        return new Response(true, $rows);
+        return new ResponseModel(true, $rows);
     }
     
     public static function mysql_post_data_from_query($conn, String $sql) {
         $result = $conn->query($sql);
         // Catch error
         if(!$result) {
-            return new Response(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
+            return new ResponseModel(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
         }
         // Return message
-        return new Response(true);
+        return new ResponseModel(true);
     }
 }
 ?>
