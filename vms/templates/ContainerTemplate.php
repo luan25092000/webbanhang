@@ -23,17 +23,19 @@ class ContainerTemplate {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php print $this->child->title; ?> - WOMEN STORE</title>
+         <!-- Title -->
+        <link rel="icon" type="image/png" href="/assets/img/favicon.png"/>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- Css -->
         <link rel="stylesheet" href="/assets/css/pc.css" media="all" />
         <link rel="stylesheet" href="/assets/css/tablet.css" media="all and (max-width:1024px) and (min-width:768px)" />
         <link rel="stylesheet" href="/assets/css/mobile.css" media="all and (max-width:767px)" />
-        <!-- Title -->
-        <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.ico" />
         <!-- Owl carousel -->
         <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
         <link rel="stylesheet" href="/assets/css/owl.theme.default.css">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     </head>
     <body>
         <div class="wrapper">
@@ -42,9 +44,6 @@ class ContainerTemplate {
                 <?php $this->child->__render(); ?>
                 <?php (new FooterComponent())->render(); ?>
             </div>
-
-            <!-- Fontawesome -->
-            <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
             <!-- jQuery library -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

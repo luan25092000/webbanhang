@@ -10,6 +10,18 @@ class Router {
         // Routes
         $this->get('/', "HomePage");
         $this->get('/search', "SearchPage");
+        $this->get('/product-detail/{id}',"ProductDetailPage");
+        $this->get('/introduce',"IntroducePage");
+        $this->get('/field',"FieldPage");
+        $this->get('/check-order',"CheckOrderPage");
+        $this->get('/contact',"ContactPage");
+        $this->get('/new',"NewPage");
+        $this->get('/new-detail',"NewDetailPage");
+        $this->get('/new-market',"NewMarketPage");
+        $this->get('/new-promotion',"NewPromotionPage");
+        $this->get('/female-product',"FemaleProductPage");
+        $this->get('/male-product',"MaleProductPage");
+        $this->get('/product',"ProductPage");
     }
     
     public function get(string $url, $action) {
