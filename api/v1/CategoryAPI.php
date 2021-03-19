@@ -4,9 +4,8 @@ namespace api\v1;
 use libs\Mysqllib;
 use db\Database;
 use models\ProductModel;
-use route\Router;
 
-class ProductAPI {
+class CategoryAPI {
     public static function gets() {
         // Connect db
         $conn_resp = Database::connect_db();
@@ -15,7 +14,7 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from category");
         return $res;
     }
     
@@ -27,7 +26,7 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE id=$id");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from category WHERE id=$id");
         return $res;
     }
     
@@ -43,9 +42,7 @@ class ProductAPI {
         return $res;
     }
 
-    public static function post(ProductModel $product, String $imgPath) {
-
-        $path = "/assets/img/product/" . $imgPath;
+    public static function post(ProductModel $product) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -53,15 +50,13 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "INSERT INTO `product`(`title`, `price`, `quantity`, `catId`, `imgPath`, `sex`) 
-                  VALUES ('$product->title',$product->price,$product->quantity,$product->catId,'$path','$product->sex')";
+        $query = "INSERT INTO `product`(`title`, `price`, `quantity`, `createdAt`, `updatedAt`, `catId`, `imgPath`, `sex`, `priceOld`) 
+                  VALUES ('$product->title',$product->price,$product->quantity,'$product->createdAt','$product->updatedAt',$product->catId,'$product->imgPath','$product->sex',$product->priceOld)";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        return $res;
-        // var_dump($res);
+        print $res;
     }
     
-    public static function update($id, ProductModel $product, String $imgPath = "") {
-
+    public static function update(ProductModel $product) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -69,15 +64,9 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`quantity`=$product->quantity,`catId`=$product->catId,`sex`='$product->sex' WHERE `id`=$id";
+        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`quantity`=$product->quantity,`updatedAt`= date('Y-m-d H:i:s'),`catId`=$product->catId,`imgPath`=$product->imgPath,`sex`=$product->sex,`priceOld`=$product->priceOld WHERE `id`=$product->id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-
-        if ($res->status && $imgPath !== "" ) {
-            $path = "/assets/img/product/" . $imgPath;
-            $query = "UPDATE `product` SET `imgPath`='$path' WHERE `id`=$id";
-            $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        }
-        return $res;
+        print $res;
     }
     
     public static function delete(String $id) {
@@ -88,9 +77,10 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "DELETE FROM `product` WHERE `id`=$id";
-        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        return $res;
+        var_dump($id);
+        // $query = "DELETE FROM `product` WHERE `id`=$id";
+        // $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        // print $res;
     }
 
     public static function getProductByKey(String $key){

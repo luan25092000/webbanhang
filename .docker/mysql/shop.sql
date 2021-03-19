@@ -1,136 +1,373 @@
+DROP DATABASE shop;
+CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE shop;
 
--- CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th2 07, 2021 lúc 04:21 PM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.2.32
 
-CREATE TABLE `shop`.`customer` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NULL DEFAULT NULL,
-  `phone` VARCHAR(15) NULL,
-  `email` VARCHAR(50) NULL,
-  `passwordHash` VARCHAR(32) NOT NULL,
-  `admin` TINYINT(1) NOT NULL DEFAULT 0,
-  `registeredAt` DATETIME NOT NULL,
-  `lastLogin` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `uq_phone` (`phone` ASC),
-  UNIQUE INDEX `uq_email` (`email` ASC) 
-);
-
-CREATE TABLE `shop`.`product` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(75) NOT NULL,
-  `price` FLOAT NOT NULL DEFAULT 0,
-  `quantity` SMALLINT(6) NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `shop`.`category` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(75) NOT NULL,
-  `slug` VARCHAR(100) NOT NULL,
-  `content` TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `shop`.`tag` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(75) NOT NULL,
-  `slug` VARCHAR(100) NOT NULL,
-  `content` TEXT NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `shop`.`promotion` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(75) NOT NULL,
-  `code` VARCHAR(10) NOT NULL,
-  `price` FLOAT NOT NULL DEFAULT 0,
-  `quantity` SMALLINT(6) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `shop`.`cart` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `customerId` BIGINT NULL DEFAULT NULL,
-  `name` VARCHAR(50) NULL DEFAULT NULL,
-  `promotionId` BIGINT NULL DEFAULT NULL,
-  `subtotal` FLOAT NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_cart_customerId` (`customerId` ASC),
-  CONSTRAINT `fk_cart_customer`
-    FOREIGN KEY (`customerId`)
-    REFERENCES `shop`.`customer` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-CREATE TABLE `shop`.`cart_item` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `productId` BIGINT NOT NULL,
-  `cartId` BIGINT NOT NULL,
-  `price` FLOAT NOT NULL DEFAULT 0,
-  `quantity` SMALLINT(6) NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_cart_item_product` (`productId` ASC),
-  INDEX `idx_cart_item_cart` (`cartId` ASC),
-  CONSTRAINT `fk_cart_item_product`
-    FOREIGN KEY (`productId`)
-    REFERENCES `shop`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cart_item_cart`
-    FOREIGN KEY (`cartId`)
-    REFERENCES `shop`.`cart` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE `shop`.`order` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `customerId` BIGINT NULL DEFAULT NULL,
-  `name` VARCHAR(50) NULL DEFAULT NULL,
-  `phone` VARCHAR(15) NULL,
-  `email` VARCHAR(50) NULL,
-  `promotionId` BIGINT NULL DEFAULT NULL,
-  `shipping` FLOAT NOT NULL DEFAULT 0,
-  `total` FLOAT NOT NULL DEFAULT 0,
-  `status` SMALLINT(6) NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_order_customer` (`customerId` ASC),
-  CONSTRAINT `fk_order_customer`
-    FOREIGN KEY (`customerId`)
-    REFERENCES `shop`.`customer` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
+--
+-- Cơ sở dữ liệu: `shop`
+--
 
-CREATE TABLE `shop`.`order_item` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT,
-  `productId` BIGINT NOT NULL,
-  `orderId` BIGINT NOT NULL,
-  `price` FLOAT NOT NULL DEFAULT 0,
-  `quantity` SMALLINT(6) NOT NULL DEFAULT 0,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `idx_order_item_product` (`productId` ASC),
-  INDEX `idx_order_item_order` (`orderId` ASC),
-  CONSTRAINT `fk_order_item_product`
-    FOREIGN KEY (`productId`)
-    REFERENCES `shop`.`product` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_item_order`
-    FOREIGN KEY (`orderId`)
-    REFERENCES `shop`.`order` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-);
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` bigint(20) NOT NULL,
+  `customerId` bigint(20) DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `promotionId` bigint(20) DEFAULT NULL,
+  `subtotal` float NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cart_item`
+--
+
+CREATE TABLE `cart_item` (
+  `id` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
+  `cartId` bigint(20) NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `category`
+--
+
+CREATE TABLE `category` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `category`
+--
+
+INSERT INTO `category` (`id`, `title`, `slug`, `content`) VALUES
+(1, 'áo', 'áo', NULL),
+(2, 'quần', 'quần', NULL),
+(3, 'đầm', 'đầm', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `passwordHash` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
+  `registeredAt` datetime NOT NULL,
+  `lastLogin` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `order`
+--
+
+CREATE TABLE `order` (
+  `id` bigint(20) NOT NULL,
+  `customerId` bigint(20) DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `promotionId` bigint(20) DEFAULT NULL,
+  `shipping` float NOT NULL DEFAULT 0,
+  `total` float NOT NULL DEFAULT 0,
+  `status` smallint(6) NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `order_item`
+--
+
+CREATE TABLE `order_item` (
+  `id` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
+  `orderId` bigint(20) NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product`
+--
+
+CREATE TABLE `product` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  `catId` bigint(20) NOT NULL,
+  `imgPath` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` char(3) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `priceOld` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product`
+--
+
+INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `catId`, `imgPath`, `sex`, `priceOld`) VALUES
+(1, 'ÁO SƠ MI NỮ CÔNG SỞ', 157500, 100, 1, '/assets/img/product/1.jpg', 'Nữ', 175000),
+(2, 'COMBO 2 ÁO YẾM XUÂN HÈ', 202500, 100, 1, '/assets/img/product/2.jpg', 'Nữ', 225000),
+(3, 'ĐẦM THÊU HOA THANH LỊCH', 247500, 100, 3, '/assets/img/product/3.jpg', 'Nữ', 275000),
+(4, 'ÁO SƠ MI CELIO EMABATON', 252000, 100, 1, '/assets/img/product/4.jpg', 'Nữ', 200000),
+(5, 'ÁO THUN NAM TRẮNG', 157500, 100, 1, '/assets/img/product/5.jpg', 'Nam', 175000),
+(6, 'ÁO SƠ MI LỊCH LÃM', 202500, 100, 1, '/assets/img/product/6.jpg', 'Nam', 225000),
+(7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, 1, '/assets/img/product/7.jpg', 'Nam', 275000),
+(8, 'QUẦN JEAN LỖ GỐI', 252000, 100, 2, '/assets/img/product/8.jpg', 'Nam', 200000);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `promotion`
+--
+
+CREATE TABLE `promotion` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tag`
+--
+
+CREATE TABLE `tag` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gmail` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jwt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  PRIMARY KEY(id),
+  CHECK ( `status` = "verified" OR `status` = "unverified" )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_cart_customerId` (`customerId`);
+
+--
+-- Chỉ mục cho bảng `cart_item`
+--
+ALTER TABLE `cart_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_cart_item_product` (`productId`),
+  ADD KEY `idx_cart_item_cart` (`cartId`);
+
+--
+-- Chỉ mục cho bảng `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_phone` (`phone`),
+  ADD UNIQUE KEY `uq_email` (`email`);
+
+--
+-- Chỉ mục cho bảng `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_order_customer` (`customerId`);
+
+--
+-- Chỉ mục cho bảng `order_item`
+--
+ALTER TABLE `order_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_order_item_product` (`productId`),
+  ADD KEY `idx_order_item_order` (`orderId`);
+
+--
+-- Chỉ mục cho bảng `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_cat_product` (`catId`);
+
+--
+-- Chỉ mục cho bảng `promotion`
+--
+ALTER TABLE `promotion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `cart_item`
+--
+ALTER TABLE `cart_item`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `order_item`
+--
+ALTER TABLE `order_item`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `promotion`
+--
+ALTER TABLE `promotion`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_cart_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `cart_item`
+--
+ALTER TABLE `cart_item`
+  ADD CONSTRAINT `fk_cart_item_cart` FOREIGN KEY (`cartId`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_cart_item_product` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `fk_order_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `order_item`
+--
+ALTER TABLE `order_item`
+  ADD CONSTRAINT `fk_order_item_order` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_order_item_product` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `fk_cat_product` FOREIGN KEY (`catId`) REFERENCES `category` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

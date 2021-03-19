@@ -9,9 +9,10 @@ class Mysqllib {
         if(!$result) {
             return new ResponseModel(false, "Error: " . $sql . "<br>" . mysqli_error($conn));
         }
+
         // Return data
         $rows = array();
-        if ($result->num_rows > 0) {
+        if ( $result !== false && $result->num_rows > 0) {
             // output dữ liệu trên trang
             while($row = $result->fetch_assoc()) {
                 $rows[] = $row;
