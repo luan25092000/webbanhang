@@ -9,5 +9,5 @@ $(document).ready(function(){
     $('#scrollback').click(function(){
         $('html,body').animate({ scrollTop: 0},600);
     });
-});
 
+});

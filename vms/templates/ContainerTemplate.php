@@ -28,9 +28,7 @@ class ContainerTemplate {
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- Css -->
-        <link rel="stylesheet" href="/assets/css/pc.css" media="all" />
-        <link rel="stylesheet" href="/assets/css/tablet.css" media="all and (max-width:1024px) and (min-width:768px)" />
-        <link rel="stylesheet" href="/assets/css/mobile.css" media="all and (max-width:767px)" />
+        <link rel="stylesheet" href="/assets/css/style.css" media="all" />
         <!-- Owl carousel -->
         <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
         <link rel="stylesheet" href="/assets/css/owl.theme.default.css">

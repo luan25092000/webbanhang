@@ -22,6 +22,12 @@ class Router {
         $this->get('/female-product',"FemaleProductPage");
         $this->get('/male-product',"MaleProductPage");
         $this->get('/product',"ProductPage");
+        $this->get('/login',"LoginPage");
+        $this->get('/register',"RegisterPage");
+        $this->get('/cart',"CartPage");
+        $this->get('/checkout',"CheckoutPage");
+        $this->get('/checkout-confirm',"CheckoutConfirmPage");
+        $this->get('/checkout-done',"CheckoutDonePage");
     }
     
     public function get(string $url, $action) {
