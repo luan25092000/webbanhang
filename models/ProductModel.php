@@ -6,12 +6,9 @@ class ProductModel {
     public $title;
     public $price;
     public $quantity;
-    // public $createdAt;
-    // public $updatedAt;
     public $catId;
     public $imgPath;
     public $sex;
-    // public $priceOld;
 
     public function __construct($product) {
         $this->title = $product["title"];

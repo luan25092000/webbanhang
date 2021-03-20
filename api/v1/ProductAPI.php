@@ -4,7 +4,6 @@ namespace api\v1;
 use libs\Mysqllib;
 use db\Database;
 use models\ProductModel;
-use route\Router;
 
 class ProductAPI {
     public static function gets() {

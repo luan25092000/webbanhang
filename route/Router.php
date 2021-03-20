@@ -42,6 +42,10 @@ class Router {
         $this->post('/admin/categories',"CategoryPage");
         $this->get('/admin/categories/{id}',"CategoryDetailPage");
 
+        $this->get('/admin/promotions',"PromotionPage");
+        $this->post('/admin/promotions',"PromotionPage");
+        $this->get('/admin/promotions/{id}',"PromotionDetailPage");
+
 
         $this->get('/admin/orders',"OrderPage");
         $this->get('/admin/customers',"CustomerPage");

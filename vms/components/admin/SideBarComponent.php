@@ -46,6 +46,12 @@ class SideBarComponent {
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="promotions">
+              <span data-feather="shopping-cart"></span>
+              Promotions
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="customers">
               <span data-feather="users"></span>
               Customers
