@@ -120,21 +120,28 @@ class Router {
                     if ($url === "/admin" || $url === "/account" || explode("/",$url)[1] === "admin" ) {
 
                         $router = Middleware::check_router($url);
-                        
-                        if ($router->status && $router->message[0]["username"] === "p" && explode("/",$url)[1] === "admin") {
+
+                        if (count($router->message) >= 1) {
+                            if ($router->status && $router->message[0]["username"] === "p" && explode("/",$url)[1] === "admin") {
                             
-                            array_shift($params); // Loại bỏ rác trong params
-                            $this->__call_admin_route($route['action'], $params); // Call action
-                            return;
-                            
-                        }elseif ($router->status && $url === "/account") {
-
-                            echo $router->message[0]["username"];
-                            return true;
-
-                        }
-                        else{
-
+                                array_shift($params); // Loại bỏ rác trong params
+                                $this->__call_admin_route($route['action'], $params); // Call action
+                                return;
+                                
+                            }elseif ($router->status && $url === "/account") {
+    
+                                echo $router->message[0]["username"];
+                                return true;
+    
+                            }
+                            else{
+    
+                                $this->__call_action_route("NotFoundPage", []);
+                                return;
+    
+                            }
+                        }else{
+    
                             $this->__call_action_route("NotFoundPage", []);
                             return;
 

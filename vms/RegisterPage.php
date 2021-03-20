@@ -45,8 +45,8 @@ class RegisterPage {
         <form method="POST" action="/register">
             <span>Username</span>
             <input type="text" name="username"></input>
-            <span>Gmail</span>
-            <input type="text" name="gmail"></input>
+            <span>Email</span>
+            <input type="text" name="email"></input>
             <span>Password</span>
             <input type="password" name="password"></input>
             <span>Confirm Password</span>

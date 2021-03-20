@@ -18,7 +18,7 @@ class AccountAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from user");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * FROM customer");
         return $res;
     }
 
@@ -37,10 +37,10 @@ class AccountAPI {
         $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
         
         // Query
-        $query = sprintf("INSERT INTO `user`(`username`, `password`, `gmail`, `status`, `token`, `jwt`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s' )", 
+        $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `status`, `token`, `jwt`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s' )", 
             $conn->real_escape_string($account->username),
             $password_hash,
-            $conn->real_escape_string($account->gmail),
+            $conn->real_escape_string($account->email),
             $account->status,
             $token,
             static::createJWT($conn->real_escape_string($account->username))
@@ -63,7 +63,7 @@ class AccountAPI {
         }
         $conn = $conn_resp->message;
 
-        $query = sprintf("SELECT password FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT password FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
             return new ResponseModel(true);
@@ -78,7 +78,7 @@ class AccountAPI {
             return $conn_resp;
         }
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT username FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         if (count($res->message) === 1) {
             return new ResponseModel(false);
@@ -128,7 +128,7 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT username FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
@@ -143,7 +143,7 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT token FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT token FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
@@ -159,9 +159,25 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("UPDATE user SET status = 'verified' WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("UPDATE customer SET status = 'verified' WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
+        
+    }
+
+    public static function checkAdmin(String $username) {
+
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+
+        $conn = $conn_resp->message;
+        $query = sprintf("SELECT admin FROM customer WHERE username='%s'", $conn->real_escape_string($username));
+        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        var_dump($res);
+        // return $res;
         
     }
 

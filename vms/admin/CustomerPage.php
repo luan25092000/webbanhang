@@ -35,6 +35,7 @@ class CustomerPage {
             <tr>
               <th>#</th>
               <th>Name</th>
+              <th>Admin</th>
               <th>Email</th>
             </tr>
           </thead>
@@ -43,7 +44,8 @@ class CustomerPage {
             <tr>
               <th><?= $row['id'] ?></th>
               <th><?= $row['username'] ?></th>
-              <th><?= $row['gmail'] ?></th>
+              <th><?= $row["admin"] ?></th>
+              <th><?= $row['email'] ?></th>
             </tr>
           <?php endforeach; ?>
           </tbody>
