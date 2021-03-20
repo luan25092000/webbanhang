@@ -4,6 +4,7 @@ namespace api\v1;
 use libs\Mysqllib;
 use db\Database;
 use models\ProductModel;
+use models\CategoryModel;
 
 class CategoryAPI {
     public static function gets() {
@@ -29,8 +30,8 @@ class CategoryAPI {
         $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from category WHERE id=$id");
         return $res;
     }
-    
-    public static function getBySex(String $sex){
+
+    public static function post(CategoryModel $category) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -38,25 +39,13 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE sex='$sex'");
+        $query = "INSERT INTO `category`(`title`, `slug`, `content`) 
+                  VALUES ('$category->title','$category->slug','$category->content')";
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
-
-    public static function post(ProductModel $product) {
-        // Connect db
-        $conn_resp = Database::connect_db();
-        if(!$conn_resp->status) {
-            return $conn_resp;
-        }
-        $conn = $conn_resp->message;
-        // Query
-        $query = "INSERT INTO `product`(`title`, `price`, `quantity`, `createdAt`, `updatedAt`, `catId`, `imgPath`, `sex`, `priceOld`) 
-                  VALUES ('$product->title',$product->price,$product->quantity,'$product->createdAt','$product->updatedAt',$product->catId,'$product->imgPath','$product->sex',$product->priceOld)";
-        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        print $res;
-    }
     
-    public static function update(ProductModel $product) {
+    public static function update(CategoryModel $category, $id) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -64,9 +53,9 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`quantity`=$product->quantity,`updatedAt`= date('Y-m-d H:i:s'),`catId`=$product->catId,`imgPath`=$product->imgPath,`sex`=$product->sex,`priceOld`=$product->priceOld WHERE `id`=$product->id";
+        $query = "UPDATE `category` SET `title`='$category->title',`slug`='$category->slug',`content`='$category->content' WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        print $res;
+        return $res;
     }
     
     public static function delete(String $id) {
@@ -77,10 +66,9 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        var_dump($id);
-        // $query = "DELETE FROM `product` WHERE `id`=$id";
-        // $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-        // print $res;
+        $query = "DELETE FROM `category` WHERE `id`=$id";
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        return $res;
     }
 
     public static function getProductByKey(String $key){

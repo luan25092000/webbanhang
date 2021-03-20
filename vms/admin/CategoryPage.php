@@ -1,130 +1,184 @@
 <?php
+
 namespace vms\admin;
+
 use api\v1\AccountAPI;
 use api\v1\ProductAPI;
+use api\v1\CategoryAPI;
 use vms\templates\ContainerAdminTemplate;
 use libs\Common;
 use route\Router;
 use models\AccountModel;
 use auth\JWT;
 use models\ResponseModel;
+use models\CategoryModel;
 
-class CategoryPage {
+class CategoryPage
+{
 
-    public function __construct($param = null) {
+  private $rows;
+
+  public function __construct($param = null)
+  {
+    $this->rows = CategoryAPI::gets();
+  }
+
+  // Khai báo template và truyền bản thân vào template cha
+  public function render()
+  {
+    $template = new ContainerAdminTemplate();
+    $template->renderChild($this);
+  }
+
+  public function __render()
+  {
+
+    if (isset($_POST["submit"])) {
+      CategoryAPI::post(new CategoryModel($_POST));
     }
 
-    // Khai báo template và truyền bản thân vào template cha
-    public function render() {
-        $template = new ContainerAdminTemplate();
-        $template->renderChild($this);
+    if (isset($_POST["e_submit"])) {
+      CategoryAPI::update(new CategoryModel($_POST), $_POST["edit_category"]);
     }
 
-    public function __render() {
-        
-    ?>
-      <div class="row">
-      	<div class="col-10">
-      		<h2>Manage Category</h2>
-      	</div>
-      	<div class="col-2">
-      		<a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-primary btn-sm">Add Category</a>
-      	</div>
+    
+    if (isset($_POST["d_submit"])) {
+      CategoryAPI::delete($_POST["id"]);
+    }
+
+?>
+    <div class="row">
+      <div class="col-10">
+        <h2>Manage Category</h2>
       </div>
-      
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
+      <div class="col-2">
+        <a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-primary btn-sm">Add Category</a>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Content</th>
+            <th>Action</th>
+          </tr>
+          <?php foreach ($this->rows->message as $row) : ?>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Action</th>
+              <th><?= $row['id'] ?></th>
+              <th><?= $row['title'] ?></th>
+              <th><?= $row['slug'] ?></th>
+              <th><?= $row['content'] ?></th>
+              <td>
+                <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_category_modal" class="btn btn-sm btn-info">Edit</a>
+                <form id="add-product-form" method="post">
+                  <input type="hidden" name="id" value=<?= $row["id"] ?> />
+                  <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
+                </form>
+              </td>
             </tr>
-          </thead>
-          <tbody id="category_list">
-            <!-- <tr>
-              <td>1</td>
-              <td>ABC</td>
-              <td>FDGR.JPG</td>
-              <td>122</td>
-              <td>eLECTRONCS</td>
-              <td>aPPLE</td>
-              <td><a class="btn btn-sm btn-info"></a><a class="btn btn-sm btn-danger">Delete</a></td>
-            </tr> -->
-          </tbody>
-        </table>
-      </div>
+          <?php endforeach; ?>
+        </thead>
+      </table>
+    </div>
     </main>
-  </div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="add_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="add-category-form" enctype="multipart/form-data">
-        	<div class="row">
-        		<div class="col-12">
-        			<div class="form-group">
-		        		<label>Category Name</label>
-		        		<input type="text" name="cat_title" class="form-control" placeholder="Enter Brand Name">
-		        	</div>
-        		</div>
-        		<input type="hidden" name="add_category" value="1">
-        		<div class="col-12">
-        			<button type="button" class="btn btn-primary add-category">Add Category</button>
-        		</div>
-        	</div>
-        	
-        </form>
-      </div>
     </div>
-  </div>
-</div>
-<!-- Modal -->
+    </div>
 
-<!--Edit category Modal -->
-<div class="modal fade" id="edit_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="edit-category-form" enctype="multipart/form-data">
-          <div class="row">
-            <div class="col-12">
-              <input type="hidden" name="cat_id">
-              <div class="form-group">
-                <label>Category Name</label>
-                <input type="text" name="e_cat_title" class="form-control" placeholder="Enter Brand Name">
-              </div>
-            </div>
-            <input type="hidden" name="edit_category" value="1">
-            <div class="col-12">
-              <button type="button" class="btn btn-primary edit-category-btn">Update Category</button>
-            </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="add_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          
-        </form>
+          <div class="modal-body">
+            <form id="add-category-form" enctype="multipart/form-data" method="post">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Slug</label>
+                    <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Content</label>
+                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
+                  </div>
+                </div>
+                <input type="hidden" name="add_category" value="1">
+                <div class="col-12">
+                  <input type="submit" class="btn btn-primary add-category" name="submit" value="Add Category"></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- Modal -->
+    <!-- Modal -->
 
-<!-- <script type="text/javascript" src="assets/js/admin/categories.js"></script> -->
+    <!--Edit category Modal -->
+    <div class="modal fade" id="edit_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-category-form" enctype="multipart/form-data" method="post">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Slug</label>
+                    <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Content</label>
+                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
+                  </div>
+                </div>
+                <input type="hidden" name="edit_category" value="1">
+                <div class="col-12">
+                  <!-- <button type="button" class="btn btn-primary edit-category-btn">Update Category</button> -->
+                  <input type="submit" class="btn btn-primary edit-category-btn" name="e_submit" value="Update Category"></button>
+                </div>
+              </div>
 
-<?php }}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+
+    <script type="text/javascript" src="/assets/js/admin/category.js"></script>
+
+<?php }
+}

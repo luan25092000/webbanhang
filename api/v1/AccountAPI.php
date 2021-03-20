@@ -10,6 +10,18 @@ use models\ResponseModel;
 
 class AccountAPI {
 
+    public static function gets() {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from user");
+        return $res;
+    }
+
     public static function post(AccountModel $account) {
 
         // Connect db

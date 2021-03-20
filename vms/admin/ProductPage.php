@@ -233,7 +233,7 @@ class ProductPage
                 </div>
                 <input type="hidden" name="edit_product">
                 <div class="col-12">
-                  <input type="submit" class="btn btn-primary submit-edit-product" name="e_submit" value="Edit Product"></input>
+                  <input type="submit" class="btn btn-primary submit-edit-product" name="e_submit" value="Update Product"></input>
                 </div>
               </div>
 

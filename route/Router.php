@@ -33,12 +33,16 @@ class Router {
         $this->get('/account',"TestPage");
 
         // change admin router
-        // $this->get('/admin',"TestPage");
         $this->get('/admin/home',"HomePage");
         $this->get('/admin/products',"ProductPage");
         $this->post('/admin/products',"ProductPage");
         $this->get('/admin/products/{id}',"ProductDetailPage");
+
         $this->get('/admin/categories',"CategoryPage");
+        $this->post('/admin/categories',"CategoryPage");
+        $this->get('/admin/categories/{id}',"CategoryDetailPage");
+
+
         $this->get('/admin/orders',"OrderPage");
         $this->get('/admin/customers',"CustomerPage");
 
