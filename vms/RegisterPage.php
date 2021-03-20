@@ -1,7 +1,6 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
-use route\Router;
 use models\AccountModel;
 
 class RegisterPage {
@@ -25,20 +24,20 @@ class RegisterPage {
                         
                         if ($result->status) {
                             AccountAPI::createJWT($username);
-                            $reRender = new Router();
-                            $reRender->map("/", "GET");
+                            echo("<script>location.href = '/';</script>");
                         }
                         
                     }else{
                         $this->messenge = $username . ' is already in use';
+                        var_dump($this);
                     }
                 } else {
                     $this->messenge = "Password is not strong enough";
-                    $reRender = new Router();
-                    $reRender->map("/register", "GET");
+                    var_dump($this);
                 }
             }else{
                 $this->messenge = "Password is not match";
+                var_dump($this);
             }
         }
     ?>

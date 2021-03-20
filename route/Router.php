@@ -33,7 +33,7 @@ class Router {
         $this->get('/account',"TestPage");
 
         // change admin router
-        $this->get('/admin/home',"HomePage");
+        $this->get('/admin',"HomePage");
         $this->get('/admin/products',"ProductPage");
         $this->post('/admin/products',"ProductPage");
         $this->get('/admin/products/{id}',"ProductDetailPage");
@@ -120,7 +120,7 @@ class Router {
 
                         $router = Middleware::check_router($url);
                         
-                        if ($router->status && $router->message[0]["username"] === "p") {
+                        if ($router->status && $router->message[0]["username"] === "p" && $url === "/admin") {
                             
                             array_shift($params); // Loại bỏ rác trong params
                             $this->__call_admin_route($route['action'], $params); // Call action

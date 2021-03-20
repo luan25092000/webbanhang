@@ -1,26 +1,31 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
-use route\Router;
 
 class LoginPage {
 
     public $messenge;
 
     public function __construct($param = null) {
+
+        if (isset($_COOKIE["jwt"])) {
+            $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
+            if ($res->status) {
+                header("Location: /");
+            }
+        }
     }
 
     public function render() {
-        $redirect = new Router();
         if (isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            if(AccountAPI::login($username, $password)){
+            if(AccountAPI::login($username, $password)->status){
                 AccountAPI::createJWT($username);
-                $redirect->map("/", "GET");
+                header("Location: /");
             } else {
                 $this->messenge = "Username/Password is invalid";
-                $redirect->map("/login", "GET");
+                var_dump($this);
             }
         }
     ?>

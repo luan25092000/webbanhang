@@ -65,14 +65,10 @@ class AccountAPI {
 
         $query = sprintf("SELECT password FROM user WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        foreach ($res as $key => $row) {
-            if (!empty($row) && is_array($row) ) {
-                if (password_verify($conn->real_escape_string($password), $row[0]["password"])) {
-                    return true;
-                }
-                return false;
-            }
+        if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
+            return new ResponseModel(true);
         }
+        return new ResponseModel(false);
     }
 
     public static function checkExistUsername(String $username) {
@@ -120,11 +116,20 @@ class AccountAPI {
             return $conn_resp;
         }
 
-        $user = JWT::decode($jwt, "kaito", ['HS512']);
-
-        foreach ($user as $key => $value) {
-            $username = $value;
+        $username = "";
+        
+        try {
+            $user = JWT::decode($jwt, "kaito", ['HS512']);
+            $username = $user->userName;
+        } catch (\Throwable $th) {
+            //throw $th;
+            $username = "";
         }
+
+        if ($username === "") {
+            return new ResponseModel(false);
+        }
+
         $conn = $conn_resp->message;
         $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
