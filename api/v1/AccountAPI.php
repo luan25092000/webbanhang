@@ -80,12 +80,9 @@ class AccountAPI {
         $conn = $conn_resp->message;
         $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        foreach ($res as $key => $row) {
-            if (!empty($row) && is_array($row) ) {
-                return new ResponseModel(false);
-            }
+        if (count($res->message) === 1) {
+            return new ResponseModel(false);
         }
-
         return new ResponseModel(true);
     }
     
