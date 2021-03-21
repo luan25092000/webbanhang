@@ -51,6 +51,11 @@ class Router {
         $this->get('/admin/orders',"OrderPage");
         $this->get('/admin/customers',"CustomerPage");
 
+        // Checkout
+        $this->get('/cart',"CartPage");
+        $this->get('/checkout',"CheckoutPage");
+        $this->get('/checkout-confirm',"CheckoutConfirmPage");
+        $this->get('/checkout-done',"CheckoutDonePage");
     }
     
     public function get(string $url, $action) {
