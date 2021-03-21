@@ -12,30 +12,30 @@ class CartController {
 
         // Check cookie
         if (!isset($_COOKIE["jwt"])) {
-            echo (new ResponseModel(false, "Access is denied"))->to_json();
+            echo (new ResponseModel(false, "Access denied"))->to_json();
             return;
         }
         // Check JWT
         $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
         if(!$res->status) {
-            echo (new ResponseModel(false, "Access is denied"))->to_json();
+            echo (new ResponseModel(false, "Access denied"))->to_json();
             return;
         }
         // Check username
         if(!count($res->message)) { // If hasn't username
-            echo (new ResponseModel(false, "Access is denied"))->to_json();
+            echo (new ResponseModel(false, "Access denied"))->to_json();
             return;
         }
         $username = $res->message[0]["username"];
         $res = AccountAPI::checkExistUsername($username);
         if($res->status) { // Chỗ này hơi ngược do thằng Kaito viết
-            echo (new ResponseModel(false, "Access is denied"))->to_json();
+            echo (new ResponseModel(false, "Access denied"))->to_json();
             return;
         }
         // Get account id
         $res = AccountAPI::get_by_username($username);
         if(!$res->status || !count($res->message)) {
-            echo (new ResponseModel(false, "Access is denied"))->to_json();
+            echo (new ResponseModel(false, "Access denied"))->to_json();
             return;
         }
         $account_id = $res->message[0]["id"];
