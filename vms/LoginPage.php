@@ -1,29 +1,45 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
+<<<<<<< HEAD
 use vms\templates\ContainerTemplate;
 use route\Router;
+=======
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 
 class LoginPage {
 
     public $messenge;
 
     public function __construct($param = null) {
+<<<<<<< HEAD
          $this->title  = "Đăng nhập";
     }
 
     public function render() {
         $redirect = new Router();
         $template = new ContainerTemplate();
+=======
+
+        if (isset($_COOKIE["jwt"])) {
+            $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
+            if ($res->status) {
+                header("Location: /");
+            }
+        }
+    }
+
+    public function render() {
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
         if (isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            if(AccountAPI::login($username, $password)){
+            if(AccountAPI::login($username, $password)->status){
                 AccountAPI::createJWT($username);
-                $redirect->map("/", "GET");
+                header("Location: /");
             } else {
                 $this->messenge = "Username/Password is invalid";
-                $redirect->map("/login", "GET");
+                var_dump($this);
             }
         }
         $template->renderChild($this);

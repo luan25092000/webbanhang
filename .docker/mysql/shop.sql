@@ -1,85 +1,101 @@
+<<<<<<< HEAD
+=======
+DROP DATABASE shop;
+CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE shop;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- phpMyAdmin SQL Dump
 -- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
+<<<<<<< HEAD
 -- Host: 127.0.0.1
 -- Generation Time: Mar 21, 2021 at 11:30 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
+=======
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th2 07, 2021 lúc 04:21 PM
+-- Phiên bản máy phục vụ: 10.4.13-MariaDB
+-- Phiên bản PHP: 7.2.32
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */
+;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */
+;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */
+;
+/*!40101 SET NAMES utf8mb4 */
+;
 --
 -- Database: `shop`
 --
-
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `cart`
 --
-
 CREATE TABLE `cart` (
   `id` bigint(20) NOT NULL,
   `customerId` bigint(20) DEFAULT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `promotionId` bigint(20) DEFAULT NULL,
   `subtotal` float NOT NULL DEFAULT 0,
+<<<<<<< HEAD
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+=======
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `cart_item`
 --
-
 CREATE TABLE `cart_item` (
   `id` bigint(20) NOT NULL,
   `productId` bigint(20) NOT NULL,
   `cartId` bigint(20) NOT NULL,
   `price` float NOT NULL DEFAULT 0,
   `quantity` smallint(6) NOT NULL DEFAULT 0,
+<<<<<<< HEAD
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+=======
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `category`
 --
-
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL,
   `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 --
 -- Dumping data for table `category`
 --
-
-INSERT INTO `category` (`id`, `title`, `slug`, `content`) VALUES
-(1, 'áo', 'áo', NULL),
-(2, 'quần', 'quần', NULL),
-(3, 'đầm', 'đầm', NULL);
-
+INSERT INTO `category` (`id`, `title`, `slug`, `content`)
+VALUES (1, 'áo', 'áo', NULL),
+  (2, 'quần', 'quần', NULL),
+  (3, 'đầm', 'đầm', NULL);
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `customer`
 --
+<<<<<<< HEAD
 
 CREATE TABLE `customer` (
   `id` bigint(20) NOT NULL,
@@ -749,8 +765,19 @@ INSERT INTO `devvn_quanhuyen` (`maqh`, `name`, `type`, `matp`) VALUES
 ('972', 'Huyện Phú Tân', 'Huyện', '96'),
 ('973', 'Huyện Ngọc Hiển', 'Huyện', '96');
 
+=======
+-- CREATE TABLE `customer` (
+--   `id` bigint(20) NOT NULL,
+--   `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `passwordHash` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+--   `admin` tinyint(1) NOT NULL DEFAULT 0,
+--   `registeredAt` datetime NOT NULL,
+--   `lastLogin` datetime DEFAULT NULL
+-- ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `devvn_tinhthanhpho`
 --
@@ -11476,7 +11503,6 @@ INSERT INTO `devvn_xaphuongthitran` (`xaid`, `name`, `type`, `maqh`) VALUES
 --
 -- Table structure for table `order`
 --
-
 CREATE TABLE `order` (
   `id` bigint(20) NOT NULL,
   `customerId` bigint(20) DEFAULT NULL,
@@ -11487,32 +11513,40 @@ CREATE TABLE `order` (
   `shipping` float NOT NULL DEFAULT 0,
   `total` float NOT NULL DEFAULT 0,
   `status` smallint(6) NOT NULL DEFAULT 0,
+<<<<<<< HEAD
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+=======
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `order_item`
 --
-
 CREATE TABLE `order_item` (
   `id` bigint(20) NOT NULL,
   `productId` bigint(20) NOT NULL,
   `orderId` bigint(20) NOT NULL,
   `price` float NOT NULL DEFAULT 0,
   `quantity` smallint(6) NOT NULL DEFAULT 0,
+<<<<<<< HEAD
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+=======
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `product`
 --
-
 CREATE TABLE `product` (
   `id` bigint(20) NOT NULL,
   `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -11522,13 +11556,20 @@ CREATE TABLE `product` (
   `imgPath` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sex` char(3) COLLATE utf8mb4_unicode_ci NOT NULL,
   `priceOld` float DEFAULT NULL,
+<<<<<<< HEAD
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+=======
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 --
 -- Dumping data for table `product`
 --
+<<<<<<< HEAD
 
 INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `catId`, `imgPath`, `sex`, `priceOld`, `updated_at`, `created_at`) VALUES
 (1, 'ÁO SƠ MI NỮ CÔNG SỞ', 157500, 100, 1, '/assets/img/product/1.jpg', 'Nữ', 175000, '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
@@ -11540,62 +11581,178 @@ INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `catId`, `imgPath`, `
 (7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, 1, '/assets/img/product/7.jpg', 'Nam', 275000, '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
 (8, 'QUẦN JEAN LỖ GỐI', 252000, 100, 2, '/assets/img/product/8.jpg', 'Nam', 200000, '2021-03-21 08:41:24', '2021-03-21 08:41:24');
 
+=======
+INSERT INTO `product` (
+    `id`,
+    `title`,
+    `price`,
+    `quantity`,
+    `catId`,
+    `imgPath`,
+    `sex`,
+    `priceOld`
+  )
+VALUES (
+    1,
+    'ÁO SƠ MI NỮ CÔNG SỞ',
+    157500,
+    100,
+    1,
+    '/assets/img/product/1.jpg',
+    'Nữ',
+    175000
+  ),
+  (
+    2,
+    'COMBO 2 ÁO YẾM XUÂN HÈ',
+    202500,
+    100,
+    1,
+    '/assets/img/product/2.jpg',
+    'Nữ',
+    225000
+  ),
+  (
+    3,
+    'ĐẦM THÊU HOA THANH LỊCH',
+    247500,
+    100,
+    3,
+    '/assets/img/product/3.jpg',
+    'Nữ',
+    275000
+  ),
+  (
+    4,
+    'ÁO SƠ MI CELIO EMABATON',
+    252000,
+    100,
+    1,
+    '/assets/img/product/4.jpg',
+    'Nữ',
+    200000
+  ),
+  (
+    5,
+    'ÁO THUN NAM TRẮNG',
+    157500,
+    100,
+    1,
+    '/assets/img/product/5.jpg',
+    'Nam',
+    175000
+  ),
+  (
+    6,
+    'ÁO SƠ MI LỊCH LÃM',
+    202500,
+    100,
+    1,
+    '/assets/img/product/6.jpg',
+    'Nam',
+    225000
+  ),
+  (
+    7,
+    'ÁO KHOÁC NAM MÙA HÈ',
+    247500,
+    100,
+    1,
+    '/assets/img/product/7.jpg',
+    'Nam',
+    275000
+  ),
+  (
+    8,
+    'QUẦN JEAN LỖ GỐI',
+    252000,
+    100,
+    2,
+    '/assets/img/product/8.jpg',
+    'Nam',
+    200000
+  );
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `promotion`
 --
-
 CREATE TABLE `promotion` (
   `id` bigint(20) NOT NULL,
   `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` float NOT NULL DEFAULT 0,
   `quantity` smallint(6) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 -- --------------------------------------------------------
-
 --
 -- Table structure for table `tag`
 --
-
 CREATE TABLE `tag` (
   `id` bigint(20) NOT NULL,
   `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+
+<<<<<<< HEAD
+=======
+-- CREATE TABLE `customer` (
+--   `id` bigint(20) NOT NULL,
+--   `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+--   `passwordHash` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+--   `admin` tinyint(1) NOT NULL DEFAULT 0,
+--   `registeredAt` datetime NOT NULL,
+--   `lastLogin` datetime DEFAULT NULL
+-- ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+CREATE TABLE `customer` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jwt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
+  `updated_at` TIMESTAMP,
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  CHECK (
+    `status` = "verified"
+    OR `status` = "unverified"
+  )
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 --
 -- Indexes for dumped tables
 --
-
 --
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`),
+ADD PRIMARY KEY (`id`),
   ADD KEY `idx_cart_customerId` (`customerId`);
-
 --
 -- Indexes for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  ADD PRIMARY KEY (`id`),
+ADD PRIMARY KEY (`id`),
   ADD KEY `idx_cart_item_product` (`productId`),
   ADD KEY `idx_cart_item_cart` (`cartId`);
-
 --
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
+ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
+<<<<<<< HEAD
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `uq_email` (`email`),
   ADD UNIQUE KEY `uq_phone` (`phone`);
@@ -11618,135 +11775,124 @@ ALTER TABLE `devvn_tinhthanhpho`
 ALTER TABLE `devvn_xaphuongthitran`
   ADD PRIMARY KEY (`xaid`);
 
+=======
+ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_phone` (`phone`),
+  ADD UNIQUE KEY `uq_email` (`email`);
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 --
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`),
+ADD PRIMARY KEY (`id`),
   ADD KEY `idx_order_customer` (`customerId`);
-
 --
 -- Indexes for table `order_item`
 --
 ALTER TABLE `order_item`
-  ADD PRIMARY KEY (`id`),
+ADD PRIMARY KEY (`id`),
   ADD KEY `idx_order_item_product` (`productId`),
   ADD KEY `idx_order_item_order` (`orderId`);
-
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
+ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cat_product` (`catId`);
-
 --
 -- Indexes for table `promotion`
 --
 ALTER TABLE `promotion`
-  ADD PRIMARY KEY (`id`);
-
+ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `tag`
 --
 ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id`);
-
+ADD PRIMARY KEY (`id`);
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 4;
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 9;
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
-
 --
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `fk_cart_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+ADD CONSTRAINT `fk_cart_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 --
 -- Constraints for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  ADD CONSTRAINT `fk_cart_item_cart` FOREIGN KEY (`cartId`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_cart_item_cart` FOREIGN KEY (`cartId`) REFERENCES `cart` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_cart_item_product` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 --
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `fk_order_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+ADD CONSTRAINT `fk_order_customer` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 --
 -- Constraints for table `order_item`
 --
 ALTER TABLE `order_item`
-  ADD CONSTRAINT `fk_order_item_order` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_order_item_order` FOREIGN KEY (`orderId`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_order_item_product` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `fk_cat_product` FOREIGN KEY (`catId`) REFERENCES `category` (`id`);
+ADD CONSTRAINT `fk_cat_product` FOREIGN KEY (`catId`) REFERENCES `category` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
+;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
+;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+;

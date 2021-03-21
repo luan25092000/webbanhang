@@ -1,8 +1,11 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
+<<<<<<< HEAD
 use vms\templates\ContainerTemplate;
 use route\Router;
+=======
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 use models\AccountModel;
 use api\v1\CountryAPI;
 
@@ -27,6 +30,7 @@ class RegisterPage {
                     if(!preg_match($pattern, $password)){
                     $checkExist = AccountAPI::checkExistUsername($username);
                     if ($checkExist->status) {
+<<<<<<< HEAD
                          $account = new AccountModel($_POST);
                          $result = AccountAPI::post($account);
                          
@@ -38,9 +42,23 @@ class RegisterPage {
                          
                     }else{
                          $this->messenge = $username . ' is already in use';
+=======
+                        $account = new AccountModel($_POST);
+                        $result = AccountAPI::post($account);
+                        
+                        if ($result->status) {
+                            AccountAPI::createJWT($username);
+                            echo("<script>location.href = '/';</script>");
+                        }
+                        
+                    }else{
+                        $this->messenge = $username . ' is already in use';
+                        var_dump($this);
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
                     }
                     } else {
                     $this->messenge = "Password is not strong enough";
+<<<<<<< HEAD
                     $reRender = new Router();
                     $reRender->map("/register", "GET");
                     }
@@ -184,4 +202,27 @@ class RegisterPage {
      </div>
 </div>
 
+=======
+                    var_dump($this);
+                }
+            }else{
+                $this->messenge = "Password is not match";
+                var_dump($this);
+            }
+        }
+    ?>
+    <div>
+        <form method="POST" action="/register">
+            <span>Username</span>
+            <input type="text" name="username"></input>
+            <span>Email</span>
+            <input type="text" name="email"></input>
+            <span>Password</span>
+            <input type="password" name="password"></input>
+            <span>Confirm Password</span>
+            <input type="password" name="repeatpassword"></input>
+            <button type=submit>Submit</button>
+        </form>
+    </div>
+>>>>>>> f550f99da737d92b01f324b01940acd2e0195fc5
 <?php }}

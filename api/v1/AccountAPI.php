@@ -10,6 +10,18 @@ use models\ResponseModel;
 
 class AccountAPI {
 
+    public static function gets() {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * FROM customer");
+        return $res;
+    }
+
     public static function post(AccountModel $account) {
 
         // Connect db
@@ -59,14 +71,10 @@ class AccountAPI {
 
         $query = sprintf("SELECT password FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        foreach ($res as $key => $row) {
-            if (!empty($row) && is_array($row) ) {
-                if (password_verify($conn->real_escape_string($password), $row[0]["password"])) {
-                    return true;
-                }
-                return false;
-            }
+        if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
+            return new ResponseModel(true);
         }
+        return new ResponseModel(false);
     }
 
     public static function checkExistUsername(String $username) {
@@ -76,14 +84,11 @@ class AccountAPI {
             return $conn_resp;
         }
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT username FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        foreach ($res as $key => $row) {
-            if (!empty($row) && is_array($row) ) {
-                return new ResponseModel(false);
-            }
+        if (count($res->message) === 1) {
+            return new ResponseModel(false);
         }
-
         return new ResponseModel(true);
     }
     
@@ -114,13 +119,22 @@ class AccountAPI {
             return $conn_resp;
         }
 
-        $user = JWT::decode($jwt, "kaito", ['HS512']);
-
-        foreach ($user as $key => $value) {
-            $username = $value;
+        $username = "";
+        
+        try {
+            $user = JWT::decode($jwt, "kaito", ['HS512']);
+            $username = $user->userName;
+        } catch (\Throwable $th) {
+            //throw $th;
+            $username = "";
         }
+
+        if ($username === "") {
+            return new ResponseModel(false);
+        }
+
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT username FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT username FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
@@ -135,7 +149,7 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT token FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT token FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
@@ -151,10 +165,27 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("UPDATE user SET status = 'verified' WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("UPDATE customer SET status = 'verified' WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
     }
 
+    public static function checkAdmin(String $username) {
+
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+
+        $conn = $conn_resp->message;
+        $query = sprintf("SELECT admin FROM customer WHERE username='%s'", $conn->real_escape_string($username));
+        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        var_dump($res);
+        // return $res;
+        
+    }
+
 }
+?>
