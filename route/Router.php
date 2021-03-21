@@ -1,71 +1,76 @@
 <?php
+
 namespace route;
 
 use auth\Middleware;
 
-class Router {
+class Router
+{
     private $__routes;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->__routes = [];
 
         // Routes
         $this->get('/', "HomePage");
         $this->get('/search', "SearchPage");
-        $this->get('/product-detail/{id}',"ProductDetailPage");
-        $this->get('/introduce',"IntroducePage");
-        $this->get('/field',"FieldPage");
-        $this->get('/check-order',"CheckOrderPage");
-        $this->get('/contact',"ContactPage");
-        $this->get('/new',"NewPage");
-        $this->get('/new-detail',"NewDetailPage");
-        $this->get('/new-market',"NewMarketPage");
-        $this->get('/new-promotion',"NewPromotionPage");
-        $this->get('/female-product',"FemaleProductPage");
-        $this->get('/male-product',"MaleProductPage");
-        $this->get('/product',"ProductPage");
-        $this->get('/register',"RegisterPage");
-        $this->post('/register',"RegisterPage");
-        $this->get('/login',"LoginPage");
-        $this->post('/login',"LoginPage");
-        $this->get('/test',"TestPage");
-        $this->get('/verify/{token}',"VerifyEmailPage");
-        $this->get('/account',"AccountPage");
+        $this->get('/product-detail/{id}', "ProductDetailPage");
+        $this->get('/introduce', "IntroducePage");
+        $this->get('/field', "FieldPage");
+        $this->get('/check-order', "CheckOrderPage");
+        $this->get('/contact', "ContactPage");
+        $this->get('/new', "NewPage");
+        $this->get('/new-detail', "NewDetailPage");
+        $this->get('/new-market', "NewMarketPage");
+        $this->get('/new-promotion', "NewPromotionPage");
+        $this->get('/female-product', "FemaleProductPage");
+        $this->get('/male-product', "MaleProductPage");
+        $this->get('/product', "ProductPage");
+        $this->get('/register', "RegisterPage");
+        $this->post('/register', "RegisterPage");
+        $this->get('/login', "LoginPage");
+        $this->post('/login', "LoginPage");
+        $this->get('/test', "TestPage");
+        $this->get('/verify/{token}', "VerifyEmailPage");
+        $this->get('/account', "AccountPage");
 
         // change admin router
-        $this->get('/admin',"HomePage");
-        
-        $this->get('/admin/products',"ProductPage");
-        $this->post('/admin/products',"ProductPage");
-        $this->get('/admin/products/{id}',"ProductDetailPage");
+        $this->get('/admin', "HomePage");
 
-        $this->get('/admin/categories',"CategoryPage");
-        $this->post('/admin/categories',"CategoryPage");
-        $this->get('/admin/categories/{id}',"CategoryDetailPage");
+        $this->get('/admin/products', "ProductPage");
+        $this->post('/admin/products', "ProductPage");
+        $this->get('/admin/products/{id}', "ProductDetailPage");
 
-        $this->get('/admin/promotions',"PromotionPage");
-        $this->post('/admin/promotions',"PromotionPage");
-        $this->get('/admin/promotions/{id}',"PromotionDetailPage");
+        $this->get('/admin/categories', "CategoryPage");
+        $this->post('/admin/categories', "CategoryPage");
+        $this->get('/admin/categories/{id}', "CategoryDetailPage");
+
+        $this->get('/admin/promotions', "PromotionPage");
+        $this->post('/admin/promotions', "PromotionPage");
+        $this->get('/admin/promotions/{id}', "PromotionDetailPage");
 
 
-        $this->get('/admin/orders',"OrderPage");
-        $this->get('/admin/customers',"CustomerPage");
+        $this->get('/admin/orders', "OrderPage");
+        $this->get('/admin/customers', "CustomerPage");
 
         // Checkout
-        $this->get('/cart',"CartPage");
-        $this->get('/checkout',"CheckoutPage");
-        $this->get('/checkout-confirm',"CheckoutConfirmPage");
-        $this->get('/checkout-done',"CheckoutDonePage");
+        $this->get('/cart', "CartPage");
+        $this->get('/checkout', "CheckoutPage");
+        $this->get('/checkout-confirm', "CheckoutConfirmPage");
+        $this->get('/checkout-done', "CheckoutDonePage");
     }
-    
-    public function get(string $url, $action) {
+
+    public function get(string $url, $action)
+    {
         // Xử lý phương thức GET
         $this->__request($url, 'GET', $action);
     }
 
-    public function post(string $url, $action) {
-         // Xử lý phương thức POST
-         $this->__request($url, 'POST', $action);
+    public function post(string $url, $action)
+    {
+        // Xử lý phương thức POST
+        $this->__request($url, 'POST', $action);
     }
 
     /**
@@ -79,7 +84,8 @@ class Router {
      * @return void
      * 
      */
-    private function __request(string $url, string $method, $action) {
+    private function __request(string $url, string $method, $action)
+    {
 
         // Kiem tra xem URL co chua param khong. VD: post/{id}
         if (preg_match_all('/({([a-zA-Z]+)})/', $url, $params)) {
@@ -109,47 +115,48 @@ class Router {
      * @return void
      * 
      */
-    public function map(string $url, string $method) {
+    public function map(string $url, string $method)
+    {
+        // Kiểm tra request gọi đến API V1
+        if(strpos($url, "/api/v1/") === 0) {
+            $this->__call_api_route("APIV1Router", substr($url, strlen("/api/v1")), $method);
+            return;
+        }
 
         // Lặp qua các route, kiểm tra có chứa url được gọi không
         foreach ($this->__routes as $route) {
-            
+
             // Nếu route có $method
             if ($route['method'] == $method) {
-                
+
                 // Kiểm tra route hiện tại có phải là url đang được gọi.
-                $reg = '/^'.$route['url'].'$/';
-                
+                $reg = '/^' . $route['url'] . '$/';
+
                 if (preg_match($reg, $url, $params)) {
 
-                    if ($url === "/admin" || $url === "/account" || explode("/",$url)[1] === "admin" ) {
+                    if ($url === "/admin" || $url === "/account" || explode("/", $url)[1] === "admin") {
 
                         $router = Middleware::check_router($url);
 
                         if ($router->status && count($router->message) >= 1) {
-                            if ($router->status && $router->message[0]["username"] === "admin" && explode("/",$url)[1] === "admin") {
-                            
+                            if ($router->status && $router->message[0]["username"] === "admin" && explode("/", $url)[1] === "admin") {
+
                                 array_shift($params); // Loại bỏ rác trong params
                                 $this->__call_admin_route($route['action'], $params); // Call action
                                 return;
-                                
-                            }elseif ($router->status && $url === "/account") {
-    
+                            } elseif ($router->status && $url === "/account") {
+
                                 echo $router->message[0]["username"];
                                 return true;
-    
-                            }
-                            else{
-    
+                            } else {
+
                                 $this->__call_action_route("NotFoundPage", []);
                                 return;
-    
                             }
-                        }else{
-    
+                        } else {
+
                             $this->__call_action_route("NotFoundPage", []);
                             return;
-
                         }
                     }
 
@@ -176,11 +183,12 @@ class Router {
      * @return void
      * 
      */
-    private function __call_action_route($action, $params) {
+    private function __call_action_route($action, $params)
+    {
 
         // Nếu action là một view-model
-        if(is_string($action)) {
-            $vm_name = 'vms\\'.$action;
+        if (is_string($action)) {
+            $vm_name = 'vms\\' . $action;
             $vm = new $vm_name($params);
             $vm->render();
             // Free variable after using
@@ -188,16 +196,23 @@ class Router {
         }
     }
 
-    private function __call_admin_route($action, $params) {
+    private function __call_admin_route($action, $params)
+    {
 
         // Nếu action là một view-model
-        if(is_string($action)) {
-            $vm_name = 'vms\\admin\\'.$action;
+        if (is_string($action)) {
+            $vm_name = 'vms\\admin\\' . $action;
             $vm = new $vm_name($params);
             $vm->render();
             // Free variable after using
             $vm = null;
         }
+    }
+
+    private function __call_api_route($router_name, $url, $method) {
+        $route_path = 'route\\' . $router_name;
+        $route = new $route_path();
+        $route->map($url, $method);
+        $route = null;
     }
 }
-?>
