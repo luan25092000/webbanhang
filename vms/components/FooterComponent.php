@@ -8,7 +8,7 @@ class FooterComponent {
     public function render() {
 ?>
 
-<div class="row">
+<div id="brands" class="row">
     <div class="col-lg-2">
         <img src="/assets/img/brand/1.png" alt="" />
     </div>
@@ -29,7 +29,7 @@ class FooterComponent {
     </div>
 </div>
 <hr />
-<div class="container">
+<div id="footer" class="container">
     <div class="row">
         <div class="col-lg-3">
             <h6>GIỚI THIỆU</h6>
@@ -73,4 +73,15 @@ class FooterComponent {
     <i class="fas fa-arrow-circle-up float-right"></i>
 </div>
 
+<style>
+    #brands .col-lg-2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #footer .col-lg-3 {
+        padding: 1rem 0;
+    }
+</style>
 <?php }}

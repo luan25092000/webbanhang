@@ -2,7 +2,6 @@
 namespace models;
 
 class ProductModel {
-    // public $id;
     public $title;
     public $price;
     public $quantity;

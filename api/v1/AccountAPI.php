@@ -38,16 +38,24 @@ class AccountAPI {
         $jwt = static::createJWT($conn->real_escape_string($account->username));
         
         // Query
-        $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `status`, `token`, `jwt`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s' )", 
+        $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `phone`, `status`, `token`, `jwt`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )", 
             $conn->real_escape_string($account->username),
             $password_hash,
             $conn->real_escape_string($account->email),
+            $conn->real_escape_string($account->phone),
             $account->status,
             $token,
-            $jwt
+            $jwt,
+            $conn->real_escape_string($account->fullname),
+            $conn->real_escape_string($account->sex),
+            $conn->real_escape_string($account->country),
+            $conn->real_escape_string($account->district),
+            $conn->real_escape_string($account->commune)
         );
 
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+
+        var_dump($res);
 
         if ($res->status) {
             SendMail::post($token, $conn->real_escape_string($account->username), $conn->real_escape_string($account->email));

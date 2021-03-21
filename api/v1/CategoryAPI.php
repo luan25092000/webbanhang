@@ -69,6 +69,4 @@ class CategoryAPI {
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
-
 }
-?>

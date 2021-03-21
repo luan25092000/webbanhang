@@ -2,7 +2,7 @@
 namespace db;
 use models\ResponseModel;
 
-Class Database {
+class Database {
     public static function connect_db() {
         $servername = "localhost";
         $username = "root";

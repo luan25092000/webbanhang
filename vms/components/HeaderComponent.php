@@ -17,13 +17,13 @@ class HeaderComponent {
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
+                <li class="nav-item"><a class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
                         95</a></li>
                 <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
                         đơn hàng</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
-                <li class="nav-item"><a href="" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
+                <li class="nav-item"><a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+                <li class="nav-item"><a href="/register" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
             </ul>
         </div>
     </div>
@@ -37,7 +37,7 @@ class HeaderComponent {
         </div>
     </form>
     <div class="cart">
-        <a href="" class="text-dark cart-child">
+        <a href="/cart" class="text-dark cart-child">
             <img src="/assets/img/cart/cart.png" alt="cart" />
             <span id="cart-total" class="cart-total ml-2 mr-2 mt-2">0 sp - 0đ</span>
             <i class="fa fa-arrow-right mt-2"></i>
@@ -47,7 +47,7 @@ class HeaderComponent {
 <nav class="navbar navbar-expand-lg text-white bg-dark options">
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#product">
-        <span class="navbar-toggler-icon"></span>
+        <i class="fas fa-list text-white"></i>
     </button>
     <div class="container">
         <div class="collapse navbar-collapse" id="product">
