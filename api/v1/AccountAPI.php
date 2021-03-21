@@ -35,6 +35,7 @@ class AccountAPI {
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
         $rand_chars = rand();
         $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
+        $jwt = static::createJWT($conn->real_escape_string($account->username));
         
         // Query
         $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `status`, `token`, `jwt`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s' )", 
@@ -43,16 +44,17 @@ class AccountAPI {
             $conn->real_escape_string($account->email),
             $account->status,
             $token,
-            static::createJWT($conn->real_escape_string($account->username))
+            $jwt
         );
 
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
 
         if ($res->status) {
-            SendMail::post($token);
+            SendMail::post($token, $conn->real_escape_string($account->username), $conn->real_escape_string($account->email));
+            return new ResponseModel(true, $jwt);
+        }else{
+            return new ResponseModel(false);
         }
-
-        return $res;
     }
 
     public static function login(String $username, String $password) {
@@ -98,12 +100,20 @@ class AccountAPI {
             'HS512'
         );
 
-        setcookie("jwt", time() - 3600);
-        setcookie("jwt", $jwt, time() + (86400 * 30), "/");
-
         return $jwt;
 
     }
+
+    public static function setcookieJWT(String $jwt) {
+
+        setcookie("jwt", time() - 3600);
+        setcookie("jwt", $jwt, time() + (86400 * 30), "/");
+
+        return true;
+
+    }
+
+
 
     public static function checkJWT(String $jwt) {
 

@@ -20,8 +20,11 @@ class LoginPage {
         if (isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            if(AccountAPI::login($username, $password)->status){
-                AccountAPI::createJWT($username);
+            $res = AccountAPI::login($username, $password);
+            if($res->status){
+                $jwt = AccountAPI::createJWT($username);
+                AccountAPI::setcookieJWT($jwt);
+                
                 header("Location: /");
             } else {
                 $this->messenge = "Username/Password is invalid";

@@ -5,12 +5,12 @@ namespace auth;
 class SendMail
 {
 
-  public static function post(String $token)
+  public static function post(String $token, String $username, String $email)
   {
     $mail = new \mail\PHPMailer();
     $mail->IsSMTP();
     $mail->Mailer = "smtp";
-    $mail->SMTPDebug  = 1;
+    // $mail->SMTPDebug  = 1;
     $mail->SMTPAuth   = TRUE;
     $mail->SMTPSecure = "STARTTLS";
     $mail->Port       = 587;
@@ -18,7 +18,7 @@ class SendMail
     $mail->Username   = "noreply@kaito.ninja";
     $mail->Password   = "kaito1@3";
     $mail->IsHTML(true);
-    $mail->AddAddress("kaito1477800@gmail.com", "kaito");
+    $mail->AddAddress($email, $username);
     $mail->SetFrom("noreply@kaito.ninja", "Verify Email");
     $mail->Subject = "Verify Email";
     $content = '

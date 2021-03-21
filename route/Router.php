@@ -30,7 +30,7 @@ class Router {
         $this->post('/login',"LoginPage");
         $this->get('/test',"TestPage");
         $this->get('/verify/{token}',"VerifyEmailPage");
-        $this->get('/account',"TestPage");
+        $this->get('/account',"AccountPage");
 
         // change admin router
         $this->get('/admin',"HomePage");
@@ -121,7 +121,7 @@ class Router {
 
                         $router = Middleware::check_router($url);
 
-                        if (count($router->message) >= 1) {
+                        if ($router->status && count($router->message) >= 1) {
                             if ($router->status && $router->message[0]["username"] === "p" && explode("/",$url)[1] === "admin") {
                             
                                 array_shift($params); // Loại bỏ rác trong params

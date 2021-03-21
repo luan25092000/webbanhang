@@ -1,11 +1,6 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
-use vms\templates\ContainerTemplate;
-use libs\Common;
-use route\Router;
-use models\AccountModel;
-use auth\JWT;
 
 class VerifyEmailPage {
 
@@ -18,6 +13,7 @@ class VerifyEmailPage {
     public function render() {
         if (isset($_COOKIE["jwt"])) {
             $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
+            var_dump($_COOKIE["jwt"]);
             if ($res->status) {
                 $username = $res->message[0]["username"];
                 $res = AccountAPI::checkToken($username);

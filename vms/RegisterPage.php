@@ -23,7 +23,7 @@ class RegisterPage {
                         $result = AccountAPI::post($account);
                         
                         if ($result->status) {
-                            AccountAPI::createJWT($username);
+                            AccountAPI::setcookieJWT($result->message);
                             echo("<script>location.href = '/';</script>");
                         }
                         
