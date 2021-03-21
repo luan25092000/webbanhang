@@ -18,12 +18,12 @@ class LoginPage {
         if (isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            if(AccountAPI::login($username, $password)){
+            if(AccountAPI::login($username, $password)->status){
                 AccountAPI::createJWT($username);
-                $redirect->map("/", "GET");
+                header("Location: /");
             } else {
                 $this->messenge = "Username/Password is invalid";
-                $redirect->map("/login", "GET");
+                var_dump($this);
             }
         }
         $template->renderChild($this);

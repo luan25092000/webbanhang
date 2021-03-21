@@ -4,7 +4,7 @@ namespace models;
 class AccountModel {
     public $username;
     public $password;
-    public $gmail;
+    public $email;
     public $status;
     public $fullname;
     public $sex;
@@ -16,7 +16,7 @@ class AccountModel {
     public function __construct($account) {
         $this->username = $account["username"];
         $this->password = $account["password"];
-        $this->gmail = $account["gmail"];
+        $this->email = $account["email"];
         $this->status = "unverified";
         $this->fullname = $account["fullname"];
         $this->sex = $account["sex"];

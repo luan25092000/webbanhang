@@ -33,12 +33,21 @@ class Router {
         $this->get('/account',"TestPage");
 
         // change admin router
-        // $this->get('/admin',"TestPage");
-        $this->get('/admin/home',"HomePage");
+        $this->get('/admin',"HomePage");
+        
         $this->get('/admin/products',"ProductPage");
         $this->post('/admin/products',"ProductPage");
         $this->get('/admin/products/{id}',"ProductDetailPage");
+
         $this->get('/admin/categories',"CategoryPage");
+        $this->post('/admin/categories',"CategoryPage");
+        $this->get('/admin/categories/{id}',"CategoryDetailPage");
+
+        $this->get('/admin/promotions',"PromotionPage");
+        $this->post('/admin/promotions',"PromotionPage");
+        $this->get('/admin/promotions/{id}',"PromotionDetailPage");
+
+
         $this->get('/admin/orders',"OrderPage");
         $this->get('/admin/customers',"CustomerPage");
 
@@ -111,21 +120,28 @@ class Router {
                     if ($url === "/admin" || $url === "/account" || explode("/",$url)[1] === "admin" ) {
 
                         $router = Middleware::check_router($url);
-                        
-                        if ($router->status && $router->message[0]["username"] === "p") {
+
+                        if (count($router->message) >= 1) {
+                            if ($router->status && $router->message[0]["username"] === "p" && explode("/",$url)[1] === "admin") {
                             
-                            array_shift($params); // Loại bỏ rác trong params
-                            $this->__call_admin_route($route['action'], $params); // Call action
-                            return;
-                            
-                        }elseif ($router->status && $url === "/account") {
-
-                            echo $router->message[0]["username"];
-                            return true;
-
-                        }
-                        else{
-
+                                array_shift($params); // Loại bỏ rác trong params
+                                $this->__call_admin_route($route['action'], $params); // Call action
+                                return;
+                                
+                            }elseif ($router->status && $url === "/account") {
+    
+                                echo $router->message[0]["username"];
+                                return true;
+    
+                            }
+                            else{
+    
+                                $this->__call_action_route("NotFoundPage", []);
+                                return;
+    
+                            }
+                        }else{
+    
                             $this->__call_action_route("NotFoundPage", []);
                             return;
 

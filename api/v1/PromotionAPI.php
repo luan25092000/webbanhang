@@ -3,9 +3,9 @@ namespace api\v1;
 
 use libs\Mysqllib;
 use db\Database;
-use models\CategoryModel;
+use models\PromotionModel;
 
-class CategoryAPI {
+class PromotionAPI {
     public static function gets() {
         // Connect db
         $conn_resp = Database::connect_db();
@@ -14,7 +14,7 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from category");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from promotion");
         return $res;
     }
     
@@ -26,11 +26,11 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from category WHERE id=$id");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from promotion WHERE id=$id");
         return $res;
     }
 
-    public static function post(CategoryModel $category) {
+    public static function post(PromotionModel $promotion) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -38,13 +38,13 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "INSERT INTO `category`(`title`, `slug`, `content`) 
-                  VALUES ('$category->title','$category->slug','$category->content')";
+        $query = "INSERT INTO `promotion`(`title`, `code`, `price`, `quantity`) 
+                  VALUES ('$promotion->title','$promotion->code',$promotion->price,$promotion->quantity)";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
     
-    public static function update(CategoryModel $category, $id) {
+    public static function update(PromotionModel $promotion, $id) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -52,7 +52,7 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "UPDATE `category` SET `title`='$category->title',`slug`='$category->slug',`content`='$category->content' WHERE `id`=$id";
+        $query = "UPDATE `promotion` SET `title`='$promotion->title',`code`='$promotion->code',`price`=$promotion->price,`quantity`=$promotion->quantity WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
@@ -65,8 +65,10 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "DELETE FROM `category` WHERE `id`=$id";
+        $query = "DELETE FROM `promotion` WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
+
 }
+?>

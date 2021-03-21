@@ -13,7 +13,7 @@ Class Middleware {
             $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
             return $res;
         }
-        return false;
+        return new ResponseModel(false);
     }
 }
 ?>

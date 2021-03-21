@@ -27,17 +27,17 @@ class RegisterPage {
                     if(!preg_match($pattern, $password)){
                     $checkExist = AccountAPI::checkExistUsername($username);
                     if ($checkExist->status) {
-                         $account = new AccountModel($_POST);
-                         $result = AccountAPI::post($account);
-                         
-                         if ($result->status) {
-                              AccountAPI::createJWT($username);
-                              $reRender = new Router();
-                              $reRender->map("/", "GET");
-                         }
-                         
+                        $account = new AccountModel($_POST);
+                        $result = AccountAPI::post($account);
+                        
+                        if ($result->status) {
+                            AccountAPI::createJWT($username);
+                            echo("<script>location.href = '/';</script>");
+                        }
+                        
                     }else{
-                         $this->messenge = $username . ' is already in use';
+                        $this->messenge = $username . ' is already in use';
+                        var_dump($this);
                     }
                     } else {
                     $this->messenge = "Password is not strong enough";

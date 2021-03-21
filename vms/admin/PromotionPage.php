@@ -2,18 +2,18 @@
 
 namespace vms\admin;
 
-use api\v1\CategoryAPI;
+use api\v1\PromotionAPI;
 use vms\templates\ContainerAdminTemplate;
-use models\CategoryModel;
+use models\PromotionModel;
 
-class CategoryPage
+class PromotionPage
 {
 
   private $rows;
 
   public function __construct($param = null)
   {
-    $this->rows = CategoryAPI::gets();
+    $this->rows = PromotionAPI::gets();
   }
 
   // Khai báo template và truyền bản thân vào template cha
@@ -27,25 +27,25 @@ class CategoryPage
   {
 
     if (isset($_POST["submit"])) {
-      CategoryAPI::post(new CategoryModel($_POST));
+      PromotionAPI::post(new PromotionModel($_POST));
     }
 
     if (isset($_POST["e_submit"])) {
-      CategoryAPI::update(new CategoryModel($_POST), $_POST["edit_category"]);
+      PromotionAPI::update(new PromotionModel($_POST), $_POST["edit_promotion"]);
     }
 
     
     if (isset($_POST["d_submit"])) {
-      CategoryAPI::delete($_POST["id"]);
+      PromotionAPI::delete($_POST["id"]);
     }
 
 ?>
     <div class="row">
       <div class="col-10">
-        <h2>Manage Category</h2>
+        <h2>Manage Promotion</h2>
       </div>
       <div class="col-2">
-        <a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-primary btn-sm">Add Category</a>
+        <a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-primary btn-sm">Add Promotion</a>
       </div>
     </div>
 
@@ -55,18 +55,20 @@ class CategoryPage
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Slug</th>
-            <th>Content</th>
+            <th>code</th>
+            <th>price</th>
+            <th>quantity</th>
             <th>Action</th>
           </tr>
           <?php foreach ($this->rows->message as $row) : ?>
             <tr>
               <th><?= $row['id'] ?></th>
               <th><?= $row['title'] ?></th>
-              <th><?= $row['slug'] ?></th>
-              <th><?= $row['content'] ?></th>
+              <th><?= $row['code'] ?></th>
+              <th><?= $row['price'] ?></th>
+              <th><?= $row['quantity'] ?></th>
               <td>
-                <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_category_modal" class="btn btn-sm btn-info">Edit</a>
+                <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_promotion_modal" class="btn btn-sm btn-info">Edit</a>
                 <form id="add-product-form" method="post">
                   <input type="hidden" name="id" value=<?= $row["id"] ?> />
                   <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
@@ -88,7 +90,7 @@ class CategoryPage
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Promotion</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -99,24 +101,30 @@ class CategoryPage
                 <div class="col-12">
                   <div class="form-group">
                     <label>title</label>
-                    <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
+                    <input type="text" name="title" class="form-control" placeholder="Enter Promotion Title">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Slug</label>
-                    <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
+                    <label>code</label>
+                    <input type="text" name="code" class="form-control" placeholder="Enter Promotion Code">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Content</label>
-                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
+                    <label>Price</label>
+                    <input type="number" name="price" class="form-control" placeholder="Enter Promotion Price">
                   </div>
                 </div>
-                <input type="hidden" name="add_category" value="1">
                 <div class="col-12">
-                  <input type="submit" class="btn btn-primary add-category" name="submit" value="Add Category"></button>
+                  <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity Price">
+                  </div>
+                </div>
+                <!-- <input type="hidden" name="add_" value="1"> -->
+                <div class="col-12">
+                  <input type="submit" class="btn btn-primary add-category" name="submit" value="Add Promotion"></button>
                 </div>
               </div>
             </form>
@@ -127,7 +135,7 @@ class CategoryPage
     <!-- Modal -->
 
     <!--Edit category Modal -->
-    <div class="modal fade" id="edit_category_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="edit_promotion_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -139,25 +147,31 @@ class CategoryPage
           <div class="modal-body">
             <form id="edit-category-form" enctype="multipart/form-data" method="post">
               <div class="row">
-                <div class="col-12">
+              <div class="col-12">
                   <div class="form-group">
                     <label>title</label>
-                    <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
+                    <input type="text" name="title" class="form-control" placeholder="Enter Promotion Title">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Slug</label>
-                    <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
+                    <label>code</label>
+                    <input type="text" name="code" class="form-control" placeholder="Enter Promotion Code">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>Content</label>
-                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
+                    <label>Price</label>
+                    <input type="number" name="price" class="form-control" placeholder="Enter Promotion Price">
                   </div>
                 </div>
-                <input type="hidden" name="edit_category" value="1">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity Price">
+                  </div>
+                </div>
+                <input type="hidden" name="edit_promotion" value="1">
                 <div class="col-12">
                   <!-- <button type="button" class="btn btn-primary edit-category-btn">Update Category</button> -->
                   <input type="submit" class="btn btn-primary edit-category-btn" name="e_submit" value="Update Category"></button>
@@ -171,7 +185,7 @@ class CategoryPage
     </div>
     <!-- Modal -->
 
-    <script type="text/javascript" src="/assets/js/admin/category.js"></script>
+    <script type="text/javascript" src="/assets/js/admin/promotion.js"></script>
 
 <?php }
 }
