@@ -37,7 +37,14 @@ class RegisterPage {
                         
                     }else{
                         $this->messenge = $username . ' is already in use';
-                        var_dump($this);
+                        $account = new AccountModel($_POST);
+                        $result = AccountAPI::post($account);
+                        
+                        if ($result->status) {
+                            AccountAPI::createJWT($username);
+                            echo("<script>location.href = '/';</script>");
+                        }
+                        
                     }
                     } else {
                     $this->messenge = "Password is not strong enough";
