@@ -2,7 +2,6 @@
 namespace vms;
 use api\v1\AccountAPI;
 use vms\templates\ContainerTemplate;
-use route\Router;
 
 class LoginPage {
 
@@ -13,7 +12,6 @@ class LoginPage {
     }
 
     public function render() {
-        $redirect = new Router();
         $template = new ContainerTemplate();
         if (isset($_POST["password"])) {
             $username = $_POST["username"];
@@ -26,7 +24,6 @@ class LoginPage {
                 header("Location: /");
             } else {
                 $this->messenge = "Username/Password is invalid";
-                var_dump($this);
             }
         }
         $template->renderChild($this);

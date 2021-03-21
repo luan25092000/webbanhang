@@ -35,7 +35,8 @@ class RegisterPage {
                         }
                         
                     }else{
-                        $this->messenge = $username . ' is already in use';      
+                        $this->messenge = $username . ' is already in use';
+                        
                     }
                     } else {
                          $this->messenge = "Password is not strong enough";
@@ -139,7 +140,7 @@ class RegisterPage {
                                    <label for="" class="col-sm-3">Phone
                                         <span class="warning">(*)</span>
                                    </label>
-                                   <input type="tel" class="col-sm-9 form-control" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Ex: 012-345-6789">
+                                   <input type="tel" class="col-sm-9 form-control" name="phone" require>
                               </div>
                               <div class="row mt-4 mr-auto ml-auto">
                                    <label for="country" class="col-sm-3">Tỉnh/TP

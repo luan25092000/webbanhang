@@ -127,7 +127,7 @@ class Router {
                         $router = Middleware::check_router($url);
 
                         if ($router->status && count($router->message) >= 1) {
-                            if ($router->status && $router->message[0]["username"] === "p" && explode("/",$url)[1] === "admin") {
+                            if ($router->status && $router->message[0]["username"] === "admin" && explode("/",$url)[1] === "admin") {
                             
                                 array_shift($params); // Loại bỏ rác trong params
                                 $this->__call_admin_route($route['action'], $params); // Call action

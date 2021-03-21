@@ -56,7 +56,6 @@ class ProductAPI {
                   VALUES ('$product->title',$product->price,$product->quantity,$product->catId,'$path','$product->sex')";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
-        // var_dump($res);
     }
     
     public static function update($id, ProductModel $product, String $imgPath = "") {

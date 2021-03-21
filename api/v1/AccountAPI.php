@@ -55,8 +55,6 @@ class AccountAPI {
 
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
 
-        var_dump($res);
-
         if ($res->status) {
             SendMail::post($token, $conn->real_escape_string($account->username), $conn->real_escape_string($account->email));
             return new ResponseModel(true, $jwt);
@@ -194,8 +192,7 @@ class AccountAPI {
         $conn = $conn_resp->message;
         $query = sprintf("SELECT admin FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        var_dump($res);
-        // return $res;
+        return $res;
         
     }
 
