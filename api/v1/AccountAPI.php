@@ -25,13 +25,19 @@ class AccountAPI {
         $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
         
         // Query
-        $query = sprintf("INSERT INTO `user`(`username`, `password`, `gmail`, `status`, `token`, `jwt`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s' )", 
+        $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `phone`, `status`, `token`, `jwt`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )", 
             $conn->real_escape_string($account->username),
             $password_hash,
             $conn->real_escape_string($account->gmail),
+            $conn->real_escape_string($account->phone),
             $account->status,
             $token,
-            static::createJWT($conn->real_escape_string($account->username))
+            static::createJWT($conn->real_escape_string($account->username)),
+            $conn->real_escape_string($account->fullname),
+            $conn->real_escape_string($account->sex),
+            $conn->real_escape_string($account->country),
+            $conn->real_escape_string($account->district),
+            $conn->real_escape_string($account->commune)
         );
 
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
@@ -51,7 +57,7 @@ class AccountAPI {
         }
         $conn = $conn_resp->message;
 
-        $query = sprintf("SELECT password FROM user WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT password FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         foreach ($res as $key => $row) {
             if (!empty($row) && is_array($row) ) {
@@ -152,4 +158,3 @@ class AccountAPI {
     }
 
 }
-?>

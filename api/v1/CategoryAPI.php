@@ -95,4 +95,3 @@ class CategoryAPI {
         return $res;
     }
 }
-?>
