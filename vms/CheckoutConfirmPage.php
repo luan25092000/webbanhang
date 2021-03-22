@@ -1,15 +1,46 @@
 <?php
 namespace vms;
 use vms\templates\ContainerTemplate;
+use api\v1\AccountAPI;
+use api\v1\CountryAPI;
+use api\v1\CartAPI;
 
 class CheckoutConfirmPage {
     public $title;
+    private $account;
+    private $cart;
+    private $message;
+    private $address;
+
     public function __construct($params = null) {
         $this->title  = "Xác nhận";
     }
 
     // Khai báo template và truyền bản thân vào template cha
     public function render() {
+        // Check auth
+        $res = AccountAPI::checkAuthRequest();
+        if(!$res->status) {
+             header("Location: /");
+             return;
+        }
+        $this->account = $res->message;
+
+        // Get cart
+        $res = CartAPI::read($this->account["id"]);
+        if(!$res->status) {
+            $this->message = $res->message;
+        }
+        $this->cart = $res->message[0];
+        $this->cart["total"] = 0;
+        foreach($this->cart["cart_items"] as $item) {
+            $this->cart["total"] += (int)$item["quantity"] * (int)$item["price"];
+        }
+
+        // Get address
+        $res = CountryAPI::getAddress($this->account["city"], $this->account["district"], $this->account["commune"]);
+        $this->address = $res->message;
+
         $template = new ContainerTemplate();
         $template->renderChild($this);
     }
@@ -68,15 +99,15 @@ class CheckoutConfirmPage {
                     <table class="checkout-infor">
                         <tr class="infor-item align-items-center">
                             <td><div class="item_icon"><i class="fas fa-user-plus"></i></div></td>
-                            <td><div class="item_content">Hoàng Đức Tuấn</div></td>
+                            <td><div class="item_content"><?= $this->account["fullName"] ?></div></td>
                         </tr>
                         <tr class="infor-item align-items-center">
                             <td><div class="item_icon"><i class="fas fa-phone-alt"></i></div></td>
-                            <td><div class="item_content">+84 936 255 358</div></td>
+                            <td><div class="item_content"><?= $this->account["phone"] ?></div></td>
                         </tr>
                         <tr class="infor-item align-items-center">
                             <td><div class="item_icon"><i class="fas fa-map-marker-alt"></i></div></td>
-                            <td><div class="item_content">Tòa A Hồ Gươm plaza, Vũ Trọng Khánh, Phường Mộ Lao, Quận Hà Đông, Hà Nội</div></td>
+                            <td><div class="item_content"><?= $this->address ?></div></td>
                         </tr>
                     </table>
                 </div>
@@ -89,10 +120,10 @@ class CheckoutConfirmPage {
                     <div class="liner"></div>
                     <div class="section-checkout__right-content">
                         <ul class="section-checkout__right-list">
-                            <li class="section-checkout__right-item"><b>Tạm tính:</b><span>900.000đ</span></li>
+                            <li class="section-checkout__right-item"><b>Tạm tính:</b><span><?= number_format($this->cart["total"]) ?>đ</span></li>
                             <li class="section-checkout__right-item"><b>Phí vận chuyển:</b><span>25.000đ</span></li>
                             <li class="section-checkout__right-item"><b>Giảm giá:</b><span class="discount">-25.000đ</span></li>
-                            <li class="section-checkout__right-item section-checkout__right-item--money"><b>Thành tiền:</b><span class="money">900.000đ</span></li>
+                            <li class="section-checkout__right-item section-checkout__right-item--money"><b>Thành tiền:</b><span class="money"><?= number_format($this->cart["total"]) ?>đ</span></li>
                         </ul>
                         <div class="desc-btn">
                             <p class="desc">Bằng việc nhấn thanh toán, bạn đồng ý với <a href="">Các điều khoản khách hàng </a>của Nhà xuất bản Xây Dựng</p>

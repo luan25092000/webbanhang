@@ -13,17 +13,19 @@ class AccountModel {
     public $commune;
     public $phone;
 
-    public function __construct($account) {
-        $this->username = $account["username"];
-        $this->password = $account["password"];
-        $this->email = $account["email"];
-        $this->status = "unverified";
-        $this->fullname = $account["fullname"];
-        $this->sex = $account["sex"];
-        $this->country = $account["country"];
-        $this->district = $account["district"];
-        $this->commune = $account["commune"];
-        $this->phone = $account["phone"];
+    public function __construct($account = null) {
+        if($account) {
+            $this->username = $account["username"];
+            $this->password = $account["password"];
+            $this->email = $account["email"];
+            $this->status = "unverified";
+            $this->fullname = $account["fullname"];
+            $this->sex = $account["sex"];
+            $this->country = $account["country"];
+            $this->district = $account["district"];
+            $this->commune = $account["commune"];
+            $this->phone = $account["phone"];
+        }
     }
 }
 ?>

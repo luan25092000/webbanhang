@@ -1,8 +1,30 @@
 <?php
 namespace vms\components;
+use api\v1\CartAPI;
+use api\v1\AccountAPI;
 
 class HeaderComponent {
-    public function __construct($params = null) {}
+    private $account;
+    private $cart;
+    private $total = 0;
+    private $count = 0;
+    public function __construct($params = null) {
+        // Get logged account
+		$res = AccountAPI::checkAuthRequest();
+		if($res->status) {
+			$this->account = $res->message;
+            if($this->account) {
+                $res = CartAPI::read($this->account["id"]);
+                if($res->status) {
+                    $this->cart = $res->message[0];
+                    foreach($this->cart["cart_items"] as $item) {
+                        $this->total += (int)$item["quantity"] * (int)$item["price"];
+                    }
+                    $this->count = count($this->cart["cart_items"]);
+                }
+            }
+		}
+    }
 
     public function render() {
 ?>
@@ -39,7 +61,7 @@ class HeaderComponent {
     <div class="cart">
         <a href="/cart" class="text-dark cart-child">
             <img src="/assets/img/cart/cart.png" alt="cart" />
-            <span id="cart-total" class="cart-total ml-2 mr-2 mt-2">0 sp - 0đ</span>
+            <span id="cart-total" class="cart-total ml-2 mr-2 mt-2"><?= $this->count ?> sp - <?= number_format($this->total) ?>đ</span>
             <i class="fa fa-arrow-right mt-2"></i>
         </a>
     </div>

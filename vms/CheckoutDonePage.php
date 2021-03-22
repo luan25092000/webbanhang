@@ -1,17 +1,29 @@
 <?php
 namespace vms;
 use vms\templates\ContainerTemplate;
+use api\v1\AccountAPI;
+use api\v1\CountryAPI;
 
 class CheckoutDonePage {
     public $title;
+    private $account;
+    
     public function __construct($params = null) {
         $this->title  = "Hoàn tất";
     }
 
     // Khai báo template và truyền bản thân vào template cha
     public function render() {
-        $template = new ContainerTemplate();
-        $template->renderChild($this);
+          // Check auth
+          $res = AccountAPI::checkAuthRequest();
+          if(!$res->status) {
+               header("Location: /");
+               return;
+          }
+          $this->account = $res->message;
+
+          $template = new ContainerTemplate();
+          $template->renderChild($this);
     }
 
     // Đổi lại tên __render nếu dùng template cha

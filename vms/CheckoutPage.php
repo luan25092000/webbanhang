@@ -1,15 +1,31 @@
 <?php
 namespace vms;
 use vms\templates\ContainerTemplate;
+use api\v1\AccountAPI;
+use api\v1\CountryAPI;
 
 class CheckoutPage {
     public $title;
+    private $account;
+    private $countries;
+
     public function __construct($params = null) {
         $this->title  = "Thanh toán";
     }
 
     // Khai báo template và truyền bản thân vào template cha
     public function render() {
+        // Check auth
+		$res = AccountAPI::checkAuthRequest();
+		if(!$res->status) {
+			header("Location: /");
+			return;
+		}
+        $this->account = $res->message;
+
+        // Get countries
+        $this->countries = CountryAPI::gets();
+
         $template = new ContainerTemplate();
         $template->renderChild($this);
     }
@@ -57,41 +73,93 @@ class CheckoutPage {
             <div class="step-number">3</div>
         </div>
     </div>
-    <div class="checkout_mb-1 mb-5">
-        <div class="section_form">
-            <form action="">
-                <div class="single-input">
-                    <span><img src="/assets/img/checkout-mb-1/user-plus.svg"></span>
-                    <input class="hover-input" type="text" placeholder="Họ và tên">
+    <form id="account-info-form">
+        <template>
+            <div class="checkout_mb-1 mb-5">
+                <div class="section_form">
+                    <div class="single-input">
+                        <span><img src="/assets/img/checkout-mb-1/user-plus.svg"></span>
+                        <input name="fullName" class="hover-input" type="text" placeholder="Họ và tên" value="<?php echo $this->account["fullName"]; ?>">
+                    </div>
+                    <div class="single-input">
+                        <span><img src="/assets/img/checkout-mb-1/phone.svg"></span>
+                        <input name="phone" class="hover-input" type="text" placeholder="Số điện thoại" value="<?php echo $this->account["phone"]; ?>">
+                    </div>
+                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/email.svg"></span>
+                        <input name="email" class="hover-input" type="text" placeholder="Email" value="<?php echo $this->account["email"]; ?>">
+                    </div>
+                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map.svg"></span>
+                        <select name="city" id="country" class="hover-input form-control"
+                            value="<?= $this->account['city'] ?>">
+                            <option value="">--Chọn tỉnh thành phố--</option>
+                            <?php foreach($this->countries->message as $country): ?>
+                                    <option value="<?= $country['matp'] ?>"><?= $country['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="icon-dropdown"><img src="/assets/img/checkout-mb-1/arrow.svg"></div>
+                    </div>
+                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map.svg"></span>
+                        <select name="district" id="district" class="hover-input form-control"
+                            value="<?= $this->account['district'] ?>">
+                            <option value="">--Chọn quận/huyện--</option>
+                        </select>
+                        <div class="icon-dropdown"><img src="/assets/img/checkout-mb-1/arrow.svg"></div>
+                    </div>
+                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map.svg"></span>
+                        <select name="commune" id="commune" class="hover-input form-control"
+                            value="<?= $this->account['commune'] ?>">
+                            <option value="">--Chọn xã/phường--</option>
+                        </select>
+                        <div class="icon-dropdown"><img src="/assets/img/checkout-mb-1/arrow.svg"></div>
+                    </div>
+                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map-1.svg"></span>
+                        <input class="hover-input" type="text" placeholder="Nhập số nhà, số đường, thôn xóm (tùy chọn)">
+                    </div>
+                    <div class="textarea-wrap">
+                        <textarea class="hover-input" placeholder="Ghi chú (tùy chọn)" style="height:94px"></textarea>
+                        <img alt="" srcset="" data-ll-status="loaded" src="/assets/img/checkout-mb-1/icon-textarea.svg">
+                    </div>
                 </div>
-                <div class="single-input">
-                    <span><img src="/assets/img/checkout-mb-1/phone.svg"></span>
-                    <input class="hover-input" type="text" placeholder="Số điện thoại">
-                </div>
-                <div class="single-input"><span><img src="/assets/img/checkout-mb-1/email.svg"></span>
-                    <input class="hover-input" type="text" placeholder="Email">
-                </div>
-                <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map.svg"></span>
-                    <select class="select-option" style="color:#02010E; font-size: 16px; font-weight: 500;">
-                        <option value="placeholder" selected="" disabled="">Chọn Tỉnh/TP</option>
-                        <option value="dn">Đà Nắng</option>
-                        <option value="tphcm">TPHCM</option>
-                        <option value="hn">Hà Nội</option>
-                        <option value="hue">Huế</option>
-                        <option value="cantho">Cần Thơ</option>
-                    </select>
-                    <div class="icon-dropdown"><img src="/assets/img/checkout-mb-1/arrow.svg"></div>
-                </div>
-                <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map-1.svg"></span>
-                    <input class="hover-input" type="text" placeholder="Nhập vị trí">
-                </div>
-                <div class="textarea-wrap">
-                    <textarea class="hover-input" placeholder="Ghi chú" style="height:94px"></textarea>
-                    <img alt="" srcset="" data-ll-status="loaded" src="/assets/img/checkout-mb-1/icon-textarea.svg">
-                </div>
-            </form>
-        </div><a class="btn_checkout-mb-1" href="/checkout-confirm">Tiếp tục</a>
-    </div>
+                <a v-if="state == 'off'" @click="submit" class="btn_checkout-mb-1" href="/checkout-confirm">Tiếp tục</a>
+                <button v-if="state == 'loading'" type="button" disabled class="btn btn-danger btn_checkout-mb-1">Loading...</button>
+            </div>
+        </template>
+    </form>
 </div>
-
+<script src="/assets/js/vue.js"></script>
+<script>
+var vm = new Vue({
+    el: "#account-info-form",
+    data: {
+        state: "off",
+        id: <?php echo $this->account["id"]; ?>,
+    },
+    methods: {
+        submit: function(e) {
+            e.preventDefault();
+            this.state = "loading";
+            $.ajax({
+                type: "POST",
+                url: "/api/v1/account/put/" + this.id,
+                data: $("#account-info-form").serialize(),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                },
+                dataType: "json",
+            }).done((data) => {
+                if(data.status) {
+                    window.location.href = "/checkout-confirm";
+                } else {
+                    console.log(data.message);
+                    displayMessageModal(data.message, "danger");
+                }
+            }).fail((err) => {
+                displayMessageModal("Có lỗi xảy ra", "danger");
+            }).always(() => {
+                this.state = "off";
+            })
+        },
+    },
+});
+</script>
 <?php }}
