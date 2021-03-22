@@ -34,6 +34,10 @@ class Router
         $this->get('/test', "TestPage");
         $this->get('/verify/{token}', "VerifyEmailPage");
         $this->get('/account', "AccountPage");
+        $this->get('/resetpassword/{token}', "ResetPasswordPage");
+        $this->post('/resetpassword/{token}', "ResetPasswordPage");
+        $this->get('/forgetpassword', "ForgetPasswordPage");
+        $this->post('/forgetpassword', "ForgetPasswordPage");
 
         // change admin router
         $this->get('/admin', "HomePage");

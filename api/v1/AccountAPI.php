@@ -35,6 +35,13 @@ class AccountAPI {
         return $res;
     }
 
+    public static function createToken(){
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $rand_chars = rand();
+        $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
+        return $token;
+    }
+
     public static function post(AccountModel $account) {
 
         // Connect db
@@ -45,10 +52,8 @@ class AccountAPI {
         $conn = $conn_resp->message;
         $password_hash = password_hash($account->password, PASSWORD_DEFAULT);
 
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-        $rand_chars = rand();
-        $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
         $jwt = static::createJWT($conn->real_escape_string($account->username));
+        $token = static::createToken();
         
         // Query
         $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `phone`, `status`, `token`, `jwt`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )", 
@@ -89,6 +94,25 @@ class AccountAPI {
         if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
             return new ResponseModel(true);
         }
+        return new ResponseModel(false);
+    }
+
+    public static function updateToken($email){
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+
+        $conn = $conn_resp->message;
+
+        $token = static::createToken();
+
+        $query = sprintf("UPDATE customer SET token = '%s' WHERE email='%s'", $token, $conn->real_escape_string($email));
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        if ($res->status) {
+            return new ResponseModel(true, $token);
+        }
+
         return new ResponseModel(false);
     }
 
@@ -178,6 +202,36 @@ class AccountAPI {
         
     }
 
+    public static function checkTokenReset(String $email) {
+
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+
+        $conn = $conn_resp->message;
+        $query = sprintf("SELECT token, username FROM customer WHERE email='%s' AND status='verified'", $conn->real_escape_string($email));
+        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        return $res;
+        
+    }
+
+    public static function changePass(String $username, String $password)
+    {
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $conn = $conn_resp->message;
+        $query = sprintf("UPDATE customer SET password = '%s' WHERE username='%s'", $password_hash, $conn->real_escape_string($username));
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        return $res;
+    }
+
 
     public static function verifyEmail(String $username) {
 
@@ -189,7 +243,7 @@ class AccountAPI {
 
         $conn = $conn_resp->message;
         $query = sprintf("UPDATE customer SET status = 'verified' WHERE username='%s'", $conn->real_escape_string($username));
-        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
         
     }
