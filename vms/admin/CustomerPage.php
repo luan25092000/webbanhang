@@ -74,6 +74,7 @@ class CustomerPage
                 </button>
             </div>
             <div class="modal-body">
+                <h4>Order 1</h4>
                 <table class="table table-cus table-borderless">
                     <thead>
                         <tr>
@@ -98,7 +99,35 @@ class CustomerPage
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-success" style="float:right">Thanh toán</button>
+                <span><b>Tổng</b>: 320.000đ</span>
+                <hr>
+                <h4>Order 2</h4>
+                <table class="table table-cus table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Khuyến mãi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Cà phê</td>
+                            <td>20.000</td>
+                            <td>3.000</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Đào</td>
+                            <td>300.000</td>
+                            <td>200.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span><b>Tổng</b>: 320.000đ</span>
+
             </div>
         </div>
     </div>
