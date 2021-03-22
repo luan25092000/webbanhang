@@ -1,4 +1,4 @@
--- DROP DATABASE  shop;
+DROP DATABASE IF EXISTS shop;
 CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE shop;
 -- phpMyAdmin SQL Dump
