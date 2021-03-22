@@ -1058,3 +1058,14 @@ section.product-4 {
         width: 100%;
     }
 }
+.bg-pink{
+    background: #facad4 !important;
+}
+.img-logo{
+    padding:10px 0;
+    width: 80%;
+    height: auto;
+}
+.table.table-cus th{
+    border:none !important;
+}
