@@ -29,6 +29,17 @@ class CartAPI {
                 $res = Mysqllib::mysql_get_data_from_query($conn, $query);
             }
         }
+        // If success (after recreating) then get cart items
+        if(!$res->status) {
+            return $res;
+        }
+        $res->message[0]["cart_items"] = [];
+        $res2 = Mysqllib::mysql_post_data_from_query($conn, "SELECT * FROM `cart_item` WHERE cartId={$res->message[0]["id"]}");
+        if(!$res2->status) {
+            if(count($res2->message)) {
+                $res->message[0]["cart_items"] = $res2->message;
+            }
+        }
         return $res;
     }
 
