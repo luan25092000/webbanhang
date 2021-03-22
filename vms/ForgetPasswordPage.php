@@ -1,29 +1,29 @@
 <?php
 namespace vms;
 use api\v1\AccountAPI;
+use auth\SendMail;
 use vms\templates\ContainerTemplate;
 
-class LoginPage {
+class ForgetPasswordPage {
 
     public $messenge;
 
     public function __construct($param = null) {
-         $this->title  = "Đăng nhập";
+         $this->title  = "Reset Password";
     }
 
     public function render() {
         $template = new ContainerTemplate();
-        if (isset($_POST["password"])) {
-            $username = $_POST["username"];
-            $password = $_POST["password"];
-            $res = AccountAPI::login($username, $password);
+        if (isset($_POST["email"])) {
+            $email = $_POST["email"];
+            $res = AccountAPI::updateToken($email);
             if($res->status){
-                $jwt = AccountAPI::createJWT($username);
-                AccountAPI::setcookieJWT($jwt);
-                
-                header("Location: /");
+               // echo $email;
+               SendMail::post($res->message, $email, $email, "reset");
+               setcookie("email", $email, time() + (86400 * 30), "/");
+               // header("Location: /");
             } else {
-                $this->messenge = "Username/Password is invalid";
+                $this->messenge = "Email is invalid";
             }
         }
         $template->renderChild($this);
@@ -60,7 +60,7 @@ class LoginPage {
                          </a>
                     </li>
                     <li>
-                         <a href="/forgetpassword">
+                         <a href="/reset-password">
                               <i class="fas fa-sign-in-alt"></i>
                               Quên mật khẩu
                          </a>
@@ -69,25 +69,18 @@ class LoginPage {
           </div>
           <div class="col-md-9 mt-1 mb-3">
                <div class="heading-lg">
-                    <h1>ĐĂNG NHẬP HỆ THỐNG</h1>
+                    <h1>NHẬP EMAIL</h1>
                </div>
-               <form class="form-horizontal mt-4" action="/login" method="post">
+               <form class="form-horizontal mt-4" method="post">
                     <div class="form-group">
-                         <label class="control-label col-sm-2" for="username">Username:</label>
+                         <label class="control-label col-sm-2" for="email">Email:</label>
                          <div class="col-sm-10">
-                              <input type="text" class="form-control" name="username" id="username" placeholder="Nhập username">
-                         </div>
-                    </div>
-                    <div class="form-group">
-                         <label class="control-label col-sm-2" for="password">Password:</label>
-                         <div class="col-sm-10">
-                              <input type="password" class="form-control" id="password" name="password" placeholder="Nhập password">
+                              <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email">
                          </div>
                     </div>
                     <div class="form-group">
                          <div class="col-sm-offset-2 col-sm-10">
-                              <button type="submit" class="btn-login">Đăng nhập</button>
-                              <a href="">Quên mật khẩu</a>
+                              <button type="submit" class="btn-login">Gửi</button>
                          </div>
                     </div>
                </form>
