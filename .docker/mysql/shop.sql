@@ -7,7 +7,7 @@ USE shop;
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2021 at 08:46 AM
+-- Generation Time: Mar 23, 2021 at 12:10 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -41,13 +41,6 @@ CREATE TABLE `cart` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `customerId`, `promotionId`, `shipping`, `total`, `updated_at`, `created_at`) VALUES
-(1, 1, NULL, 25000, 0, NULL, '2021-03-22 00:38:32');
-
 -- --------------------------------------------------------
 
 --
@@ -63,13 +56,6 @@ CREATE TABLE `cart_item` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cart_item`
---
-
-INSERT INTO `cart_item` (`id`, `productId`, `cartId`, `price`, `quantity`, `updated_at`, `created_at`) VALUES
-(1, 2, 1, 202500, 7, NULL, '2021-03-23 07:37:46');
 
 -- --------------------------------------------------------
 
@@ -122,8 +108,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `username`, `password`, `email`, `phone`, `jwt`, `token`, `status`, `admin`, `updated_at`, `created_at`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES
-(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-03-23 07:37:52', '2021-03-23 07:37:52', 'admin', 'male', '01', '019', '00625'),
-(6, 'cc', '$2y$10$4R6L.5HgsKKMPT6Ntni6nuDcNgcFVu0iVXhxYw3AqGUTgmsZrmwcW', 'ngosangns@gmail.com', '012-345-6789', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImNjIn0.idvieXdfffR3nsGQnj_OKlXGmGz7vyrSgFhttkQDinUqHLD4XlbHuTXb0qUu7GXjVRSWKa5BVNPCL_uwWrl1Gg', 'aXBid2Y2dWp2bTVvZ3l4cjducXN0MGNlMzRkMmtoYWx6MTk4MjA4MzQ3NTUyOA==', 'unverified', 0, '2021-03-22 01:30:54', '2021-03-22 01:30:54', 'cc', 'male', '', '', '');
+(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-03-23 11:02:13', '2021-03-23 11:02:13', 'admin', 'male', '04', '047', '01471');
 
 -- --------------------------------------------------------
 
@@ -11505,6 +11490,7 @@ INSERT INTO `devvn_xaphuongthitran` (`xaid`, `name`, `type`, `maqh`) VALUES
 CREATE TABLE `order` (
   `id` bigint(20) NOT NULL,
   `customerId` bigint(20) DEFAULT NULL,
+  `code` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `promotionId` bigint(20) DEFAULT NULL,
   `shipping` float NOT NULL DEFAULT 0,
   `total` float NOT NULL DEFAULT 0,
@@ -11580,7 +11566,7 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`id`, `title`, `code`, `price`, `quantity`) VALUES
-(1, 'hello', 'HELLO', 10000, 14),
+(1, 'hello', 'HELLO', 10000, 99),
 (2, 'test', 'test', 123, 123);
 
 -- --------------------------------------------------------
@@ -11688,13 +11674,13 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -11712,13 +11698,13 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product`
