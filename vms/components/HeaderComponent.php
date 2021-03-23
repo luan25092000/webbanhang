@@ -13,15 +13,13 @@ class HeaderComponent {
 		$res = AccountAPI::checkAuthRequest();
 		if($res->status) {
 			$this->account = $res->message;
-            if($this->account) {
-                $res = CartAPI::read($this->account["id"]);
-                if($res->status) {
-                    $this->cart = $res->message[0];
-                    foreach($this->cart["cart_items"] as $item) {
-                        $this->total += (int)$item["quantity"] * (int)$item["price"];
-                    }
-                    $this->count = count($this->cart["cart_items"]);
+            $res = CartAPI::read($this->account["id"]);
+            if($res->status) {
+                $this->cart = $res->message[0];
+                foreach($this->cart["cart_items"] as $item) {
+                    $this->total += (int)$item["quantity"] * (int)$item["price"];
                 }
+                $this->count = count($this->cart["cart_items"]);
             }
 		}
     }

@@ -91,10 +91,11 @@ class AccountAPI {
 
         $query = sprintf("SELECT password FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        if ($res->status) {
-            
-            if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
-                return new ResponseModel(true);
+        if($res->status) {
+            if(count($res->message)) {
+                if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
+                    return new ResponseModel(true);
+                }
             }
         }
         return new ResponseModel(false);
@@ -268,35 +269,30 @@ class AccountAPI {
 
     // Check login return account
     public static function checkAuthRequest() {
-        $false_response = (new ResponseModel(false, "Access denied"))->to_json();
+        $false_response = new ResponseModel(false, "Access denied");
 
         // Check cookie
         if (!isset($_COOKIE["jwt"])) {
-            echo $false_response;
-            return;
+            return $false_response;
         }
         // Check JWT
         $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
         if(!$res->status) {
-            echo $false_response;
-            return;
+            return $false_response;
         }
         // Check username
         if(!count($res->message)) { // If hasn't username
-            echo $false_response;
-            return;
+            return $false_response;
         }
         $username = $res->message[0]["username"];
         $res = AccountAPI::checkExistUsername($username);
         if($res->status) { // Chỗ này hơi ngược do thằng Kaito viết
-            echo $false_response;
-            return;
+            return $false_response;
         }
         // Get account
         $res = AccountAPI::get_by_username($username);
         if(!$res->status || !count($res->message)) {
-            echo $false_response;
-            return;
+            return $false_response;
         }
         return new ResponseModel(true, $res->message[0]);
     }
