@@ -42,6 +42,7 @@ class ContainerTemplate {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <!-- Owl carousel -->
         <script src="/assets/js/owl.carousel.min.js"></script>
+        <script src="/assets/js/script.js"></script>
     </head>
     <body>
         <div class="wrapper">
@@ -60,7 +61,7 @@ class ContainerTemplate {
                 </div>
             </div>
 
-            <script src="/assets/js/script.js"></script>
+            <!-- <script src="/assets/js/script.js"></script> -->
         </div>
     </body>
 </html>
