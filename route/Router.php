@@ -155,12 +155,12 @@ class Router
                                 return true;
                             } else {
 
-                                $this->__call_action_route("NotFoundPage", []);
+                                $this->__call_action_route("AccessDeniedPage", []);
                                 return;
                             }
                         } else {
 
-                            $this->__call_action_route("NotFoundPage", []);
+                            $this->__call_action_route("AccessDeniedPage", []);
                             return;
                         }
                     }

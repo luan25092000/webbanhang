@@ -35,7 +35,7 @@ class ProductPage
     if (isset($_POST["submit"])) {
       PHPUpload::upload($_FILES);
       ProductAPI::post(new ProductModel($_POST), $_FILES["fileToUpload"]["name"]);
-      echo("<script>location.href = '/admin/promotions';</script>");
+      echo("<script>location.href = '/admin/products';</script>");
     }
 
     if (isset($_POST["e_submit"])) {
@@ -45,10 +45,12 @@ class ProductPage
       }
 
       ProductAPI::update($_POST["edit_product"], new ProductModel($_POST), $_FILES["fileToUpload"]["name"]);
+      echo("<script>location.href = '/admin/products';</script>");
     }
 
     if (isset($_POST["d_submit"])) {
       ProductAPI::delete($_POST["id"]);
+      echo("<script>location.href = '/admin/products';</script>");
     }
 
 ?>

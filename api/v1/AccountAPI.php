@@ -91,8 +91,11 @@ class AccountAPI {
 
         $query = sprintf("SELECT password FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
-            return new ResponseModel(true);
+        if ($res->status) {
+            
+            if (password_verify($conn->real_escape_string($password), $res->message[0]["password"])) {
+                return new ResponseModel(true);
+            }
         }
         return new ResponseModel(false);
     }

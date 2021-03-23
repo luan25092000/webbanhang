@@ -28,15 +28,18 @@ class CategoryPage
 
     if (isset($_POST["submit"])) {
       CategoryAPI::post(new CategoryModel($_POST));
+      echo("<script>location.href = '/admin/categories';</script>");
     }
 
     if (isset($_POST["e_submit"])) {
       CategoryAPI::update(new CategoryModel($_POST), $_POST["edit_category"]);
+      echo("<script>location.href = '/admin/categories';</script>");
     }
 
     
     if (isset($_POST["d_submit"])) {
       CategoryAPI::delete($_POST["id"]);
+      echo("<script>location.href = '/admin/categories';</script>");
     }
 
 ?>
