@@ -35,6 +35,7 @@ class ProductPage
     if (isset($_POST["submit"])) {
       PHPUpload::upload($_FILES);
       ProductAPI::post(new ProductModel($_POST), $_FILES["fileToUpload"]["name"]);
+      echo("<script>location.href = '/admin/promotions';</script>");
     }
 
     if (isset($_POST["e_submit"])) {

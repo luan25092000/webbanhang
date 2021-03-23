@@ -28,15 +28,18 @@ class PromotionPage
 
     if (isset($_POST["submit"])) {
       PromotionAPI::post(new PromotionModel($_POST));
+      echo("<script>location.href = '/admin/promotions';</script>");
     }
 
     if (isset($_POST["e_submit"])) {
       PromotionAPI::update(new PromotionModel($_POST), $_POST["edit_promotion"]);
+      echo("<script>location.href = '/admin/promotions';</script>");
     }
 
     
     if (isset($_POST["d_submit"])) {
       PromotionAPI::delete($_POST["id"]);
+      echo("<script>location.href = '/admin/promotions';</script>");
     }
 
 ?>
@@ -70,7 +73,7 @@ class PromotionPage
               <td>
                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_promotion_modal" class="btn btn-sm btn-info">Edit</a>
                 <form id="add-product-form" method="post">
-                  <input type="hidden" name="id" value=<?= $row["id"] ?> />
+                  <input type="hidden" name="id"  lue=<?= $row["id"] ?> />
                   <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
                 </form>
               </td>

@@ -4,9 +4,11 @@ use models\ResponseModel;
 
 class Database {
     public static function connect_db() {
-        $servername = "localhost";
+        // $servername = "localhost";
+        $servername = "mysql";
         $username = "root";
-        $password = "";
+        // $password = "";
+        $password = "kaito";
         $dbname = "shop";
         $false_response = new ResponseModel(false, "Connection failed: ". mysqli_connect_error());
     
