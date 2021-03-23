@@ -34,7 +34,7 @@ class CartAPI {
             return $res;
         }
         $res->message[0]["cart_items"] = [];
-        $res2 = Mysqllib::mysql_get_data_from_query($conn, "SELECT cart_item.*, product.title, product.imgPath, product.priceOld FROM `cart_item` LEFT JOIN `product` ON cart_item.productId=product.id AND cart_item.cartId={$res->message[0]["id"]}");
+        $res2 = Mysqllib::mysql_get_data_from_query($conn, "SELECT cart_item.*, product.title, product.imgPath FROM `cart_item` LEFT JOIN `product` ON cart_item.productId=product.id AND cart_item.cartId={$res->message[0]["id"]}");
         if(!$res2->status) {
             return new ResponseModel(false, "Error");
         }

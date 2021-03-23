@@ -4,6 +4,7 @@ use vms\templates\ContainerTemplate;
 use api\v1\AccountAPI;
 use api\v1\CountryAPI;
 use api\v1\CartAPI;
+use api\v1\PromotionAPI;
 
 class CheckoutConfirmPage {
     public $title;
@@ -11,6 +12,7 @@ class CheckoutConfirmPage {
     private $cart;
     private $message;
     private $address;
+    private $promotion = 0;
 
     public function __construct($params = null) {
         $this->title  = "Xác nhận";
@@ -35,6 +37,16 @@ class CheckoutConfirmPage {
         $this->cart["total"] = 0;
         foreach($this->cart["cart_items"] as $item) {
             $this->cart["total"] += (int)$item["quantity"] * (int)$item["price"];
+        }
+
+        // Get promotion
+        if($this->cart && $this->cart["promotionId"]) {
+            $res = PromotionAPI::getById($this->cart["promotionId"]);
+            if($res->status) {
+                if(count($res->message)) {
+                    $this->promotion = $res->message[0]["price"];
+                }
+            }
         }
 
         // Get address
@@ -121,9 +133,9 @@ class CheckoutConfirmPage {
                     <div class="section-checkout__right-content">
                         <ul class="section-checkout__right-list">
                             <li class="section-checkout__right-item"><b>Tạm tính:</b><span><?= number_format($this->cart["total"]) ?>đ</span></li>
-                            <li class="section-checkout__right-item"><b>Phí vận chuyển:</b><span>25.000đ</span></li>
-                            <li class="section-checkout__right-item"><b>Giảm giá:</b><span class="discount">-25.000đ</span></li>
-                            <li class="section-checkout__right-item section-checkout__right-item--money"><b>Thành tiền:</b><span class="money"><?= number_format($this->cart["total"]) ?>đ</span></li>
+                            <li class="section-checkout__right-item"><b>Phí vận chuyển:</b><span><?= number_format($this->cart["shipping"]) ?>đ</span></li>
+                            <li class="section-checkout__right-item"><b>Giảm giá:</b><span class="discount"><?= number_format($this->promotion) ?>đ</span></li>
+                            <li class="section-checkout__right-item section-checkout__right-item--money"><b>Thành tiền:</b><span class="money"><?= number_format($this->cart["total"] + 25000 - $this->promotion) ?>đ</span></li>
                         </ul>
                         <div class="desc-btn">
                             <p class="desc">Bằng việc nhấn thanh toán, bạn đồng ý với <a href="">Các điều khoản khách hàng </a>của Nhà xuất bản Xây Dựng</p>
