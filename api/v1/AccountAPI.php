@@ -180,7 +180,7 @@ class AccountAPI {
             $username = "";
         }
 
-        if ($username === "") {
+        if ($username == "") {
             return new ResponseModel(false);
         }
 

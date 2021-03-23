@@ -142,7 +142,7 @@ class Router
                     if ($url === "/admin" || $url === "/account" || explode("/", $url)[1] === "admin") {
 
                         $router = Middleware::check_router($url);
-
+                        
                         if ($router->status && count($router->message) >= 1) {
                             if ($router->status && $router->message[0]["username"] === "admin" && explode("/", $url)[1] === "admin") {
 
@@ -162,6 +162,11 @@ class Router
 
                             $this->__call_action_route("AccessDeniedPage", []);
                             return;
+                        }
+                    }elseif ($url == "/login") {
+                        $router = Middleware::check_router($url);
+                        if ($router->status) {
+                            header("Location: /account");
                         }
                     }
 

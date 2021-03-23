@@ -3,7 +3,6 @@
 namespace vms;
 
 use api\v1\AccountAPI;
-use models\ResponseModel;
 
 class AccountPage
 {

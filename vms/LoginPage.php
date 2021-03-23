@@ -23,12 +23,21 @@ class LoginPage {
                 
                 header("Location: /");
             } else {
-                $this->messenge = "Username/Password is invalid";
+                $this->messenge = "Username/Password is invalid";      
             }
         }
         $template->renderChild($this);
     }
     public function __render() {
+     
+     if ($this->messenge) {
+          echo '<script type="text/javascript">
+          $(document).ready(function () {
+               displayMessageModal("' . $this->messenge . '", "danger");
+          });
+          </script>';
+     }
+
 ?>
 <div class="container">
      <div class="heading-link mt-3">
@@ -94,5 +103,4 @@ class LoginPage {
           </div>
      </div>
 </div>
-
 <?php }}

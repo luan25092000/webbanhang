@@ -6,12 +6,15 @@ use models\ResponseModel;
 
 Class Middleware {
 
-    private $secret = "kaito";
-
     public static function check_router(String $url) {
         if (isset($_COOKIE["jwt"])) {
             $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
-            return $res;
+            if ($res->status) {
+                if (count($res->message)) {
+                    return $res;
+                }
+            }
+            return new ResponseModel(false);
         }
         return new ResponseModel(false);
     }
