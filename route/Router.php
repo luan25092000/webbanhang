@@ -19,6 +19,7 @@ class Router
         $this->get('/introduce', "IntroducePage");
         $this->get('/field', "FieldPage");
         $this->get('/check-order', "CheckOrderPage");
+        $this->get('/order-detail/{id}', "OrderDetailPage");
         $this->get('/contact', "ContactPage");
         $this->get('/new', "NewPage");
         $this->get('/new-detail', "NewDetailPage");

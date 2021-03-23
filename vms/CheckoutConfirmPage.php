@@ -135,6 +135,13 @@ class CheckoutConfirmPage {
                             <li class="section-checkout__right-item"><b>Tạm tính:</b><span><?= number_format($this->cart["total"]) ?>đ</span></li>
                             <li class="section-checkout__right-item"><b>Phí vận chuyển:</b><span><?= number_format($this->cart["shipping"]) ?>đ</span></li>
                             <li class="section-checkout__right-item"><b>Giảm giá:</b><span class="discount"><?= number_format($this->promotion) ?>đ</span></li>
+                            <!-- Nhập mã giảm -->
+                            <div class="input-group mb-3 mt-3">
+                                <input name="promotion_code" type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                                <div class="input-group-append">
+                                    <button id="add-promotion" onclick="addPromotion()" class="btn btn-primary" type="text">Thêm mã</button>
+                                </div>
+                            </div>
                             <li class="section-checkout__right-item section-checkout__right-item--money"><b>Thành tiền:</b><span class="money"><?= number_format($this->cart["total"] + 25000 - $this->promotion) ?>đ</span></li>
                         </ul>
                         <div class="desc-btn">
@@ -147,5 +154,23 @@ class CheckoutConfirmPage {
         </div>
     </div>
 </div>
-
+<script>
+function addPromotion() {
+    let promotion_code = $("input[name='promotion_code']").val();
+    $.ajax({
+        url: "/api/v1/checkout/promotion",
+        type: "POST",
+        data: { promotion_code },
+        dataType: "json",
+    }).done((data) => {
+        if(data.status) {
+            window.location.reload(false);
+        } else {
+            displayMessageModal(data.message, "danger");
+        }
+    }).fail((err) => {
+        displayMessageModal("Có lỗi xảy ra", "danger");
+    });
+}
+</script>
 <?php }}

@@ -104,7 +104,6 @@ class ProductDetailPage {
                         </div>
                         <div class="price text-center">
                             <span class="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
-                            <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                         </div>
                         <div class="btn-buy text-center">
                             <button class="btn btn-default">Mua ngay</button>
@@ -130,14 +129,11 @@ class ProductDetailPage {
                     <h2 class="ng-binding"><?= $row['title'] ?></h2>
                     <div class="price">
                         <span class="price-new ng-binding"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
-                        <span class="price-old ng-binding"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span>
                     </div>
                     <span class="product-code ng-binding"><b>Mã SP:</b> </span>
                     <p class="describe-detail">
                         <?= $row['title'] ?> – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu
-                        Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái. Giá
-                        <?= number_format($row['priceOld'], 0, '', ',') ?>₫, Còn
-                        <?= number_format($row['price'], 0, '', ',') ?>₫, Giảm 40%.&nbsp;</p>
+                        Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.</p>
                     <iframe
                         src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fluankma&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=415196006363533"
                         width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0"

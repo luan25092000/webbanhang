@@ -31,7 +31,7 @@ $(document).ready(function () {
             // Set loading for submit button
             let btnSubmit = addToCartForms[i].querySelector(":scope button[type='submit']");
             let oldValue = $(btnSubmit).html();
-            $(btnSubmit).html(`<div class="spinner-border" role="status"></div>`);
+            $(btnSubmit).html(`Loading...`);
             // Send request
             $.ajax({
                 type: "POST",
