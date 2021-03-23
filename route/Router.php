@@ -60,6 +60,7 @@ class Router
 
         // Checkout
         $this->get('/cart', "CartPage");
+        $this->post('/cart', "CartPage");
         $this->get('/checkout', "CheckoutPage");
         $this->get('/checkout-confirm', "CheckoutConfirmPage");
         $this->get('/checkout-done', "CheckoutDonePage");

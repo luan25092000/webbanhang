@@ -263,5 +263,57 @@ class AccountAPI {
         
     }
 
+    // Check login return account
+    public static function checkAuthRequest() {
+        $false_response = (new ResponseModel(false, "Access denied"))->to_json();
+
+        // Check cookie
+        if (!isset($_COOKIE["jwt"])) {
+            echo $false_response;
+            return;
+        }
+        // Check JWT
+        $res = AccountAPI::checkJWT($_COOKIE["jwt"]);
+        if(!$res->status) {
+            echo $false_response;
+            return;
+        }
+        // Check username
+        if(!count($res->message)) { // If hasn't username
+            echo $false_response;
+            return;
+        }
+        $username = $res->message[0]["username"];
+        $res = AccountAPI::checkExistUsername($username);
+        if($res->status) { // Chỗ này hơi ngược do thằng Kaito viết
+            echo $false_response;
+            return;
+        }
+        // Get account
+        $res = AccountAPI::get_by_username($username);
+        if(!$res->status || !count($res->message)) {
+            echo $false_response;
+            return;
+        }
+        return new ResponseModel(true, $res->message[0]);
+    }
+
+    public static function update(String $id, AccountModel $account) {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+
+        $query = "UPDATE `customer` SET email='{$account->email}', phone='{$account->phone}',
+            fullName='{$account->fullName}', city='{$account->city}', district='{$account->district}',
+            commune='{$account->commune}' WHERE id=$id";
+        $res2 = Mysqllib::mysql_post_data_from_query($conn, $query);
+        if(!$res2->status) {
+            $res2->message = "Error";
+        }
+        return $res2;
+    }
 }
 ?>

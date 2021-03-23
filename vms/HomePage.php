@@ -108,24 +108,23 @@ class HomePage {
 <div class="row">
     <?php foreach($this->female_products->message as $row): ?>
     <div class="col-lg-3">
-        <form action="" method="post">
-            <div class="product-item-box">
-                <div class="product-item">
-                    <div class="image">
-                        <a href="/product-detail/<?= $row['id'] ?>">
-                            <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%" name="product-image"
-                                class="product-image" />
-                        </a>
-                        <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                    </div>
-                    <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
-                    <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
+        <div class="product-item-box">
+            <div class="product-item">
+                <div class="image">
+                    <a href="/product-detail/<?= $row['id'] ?>">
+                        <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%" name="product-image"
+                            class="product-image" />
+                    </a>
+                    <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                 </div>
+                <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
+                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
             </div>
-            <input type="hidden" name="price" value="<?= $row['price'] ?>" />
-            <input type="hidden" name="title" value="<?= $row['title'] ?>" />
-            <input type="hidden" name="quantity" value="<?= $row['quantity'] ?>" />
+        </div>
+        <form class="add-to-cart" action="" method="POST">
             <div class="col text-center">
+                <input type="hidden" name="product_id" value="<?= $row['id'] ?>"/>
+                <input type="hidden" name="product_quantity" value="1"/>
                 <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
             </div>
         </form>
@@ -152,24 +151,23 @@ class HomePage {
 <div class="row mb-4">
     <?php foreach($this->male_products->message as $row): ?>
     <div class="col-lg-3">
-        <form action="" method="post">
-            <div class="product-item-box">
-                <div class="product-item">
-                    <div class="image">
-                        <a href="/product-detail/<?= $row['id'] ?>">
-                            <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%"
-                                name="product-image" class="product-image" />
-                        </a>
-                        <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
-                    </div>
-                    <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4"><?= $row['title'] ?></a>
-                    <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
+        <div class="product-item-box">
+            <div class="product-item">
+                <div class="image">
+                    <a href="/product-detail/<?= $row['id'] ?>">
+                        <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%"
+                            name="product-image" class="product-image" />
+                    </a>
+                    <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                 </div>
+                <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4"><?= $row['title'] ?></a>
+                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
             </div>
-            <input type="hidden" name="price" value="<?= $row['price'] ?>" />
-            <input type="hidden" name="title" value="<?= $row['title'] ?>" />
-            <input type="hidden" name="quantity" value="<?= $row['quantity'] ?>" />
+        </div>
+        <form class="add-to-cart" action="" method="POST">
             <div class="col text-center">
+                <input type="hidden" name="product_id" value="<?= $row['id'] ?>"/>
+                <input type="hidden" name="product_quantity" value="1"/>
                 <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
             </div>
         </form>

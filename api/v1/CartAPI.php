@@ -34,11 +34,12 @@ class CartAPI {
             return $res;
         }
         $res->message[0]["cart_items"] = [];
-        $res2 = Mysqllib::mysql_post_data_from_query($conn, "SELECT * FROM `cart_item` WHERE cartId={$res->message[0]["id"]}");
+        $res2 = Mysqllib::mysql_get_data_from_query($conn, "SELECT cart_item.*, product.title, product.imgPath, product.priceOld FROM `cart_item` LEFT JOIN `product` ON cart_item.productId=product.id AND cart_item.cartId={$res->message[0]["id"]}");
         if(!$res2->status) {
-            if(count($res2->message)) {
-                $res->message[0]["cart_items"] = $res2->message;
-            }
+            return new ResponseModel(false, "Error");
+        }
+        if(count($res2->message)) {
+            $res->message[0]["cart_items"] = $res2->message;
         }
         return $res;
     }
@@ -81,7 +82,7 @@ class CartAPI {
         }
         if(!count($res->message)) { // If the item doesn't exist in the cart, then add it
             $query = "INSERT INTO cart_item(`productId`, `cartId`, `price`, `quantity`) 
-                VALUES({$product["id"]}, {$cart["id"]}, {$product["price"]}, {$product["quantity"]})";
+                VALUES({$product["id"]}, {$cart["id"]}, {$product["price"]}, $quantity)";
             $res = Mysqllib::mysql_post_data_from_query($conn, $query);
             if(!$res->status) {
                 $res->message = "Error while adding the product";
@@ -89,7 +90,7 @@ class CartAPI {
             return $res;
         } else { // Increase the quantity
             $cart_item = $res->message[0];
-            $new_quantity = $cart_item->quantity + $quantity;
+            $new_quantity = (int)$cart_item["quantity"] + (int)$quantity;
             $query = "UPDATE cart_item SET quantity=$new_quantity
                 WHERE id={$cart_item["id"]}";
             $res = Mysqllib::mysql_post_data_from_query($conn, $query);
@@ -156,7 +157,7 @@ class CartAPI {
         }
     }
 
-    public static function delete(String $account_id, String $product_id, String $quantity) {
+    public static function delete(String $account_id, String $cart_item_id) {
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -175,32 +176,23 @@ class CartAPI {
         }
         $cart = $res->message[0];
 
-        // Get the product info
-        $query = "SELECT * from product WHERE id=$product_id LIMIT 1";
-        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
-        if(!$res->status) {
-            return new ResponseModel(false, "Error");
-        }
-        if(!count($res->message)) { // If the product doesn't exists
-            return new ResponseModel(false, "Not found the product");
-        }
-        $product = $res->message[0];
-
         // Get the item in the cart
-        $query = "SELECT * from cart_item WHERE cartId={$cart["id"]} AND productId=$product_id LIMIT 1";
+        $query = "SELECT * from cart_item WHERE cartId={$cart["id"]} AND id=$cart_item_id LIMIT 1";
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         if(!$res->status) {
             return new ResponseModel(false, "Error");
         }
-        if(count($res->message)) { // Remove the item from the cart
-            $cart_item = $res->message[0];
-            $query = "DELETE FROM cart_item WHERE id={$cart_item["id"]}";
-            $res = Mysqllib::mysql_post_data_from_query($conn, $query);
-            if(!$res->status) {
-                $res->message = "Error while removing the product";
-            }
-            return $res;
+        if(!count($res->message)) {
+            return new ResponseModel(false, "Error");
         }
+        // Remove the item from the cart
+        $cart_item = $res->message[0];
+        $query = "DELETE FROM cart_item WHERE id={$cart_item["id"]}";
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        if(!$res->status) {
+            $res->message = "Error while removing the product";
+        }
+        return $res;
     }
 }
 ?>

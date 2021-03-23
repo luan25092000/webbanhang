@@ -8,6 +8,8 @@ class APIV1Router {
 
         // Handlers
         $this->add_route("/cart", "CartController");
+        $this->add_route("/cart/{action}", "CartController");
+        $this->add_route("/account/{id}", "AccountController");
     }
 
     public function add_route(string $url, $action) {
