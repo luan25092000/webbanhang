@@ -102,13 +102,15 @@ li.nav-item > a:hover {
 }
 
 .product-item:hover .product-image {
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
 }
 
 .product-image {
-    transition: transform 1s;
+    transition: transform 1.5s;
 }
-
+.sp-large img{
+    width: 100%;
+}
 .product-item {
     display: flex;
     flex-direction: column;
@@ -169,7 +171,15 @@ li.nav-item > a:hover {
     background-color: #f04b4e;
     text-decoration: none;
 }
-
+.discount{
+    color: red !important;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #fde272;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 /* policy */
 .sale-policy-block {
     background-color: #f46164;

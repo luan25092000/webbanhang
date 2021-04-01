@@ -61,19 +61,15 @@ class ProductDetailPage {
                     <h3>Hướng Dẫn Mua Hàng</h3>
                     <ul class="buy-guide-policy">
                         <li>
-                            <span>1</span>Mua hàng trực tiếp tại website
-                            <b>http://www.runtime.vn</b>
-                        </li>
-                        <li>
-                            <span>2</span>Gọi điện thoại
+                            <span>1</span>Gọi điện thoại
                             <b class="color-pink">033 918 1998</b> để mua hàng
                         </li>
                         <li>
-                            <span>3</span>Mua tại Trung tâm CSKH:
-                            <b class="color-pink">5/12A Quang Trung, P.14, Q.Gò Vấp, Tp.HCM</b>
+                            <span>2</span>Mua tại Trung tâm CSKH:
+                            <b class="color-pink">17A Cộng Hòa, Tân Bình, Hồ Chí Minh</b>
                         </li>
                         <li>
-                            <span>4</span>Mua sỉ/buôn xin gọi
+                            <span>3</span>Mua sỉ/buôn xin gọi
                             <b>0908 77 00 95</b> để được hỗ trợ.
                         </li>
                     </ul>
@@ -139,19 +135,34 @@ class ProductDetailPage {
                         width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                         allowfullscreen="true"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                    
+
                     <form class="add-to-cart">
                         <div class="product-detail-quantity">
                             <input type="hidden" value="<?php echo $row['id']; ?>" name="product_id">
                             <h5>Số lượng:</h5>
                             <div style="display: flex; flex-direction: row; ">
-                                <button type="button" class="quantity-btn" data-quantity-minus="" onclick="addQuantity(-1)">
-                                    <svg viewBox="0 0 409.6 409.6"><g><g><path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z"></path></g></g></svg>
+                                <button type="button" class="quantity-btn" data-quantity-minus=""
+                                    onclick="addQuantity(-1)">
+                                    <svg viewBox="0 0 409.6 409.6">
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
                                 </button>
-                                <input id="product-detail-quantity-input" class="quantity-input" type="number" value="1" class="text ng-valid ng-dirty ng-valid-number ng-touched"
-                                    ng-model="InputQuantity" ng-init="InputQuantity=1" name="product_quantity">
-                                <button type="button" class="quantity-btn" data-quantity-plus="" onclick="addQuantity(1)">
-                                    <svg viewBox="0 0 426.66667 426.66667"><path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"></path></svg>
+                                <input id="product-detail-quantity-input" class="quantity-input" type="number" value="1"
+                                    class="text ng-valid ng-dirty ng-valid-number ng-touched" ng-model="InputQuantity"
+                                    ng-init="InputQuantity=1" name="product_quantity">
+                                <button type="button" class="quantity-btn" data-quantity-plus=""
+                                    onclick="addQuantity(1)">
+                                    <svg viewBox="0 0 426.66667 426.66667">
+                                        <path
+                                            d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0">
+                                        </path>
+                                    </svg>
                                 </button>
                             </div>
                         </div>
@@ -202,7 +213,7 @@ class ProductDetailPage {
 <script>
 function addQuantity(quan) {
     let sum = parseInt($("#product-detail-quantity-input").val()) + parseInt(quan);
-    if(sum < 1) {
+    if (sum < 1) {
         $("#product-detail-quantity-input").val(1);
     } else {
         $("#product-detail-quantity-input").val(sum);
