@@ -34,6 +34,7 @@ class Router
         $this->post('/register', "RegisterPage");
         $this->get('/login', "LoginPage");
         $this->post('/login', "LoginPage");
+        $this->get('/logout', "LogoutPage");
         $this->get('/verify/{token}', "VerifyEmailPage");
         $this->get('/account', "AccountPage");
         $this->get('/resetpassword/{token}', "ResetPasswordPage");
