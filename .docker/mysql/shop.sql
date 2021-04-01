@@ -3,13 +3,13 @@ CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE shop;
 
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Mar 23, 2021 at 03:40 AM
--- Server version: 8.0.23
--- PHP Version: 7.4.16
+-- Host: 127.0.0.1
+-- Generation Time: Mar 23, 2021 at 12:10 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,19 +32,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
-  `id` bigint NOT NULL,
-  `customerId` bigint DEFAULT NULL,
-  `total` float NOT NULL DEFAULT '0',
+  `id` bigint(20) NOT NULL,
+  `customerId` bigint(20) DEFAULT NULL,
+  `promotionId` bigint(20) DEFAULT NULL,
+  `shipping` float DEFAULT 25000,
+  `total` float NOT NULL DEFAULT 0,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `customerId`, `total`, `updated_at`, `created_at`) VALUES
-(1, 1, 0, NULL, '2021-03-22 00:38:32');
 
 -- --------------------------------------------------------
 
@@ -53,21 +48,14 @@ INSERT INTO `cart` (`id`, `customerId`, `total`, `updated_at`, `created_at`) VAL
 --
 
 CREATE TABLE `cart_item` (
-  `id` bigint NOT NULL,
-  `productId` bigint NOT NULL,
-  `cartId` bigint NOT NULL,
-  `price` float NOT NULL DEFAULT '0',
-  `quantity` smallint NOT NULL DEFAULT '0',
+  `id` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
+  `cartId` bigint(20) NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cart_item`
---
-
-INSERT INTO `cart_item` (`id`, `productId`, `cartId`, `price`, `quantity`, `updated_at`, `created_at`) VALUES
-(1, 2, 1, 202500, 4, NULL, '2021-03-23 03:17:45');
 
 -- --------------------------------------------------------
 
@@ -76,9 +64,9 @@ INSERT INTO `cart_item` (`id`, `productId`, `cartId`, `price`, `quantity`, `upda
 --
 
 CREATE TABLE `category` (
-  `id` bigint NOT NULL,
-  `title` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -97,22 +85,22 @@ INSERT INTO `category` (`id`, `title`, `slug`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `id` bigint NOT NULL,
-  `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jwt` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT '0',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `fullName` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `sex` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `district` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `commune` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `id` bigint(20) NOT NULL,
+  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jwt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT 0,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fullName` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` char(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `district` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `commune` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -120,8 +108,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `username`, `password`, `email`, `phone`, `jwt`, `token`, `status`, `admin`, `updated_at`, `created_at`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES
-(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-03-22 02:34:43', '2021-03-22 02:34:43', 'admin', 'male', '', '', ''),
-(6, 'cc', '$2y$10$4R6L.5HgsKKMPT6Ntni6nuDcNgcFVu0iVXhxYw3AqGUTgmsZrmwcW', 'ngosangns@gmail.com', '012-345-6789', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImNjIn0.idvieXdfffR3nsGQnj_OKlXGmGz7vyrSgFhttkQDinUqHLD4XlbHuTXb0qUu7GXjVRSWKa5BVNPCL_uwWrl1Gg', 'aXBid2Y2dWp2bTVvZ3l4cjducXN0MGNlMzRkMmtoYWx6MTk4MjA4MzQ3NTUyOA==', 'unverified', 0, '2021-03-22 01:30:54', '2021-03-22 01:30:54', 'cc', 'male', '', '', '');
+(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-03-23 11:02:13', '2021-03-23 11:02:13', 'admin', 'male', '04', '047', '01471');
 
 -- --------------------------------------------------------
 
@@ -130,10 +117,10 @@ INSERT INTO `customer` (`id`, `username`, `password`, `email`, `phone`, `jwt`, `
 --
 
 CREATE TABLE `devvn_quanhuyen` (
-  `maqh` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `matp` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `maqh` varchar(5) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `matp` varchar(5) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -779,9 +766,9 @@ INSERT INTO `devvn_quanhuyen` (`maqh`, `name`, `type`, `matp`) VALUES
 --
 
 CREATE TABLE `devvn_tinhthanhpho` (
-  `matp` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `matp` varchar(5) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
@@ -860,10 +847,10 @@ INSERT INTO `devvn_tinhthanhpho` (`matp`, `name`, `type`) VALUES
 --
 
 CREATE TABLE `devvn_xaphuongthitran` (
-  `xaid` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `maqh` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `xaid` varchar(5) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `maqh` varchar(5) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -11501,14 +11488,15 @@ INSERT INTO `devvn_xaphuongthitran` (`xaid`, `name`, `type`, `maqh`) VALUES
 --
 
 CREATE TABLE `order` (
-  `id` bigint NOT NULL,
-  `customerId` bigint DEFAULT NULL,
-  `promotionId` bigint DEFAULT NULL,
-  `shipping` float NOT NULL DEFAULT '0',
-  `total` float NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `id` bigint(20) NOT NULL,
+  `customerId` bigint(20) DEFAULT NULL,
+  `code` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `promotionId` bigint(20) DEFAULT NULL,
+  `shipping` float NOT NULL DEFAULT 0,
+  `total` float NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -11518,13 +11506,13 @@ CREATE TABLE `order` (
 --
 
 CREATE TABLE `order_item` (
-  `id` bigint NOT NULL,
-  `productId` bigint NOT NULL,
-  `orderId` bigint NOT NULL,
-  `price` float NOT NULL DEFAULT '0',
-  `quantity` smallint NOT NULL DEFAULT '0',
+  `id` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
+  `orderId` bigint(20) NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -11534,15 +11522,15 @@ CREATE TABLE `order_item` (
 --
 
 CREATE TABLE `product` (
-  `id` bigint NOT NULL,
-  `title` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` float NOT NULL DEFAULT '0',
-  `quantity` smallint NOT NULL DEFAULT '0',
-  `catId` bigint NOT NULL,
-  `imgPath` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `sex` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0,
+  `catId` bigint(20) NOT NULL,
+  `imgPath` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sex` char(3) COLLATE utf8mb4_unicode_ci NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -11566,11 +11554,11 @@ INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `catId`, `imgPath`, `
 --
 
 CREATE TABLE `promotion` (
-  `id` bigint NOT NULL,
-  `title` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` float NOT NULL DEFAULT '0',
-  `quantity` smallint NOT NULL DEFAULT '0'
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `quantity` smallint(6) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -11578,7 +11566,7 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`id`, `title`, `code`, `price`, `quantity`) VALUES
-(1, 'hello', 'HELLO', 10000, 14),
+(1, 'hello', 'HELLO', 10000, 99),
 (2, 'test', 'test', 123, 123);
 
 -- --------------------------------------------------------
@@ -11588,9 +11576,9 @@ INSERT INTO `promotion` (`id`, `title`, `code`, `price`, `quantity`) VALUES
 --
 
 CREATE TABLE `tag` (
-  `id` bigint NOT NULL,
-  `title` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` bigint(20) NOT NULL,
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -11686,55 +11674,55 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

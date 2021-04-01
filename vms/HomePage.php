@@ -118,7 +118,7 @@ class HomePage {
                     <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                 </div>
                 <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
-                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
+                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</div>
             </div>
         </div>
         <form class="add-to-cart" action="" method="POST">
@@ -161,7 +161,7 @@ class HomePage {
                     <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                 </div>
                 <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4"><?= $row['title'] ?></a>
-                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫</span></div>
+                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</div>
             </div>
         </div>
         <form class="add-to-cart" action="" method="POST">

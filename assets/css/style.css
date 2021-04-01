@@ -139,7 +139,6 @@ li.nav-item > a:hover {
 .buy {
     outline: none;
     border: 1px solid #f46164;
-    border-bottom: none;
     color: #f46164;
     background-color: white;
     border-radius: 0.2rem;
