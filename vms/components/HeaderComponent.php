@@ -50,7 +50,7 @@ class HeaderComponent {
 </nav>
 <div class="container mt-4 mb-4 logo">
     <a href="/"><img src="/assets/img/logo/logo.png" alt="logo" /></a>
-    <form method="get" action="/search" enctype="multipart/form-data" class="form-search">
+    <form method="post" action="/product" class="form-search">
         <div class="form-group d-flex">
             <input type="text" placeholder="Tìm kiếm..." class="search-text-box" name="key"/>
             <button type="submit" class="button-search"><i class="fas fa-search"></i></button>

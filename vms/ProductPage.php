@@ -16,18 +16,21 @@ class ProductPage
         $this->title  = "Sản phẩm";
         // Tất cả sản phẩm
         // $this->rows = null;
-        if (isset($_POST["filter"]) ) {
+        if (isset($_POST["filter"])) {
             if ($_POST["filter"] != 0) {
                 $this->rows = ProductAPI::filter($_POST["filter"]);
                 echo ("<script>location.href = 'product#form-select-filter';</script>");
-            }else{
+            } else {
                 $this->rows = ProductAPI::gets();
             }
-
-        }else{
+        } else {
             $this->rows = ProductAPI::gets();
         }
 
+        if (isset($_POST["key"])) {
+            $this->rows = ProductAPI::getProductByKey($_POST["key"]);
+            echo ("<script>location.href = 'product#form-select-filter';</script>");
+        }
     }
 
     // Khai báo template và truyền bản thân vào template cha
@@ -75,26 +78,24 @@ class ProductPage
             </div>
             <div class="row" id="body-product">
                 <?php foreach ($this->rows->message as $row) : ?>
-                    <div class="col-lg-3 mt-3">
-                        <form action="" method="get">
-                            <div class="product-item-box">
-                                <div class="product-item">
-                                    <div class="image">
-                                        <a href="" class="product-image">
-                                            <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%" class="product-image360" />
-                                            <div class="discount">10%</div>
-                                        </a>
-                                        <a href="./product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i>
-                                            XEM
-                                            THÊM</a>
-                                    </div>
-                                    <a href="" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
-                                    <div class="price-new" name="price-new"><?= number_format($row['price'] * 0.9, 0, '', ',') ?>₫ <span class="price-old"><?= number_format($row['price'], 0, '', ',') ?>₫ </span>
-                                    </div>
+                    <div class="col-lg-3">
+                        <div class="product-item-box">
+                            <div class="product-item">
+                                <div class="image">
+                                    <a href="/product-detail/<?= $row['id'] ?>">
+                                        <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%" name="product-image" class="product-image" />
+                                    </a>
+                                    <a href="/product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i> XEM THÊM</a>
                                 </div>
+                                <a href="/product-detail/<?= $row['id'] ?>" class="product-name mt-4"><?= $row['title'] ?></a>
+                                <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</div>
                             </div>
-                            <div class="col text-center mt-3">
-                                <button class="btn btn-buy-product" type="submit"><i class="fas fa-shopping-cart mr-2"></i>Mua</button>
+                        </div>
+                        <form class="add-to-cart" action="" method="POST">
+                            <div class="col text-center">
+                                <input type="hidden" name="product_id" value="<?= $row['id'] ?>" />
+                                <input type="hidden" name="product_quantity" value="1" />
+                                <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
                             </div>
                         </form>
                     </div>

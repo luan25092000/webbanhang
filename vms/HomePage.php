@@ -19,17 +19,17 @@ class HomePage
 
         if (isset($_POST["filter"])) {
             $category = $_POST["filter"];
-            if ($_POST["filter"] != "Thời Trang Nữ" && $_POST["type"] == "female" ) {
+            if ($_POST["filter"] != "Thời Trang Nữ" && $_POST["type"] == "female") {
                 $this->female_products = ProductAPI::getByCategory($category);
                 $this->male_products = ProductAPI::getBySex('Nam');
-            }elseif($_POST["filter"] != "Thời Trang Nam" && $_POST["type"] == "male"){
+            } elseif ($_POST["filter"] != "Thời Trang Nam" && $_POST["type"] == "male") {
                 $this->male_products = ProductAPI::getByCategory($category);
                 $this->female_products = ProductAPI::getBySex('Nữ');
-            }else{
+            } else {
                 $this->female_products = ProductAPI::getBySex('Nữ');
                 $this->male_products = ProductAPI::getBySex('Nam');
             }
-        }else{
+        } else {
             $this->female_products = ProductAPI::getBySex('Nữ');
             $this->male_products = ProductAPI::getBySex('Nam');
         }
