@@ -38,9 +38,10 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "INSERT INTO `category`(`title`, `slug`, `content`) 
-                  VALUES ('$category->title','$category->slug','$category->content')";
+        $query = "INSERT INTO `category`(`title`, `slug`) 
+                  VALUES ('$category->title','$category->slug')";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        
         return $res;
     }
     
@@ -52,7 +53,7 @@ class CategoryAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "UPDATE `category` SET `title`='$category->title',`slug`='$category->slug',`content`='$category->content' WHERE `id`=$id";
+        $query = "UPDATE `category` SET `title`='$category->title',`slug`='$category->slug' WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }

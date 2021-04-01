@@ -21,12 +21,12 @@ class SideBarComponent {
           ?>
 
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/admin">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="/admin/orders">
                     <span data-feather="file"></span>
