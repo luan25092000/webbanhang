@@ -8,7 +8,7 @@ USE shop;
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2021 at 12:40 PM
+-- Generation Time: Apr 01, 2021 at 08:34 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -65,6 +65,15 @@ CREATE TABLE `cart_item` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `cart_item`
+--
+
+INSERT INTO `cart_item` (`id`, `productId`, `cartId`, `price`, `quantity`, `updated_at`, `created_at`) VALUES
+(27, 2, 3, 202500, 2, NULL, '2021-04-01 17:28:37'),
+(28, 1, 3, 157500, 1, NULL, '2021-04-01 17:21:40'),
+(29, 6, 3, 202500, 1, NULL, '2021-04-01 17:22:04');
+
 -- --------------------------------------------------------
 
 --
@@ -82,10 +91,14 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `title`, `slug`) VALUES
-(1, 'áo', 'áo'),
-(2, 'quần', 'quần'),
-(3, 'đầm', 'đầm'),
-(4, 'test', 'test');
+(1, 'Áo Sơ Mi Nữ', 'ao-so-mi-nu'),
+(2, 'Áo Thun Nữ', 'ao-thun-nu'),
+(3, 'Váy Nữ', 'vay-nu'),
+(4, 'Quần Nữ', 'quan-nu'),
+(5, 'Áo Sơ Mi Nam', 'ao-so-mi-nam'),
+(6, 'Áo Thun Nam', 'ao-thun-nam'),
+(7, 'Quần Nam', 'quan-nam'),
+(8, 'Áo Khoác Nam', 'ao-khoac-nam');
 
 -- --------------------------------------------------------
 
@@ -117,7 +130,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `username`, `password`, `email`, `phone`, `jwt`, `token`, `status`, `admin`, `updated_at`, `created_at`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES
-(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-04-01 08:01:10', '2021-04-01 08:01:10', 'admin', 'male', '25', '237', '08533');
+(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-04-01 17:28:47', '2021-04-01 17:28:47', 'admin', 'male', '01', '001', '00001'),
+(7, 'kaito', '$2y$10$BfXRadr6kcZlocgOuh0wjOVvoh9nRPxKkLAfeNivTRAHZGQhAwuUW', 'kaito@kaito.ninja', '0383227833', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImthaXRvIn0.yJ2QlcaDPw3jTRFsG9AGD0n1WRYFkeIKKxQaoyE0Is-6odDZJZ5mz2O5z60Pj7NtXawvgxTHm1kSiqo8NDx-0Q', 'cnpzbWJ3ZTJ0b2ZrNXA3aWNhMGpobGd1eHlxdjkzMWQ2OG40OTE5Njk3Nzc1', 'unverified', 0, '2021-04-01 17:26:40', '2021-04-01 17:26:40', 'kaito ryouga', 'male', '25', '237', '08536');
 
 -- --------------------------------------------------------
 
@@ -11515,7 +11529,7 @@ CREATE TABLE `order` (
 INSERT INTO `order` (`id`, `customerId`, `code`, `promotionId`, `shipping`, `total`, `status`, `updated_at`, `created_at`) VALUES
 (25, 1, '1-1617236502', 2, 25000, 202500, 0, NULL, '2021-04-01 00:21:42'),
 (26, 1, '1-1617240258', 2, 25000, 405000, 0, NULL, '2021-04-01 01:24:18'),
-(27, 1, '1-1617264079', 3, 25000, 202869, 0, NULL, '2021-04-01 08:01:19');
+(28, 1, '1-1617289319', 3, 25000, 504000, 0, NULL, '2021-04-01 15:01:59');
 
 -- --------------------------------------------------------
 
@@ -11541,8 +11555,7 @@ INSERT INTO `order_item` (`id`, `productId`, `orderId`, `price`, `quantity`, `up
 (20, 6, 25, 202500, 1, NULL, '2021-04-01 00:21:42'),
 (21, 5, 26, 157500, 1, NULL, '2021-04-01 01:24:18'),
 (22, 7, 26, 247500, 1, NULL, '2021-04-01 01:24:18'),
-(23, 10, 27, 123, 3, NULL, '2021-04-01 08:01:19'),
-(24, 2, 27, 202500, 1, NULL, '2021-04-01 08:01:19');
+(25, 4, 28, 252000, 2, NULL, '2021-04-01 15:01:59');
 
 -- --------------------------------------------------------
 
@@ -11568,14 +11581,13 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `title`, `price`, `quantity`, `catId`, `imgPath`, `sex`, `updated_at`, `created_at`) VALUES
 (1, 'ÁO SƠ MI NỮ CÔNG SỞ', 157500, 100, 1, '/assets/img/product/1.jpg', 'Nữ', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(2, 'COMBO 2 ÁO YẾM XUÂN HÈ', 202500, 100, 1, '/assets/img/product/2.jpg', 'Nữ', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
+(2, 'COMBO 2 ÁO YẾM XUÂN HÈ', 202500, 100, 2, '/assets/img/product/2.jpg', 'Nữ', '2021-03-21 08:41:24', '2021-04-01 15:26:02'),
 (3, 'ĐẦM THÊU HOA THANH LỊCH', 247500, 100, 3, '/assets/img/product/3.jpg', 'Nữ', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
 (4, 'ÁO SƠ MI CELIO EMABATON', 252000, 100, 1, '/assets/img/product/4.jpg', 'Nữ', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(5, 'ÁO THUN NAM TRẮNG', 157500, 100, 1, '/assets/img/product/5.jpg', 'Nam', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(6, 'ÁO SƠ MI LỊCH LÃM', 202500, 100, 1, '/assets/img/product/6.jpg', 'Nam', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, 1, '/assets/img/product/7.jpg', 'Nam', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(8, 'QUẦN JEAN LỖ GỐI', 252000, 100, 2, '/assets/img/product/8.jpg', 'Nam', '2021-03-21 08:41:24', '2021-03-21 08:41:24'),
-(10, '123234234', 123, 123, 1, '/assets/img/product/o.png', 'Nam', NULL, '2021-04-01 08:05:30');
+(5, 'ÁO THUN NAM TRẮNG', 157500, 100, 6, '/assets/img/product/5.jpg', 'Nam', '2021-03-21 08:41:24', '2021-04-01 15:26:16'),
+(6, 'ÁO SƠ MI LỊCH LÃM', 202500, 100, 5, '/assets/img/product/6.jpg', 'Nam', '2021-03-21 08:41:24', '2021-04-01 15:26:27'),
+(7, 'ÁO KHOÁC NAM MÙA HÈ', 247500, 100, 8, '/assets/img/product/7.jpg', 'Nam', '2021-03-21 08:41:24', '2021-04-01 15:26:34'),
+(8, 'QUẦN JEAN LỖ GỐI', 252000, 100, 7, '/assets/img/product/8.jpg', 'Nam', '2021-03-21 08:41:24', '2021-04-01 15:26:46');
 
 -- --------------------------------------------------------
 
@@ -11599,18 +11611,6 @@ INSERT INTO `promotion` (`id`, `title`, `code`, `price`, `quantity`) VALUES
 (1, 'hello', 'HELLO', 10000, 99),
 (2, 'test', 'test', 123, 121),
 (3, 'kaito', 'kaito', 1234, 11);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tag`
---
-
-CREATE TABLE `tag` (
-  `id` bigint(20) NOT NULL,
-  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -11692,12 +11692,6 @@ ALTER TABLE `promotion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tag`
---
-ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -11711,31 +11705,31 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -11748,12 +11742,6 @@ ALTER TABLE `product`
 --
 ALTER TABLE `promotion`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tag`
---
-ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

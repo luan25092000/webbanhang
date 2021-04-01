@@ -1,10 +1,14 @@
 <?php
 namespace vms;
 
-class LoginGooglePage {
+class LogoutPage {
+
+    public $pageId;
+    public $row;
 
     public function __construct($param = null) {
-        
+        setcookie("jwt", time() - 3600);
+        header("Location: /");
     }
 
     public function render() {
