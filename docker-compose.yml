@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   nginx:
@@ -18,9 +18,9 @@ services:
     volumes:
       - ./:/var/www/php
     depends_on:
-      - mysql
+      - localhost
 
-  mysql:
+  localhost:
     # image: mysql:8
     build: ./.docker/mysql
     environment:
@@ -36,9 +36,9 @@ services:
     ports:
       - 8080:80
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: localhost
     depends_on:
-      - mysql
+      - localhost
 
 volumes:
   mysqldata:
