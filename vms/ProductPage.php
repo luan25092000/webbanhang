@@ -61,14 +61,14 @@ class ProductPage {
                 <div class="product-item-box">
                     <div class="product-item">
                         <div class="image">
-                            <a href="">
+                            <a href="" class="product-image">
                                 <img src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>" width="100%" height="100%"
-                                    class="product-image product-image360" />
+                                    class="product-image360" />
+                                <div class="discount">10%</div>
                             </a>
                             <a href="./product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i>
                                 XEM
                                 THÊM</a>
-                            <div class="discount">10%</div>
                         </div>
                         <a href="" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
                         <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span

@@ -65,9 +65,8 @@ class FemaleProductPage {
                                 <img src="<?= $row['imgPath'] ?>" alt="2" width="100%" height="100%"
                                     class="product-image product-image360" />
                             </a>
-                            <a href="./product-detail/<?= $row['id'] ?>" class="more-info"><i
-                                    class="fas fa-search"></i> XEM
-                                THÊM</a>
+                            <a href="./product-detail/<?= $row['id'] ?>" class="more-info"><i class="fas fa-search"></i>
+                                XEM THÊM</a>
                             <div class="discount">-10%</div>
                         </div>
                         <a href="./product-detail/<?= $row['id'] ?>" class="product-name mt-4"
