@@ -14,6 +14,7 @@ class Router
 
         // Routes
         $this->get('/', "HomePage");
+        $this->post('/', "HomePage");
         $this->get('/search', "SearchPage");
         $this->get('/product-detail/{id}', "ProductDetailPage");
         $this->get('/introduce', "IntroducePage");
@@ -33,7 +34,6 @@ class Router
         $this->post('/register', "RegisterPage");
         $this->get('/login', "LoginPage");
         $this->post('/login', "LoginPage");
-        $this->get('/test', "TestPage");
         $this->get('/verify/{token}', "VerifyEmailPage");
         $this->get('/account', "AccountPage");
         $this->get('/resetpassword/{token}', "ResetPasswordPage");

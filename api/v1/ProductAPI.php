@@ -112,6 +112,19 @@ class ProductAPI
         return $res;
     }
 
+    public static function getByCategory(String $category)
+    {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if (!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * from product WHERE catId = ( SELECT id FROM category WHERE title LIKE '%$category%' )");
+        return $res;
+    }
+
     public static function filter(String $type)
     {
         // Connect db

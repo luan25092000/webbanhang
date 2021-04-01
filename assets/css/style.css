@@ -88,6 +88,10 @@ li.nav-item > a:hover {
     color: black !important;
 }
 
+.male-product {
+    color: black !important;
+}
+
 /* product */
 .image {
     height: 348px;
