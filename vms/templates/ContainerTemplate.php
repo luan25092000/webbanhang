@@ -45,6 +45,7 @@ class ContainerTemplate {
     <!-- Owl carousel -->
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/filter.js"></script>
 </head>
 
 <body>

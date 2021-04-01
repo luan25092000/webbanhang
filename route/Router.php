@@ -28,6 +28,7 @@ class Router
         $this->get('/female-product', "FemaleProductPage");
         $this->get('/male-product', "MaleProductPage");
         $this->get('/product', "ProductPage");
+        $this->post('/product', "ProductPage");
         $this->get('/register', "RegisterPage");
         $this->post('/register', "RegisterPage");
         $this->get('/login', "LoginPage");
@@ -58,6 +59,7 @@ class Router
 
         $this->get('/admin/orders', "OrderPage");
         $this->get('/admin/orders/{id}', "OrderDetailPage");
+
         $this->get('/admin/customers', "CustomerPage");
         $this->get('/admin/customers/{username}', "CustomerDetailPage");
         $this->post('/admin/customers', "CustomerPage");
