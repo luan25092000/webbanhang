@@ -71,8 +71,8 @@ class ProductPage {
                                 THÊM</a>
                         </div>
                         <a href="" class="product-name mt-4" name="product-name"><?= $row['title'] ?></a>
-                        <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫ <span
-                                class="price-old"><?= number_format($row['priceOld'], 0, '', ',') ?>₫ </span>
+                        <div class="price-new" name="price-new"><?= number_format($row['price']*0.75, 0, '', ',') ?>₫ <span
+                                class="price-old"><?= number_format($row['price'], 0, '', ',') ?>₫ </span>
                         </div>
                     </div>
                 </div>

@@ -27,19 +27,25 @@ class PromotionPage
   {
 
     if (isset($_POST["submit"])) {
-      PromotionAPI::post(new PromotionModel($_POST));
-      echo("<script>location.href = '/admin/promotions';</script>");
-    }
+      switch ($_POST["submit"]) {
+        case 'Add Promotion':
+          PromotionAPI::post(new PromotionModel($_POST));
+          echo ("<script>location.href = '/admin/promotions';</script>");
+          break;
 
-    if (isset($_POST["e_submit"])) {
-      PromotionAPI::update(new PromotionModel($_POST), $_POST["edit_promotion"]);
-      echo("<script>location.href = '/admin/promotions';</script>");
-    }
+        case 'Edit Promotion':
+          PromotionAPI::update(new PromotionModel($_POST), $_POST["edit_promotion"]);
+          echo ("<script>location.href = '/admin/promotions';</script>");
+          break;
 
-    
-    if (isset($_POST["d_submit"])) {
-      PromotionAPI::delete($_POST["id"]);
-      echo("<script>location.href = '/admin/promotions';</script>");
+        case 'Delete Promotion':
+          PromotionAPI::delete($_POST["id"]);
+          break;
+
+        default:
+          echo ("<script>location.href = '/admin/promotions';</script>");
+          break;
+      }
     }
 
 ?>
@@ -64,7 +70,7 @@ class PromotionPage
             <th>Action</th>
           </tr>
           <?php foreach ($this->rows->message as $row) : ?>
-            <tr>
+            <tr id="promotion-<?= $row['id'] ?>">
               <th><?= $row['id'] ?></th>
               <th><?= $row['title'] ?></th>
               <th><?= $row['code'] ?></th>
@@ -72,10 +78,7 @@ class PromotionPage
               <th><?= $row['quantity'] ?></th>
               <td>
                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_promotion_modal" class="btn btn-sm btn-info">Edit</a>
-                <form id="add-product-form" method="post">
-                  <input type="hidden" name="id"  lue=<?= $row["id"] ?> />
-                  <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
-                </form>
+                <button data-id="<?= $row["id"] ?>" class="btn btn-danger">Delete</button>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -150,7 +153,7 @@ class PromotionPage
           <div class="modal-body">
             <form id="edit-category-form" enctype="multipart/form-data" method="post">
               <div class="row">
-              <div class="col-12">
+                <div class="col-12">
                   <div class="form-group">
                     <label>title</label>
                     <input type="text" name="title" class="form-control" placeholder="Enter Promotion Title">
@@ -177,7 +180,7 @@ class PromotionPage
                 <input type="hidden" name="edit_promotion" value="1">
                 <div class="col-12">
                   <!-- <button type="button" class="btn btn-primary edit-category-btn">Update Category</button> -->
-                  <input type="submit" class="btn btn-primary edit-category-btn" name="e_submit" value="Update Category"></button>
+                  <input type="submit" class="btn btn-primary edit-category-btn" name="submit" value="Edit Promotion"></button>
                 </div>
               </div>
 
