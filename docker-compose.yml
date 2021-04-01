@@ -18,9 +18,9 @@ services:
     volumes:
       - ./:/var/www/php
     depends_on:
-      - localhost
+      - mysql
 
-  localhost:
+  mysql:
     # image: mysql:8
     build: ./.docker/mysql
     environment:
@@ -36,9 +36,9 @@ services:
     ports:
       - 8080:80
     environment:
-      PMA_HOST: localhost
+      PMA_HOST: mysql
     depends_on:
-      - localhost
+      - mysql
 
 volumes:
   mysqldata:

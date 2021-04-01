@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.btn-info', function () {
 
-        var productId = '/admin/products/' + $(this)[0].attributes[1].nodeValue;
+        var productId = '/admin/products/' + $(this)[0].attributes["data-id"].nodeValue;
 
         $.ajax({
             url: productId,
@@ -43,31 +43,13 @@ $(document).ready(function () {
 
             url: productId,
             method: 'POST',
-            data:{delete: id},
-            // contentType: false,
-            // cache: true,
-            // processData: false,
+            data:{submit: "Delete Product", id: id},
             success: function (response) {
 
-                console.log(response);
+                if(response){
+                    $(`#product-${id}`).empty();
+                }
 
-                // var product = JSON.parse(response).message[0];
-                // var status = JSON.parse(response).status;
-
-                // console.log(product.sex);
-
-                // if (status) {
-                //     $("input[name='title']").val(product.title);
-                //     $("input[name='quantity']").val(product.quantity);
-                //     $("input[name='price']").val(product.price);
-                //     $("input[name='edit_product']").val(product.id);
-                //     $("select[name='sex']").val(product.sex);
-                //     $("select[name='catId']").val(product.catId);
-                //     $("[name='imagePath']").val(product.imgPath);
-                //     $("[name='imagePath']").empty();
-                //     i = $('<img/>', { src: product.imgPath, class: "img-product" });
-                //     $("[name='imagePath']").append(i);
-                // }
             }
 
         });
