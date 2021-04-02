@@ -198,7 +198,7 @@ class AccountAPI {
         }
 
         $conn = $conn_resp->message;
-        $query = sprintf("SELECT username FROM customer WHERE username='%s'", $conn->real_escape_string($username));
+        $query = sprintf("SELECT * FROM customer WHERE username='%s'", $conn->real_escape_string($username));
         $res = Mysqllib::mysql_get_data_from_query($conn, $query);
         return $res;
         
@@ -297,16 +297,16 @@ class AccountAPI {
         if(!count($res->message)) { // If hasn't username
             return $false_response;
         }
-        $username = $res->message[0]["username"];
-        $res = AccountAPI::checkExistUsername($username);
-        if($res->status) { // Chỗ này hơi ngược do thằng Kaito viết
-            return $false_response;
-        }
-        // Get account
-        $res = AccountAPI::get_by_username($username);
-        if(!$res->status || !count($res->message)) {
-            return $false_response;
-        }
+        // $username = $res->message[0]["username"];
+        // // $res = AccountAPI::checkExistUsername($username);
+        // // if($res->status) { // Chỗ này hơi ngược do thằng Kaito viết
+        // //     return $false_response;
+        // // }
+        // // Get account
+        // $res = AccountAPI::get_by_username($username);
+        // if(!$res->status || !count($res->message)) {
+        //     return $false_response;
+        // }
         return new ResponseModel(true, $res->message[0]);
     }
 

@@ -3,13 +3,13 @@ CREATE SCHEMA `shop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE shop;
 
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2021 at 06:45 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Generation Time: Apr 02, 2021 at 05:22 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article`
+--
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -88,9 +101,14 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `title`, `slug`) VALUES
-(1, 'áo', 'ao'),
-(2, 'quần', 'quan'),
-(3, 'đầm', 'đầm');
+(1, 'Áo Sơ Mi Nữ', 'ao-so-mi-nu'),
+(2, 'Áo Thun Nữ', 'ao-thun-nu'),
+(3, 'Váy Nữ', 'vay-nu'),
+(4, 'Quần Nữ', 'quan-nu'),
+(5, 'Áo Sơ Mi Nam', 'ao-so-mi-nam'),
+(6, 'Áo Thun Nam', 'ao-thun-nam'),
+(7, 'Quần Nam', 'quan-nam'),
+(8, 'Áo Khoác Nam', 'ao-khoac-nam');
 
 -- --------------------------------------------------------
 
@@ -122,7 +140,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `username`, `password`, `email`, `phone`, `jwt`, `token`, `status`, `admin`, `updated_at`, `created_at`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES
-(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 0, '2021-04-02 04:21:30', '2021-04-02 04:21:30', 'admin', 'male', '26', '248', '08911');
+(1, 'admin', '$2y$10$xyB916ubyqzxk5eJ13.mveC9fVMIZZHDZ40XPCVwrqZSkvYIKeVE2', 'kaito1477800@gmail.com', '0909259713', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyTmFtZSI6ImFkbWluIn0.MzPREfi9h_8ikpFlunFVUJNXHSlXq1tQrPwJVH1X_Js4P3AUxYaStdrP674UfbyC9XXYnccrH2_lMcSR5LtejA', 'bnFwZnYxbGc0Y2I4eWVremltM3J3MmpodDlvYTZ1c2R4NTA3MzIzNTU3NDYw', 'verified', 1, '2021-04-02 15:12:06', '2021-04-02 15:12:06', 'admin', 'male', '26', '248', '08911');
 
 -- --------------------------------------------------------
 
@@ -11599,21 +11617,15 @@ INSERT INTO `promotion` (`id`, `title`, `code`, `price`, `quantity`) VALUES
 (1, 'hello', 'HELLO', 10000, 100),
 (2, 'test', 'test', 123, 123);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tag`
---
-
-CREATE TABLE `tag` (
-  `id` bigint(20) NOT NULL,
-  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cart`
@@ -11691,14 +11703,14 @@ ALTER TABLE `promotion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tag`
---
-ALTER TABLE `tag`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -11716,7 +11728,7 @@ ALTER TABLE `cart_item`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -11747,12 +11759,6 @@ ALTER TABLE `product`
 --
 ALTER TABLE `promotion`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tag`
---
-ALTER TABLE `tag`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
