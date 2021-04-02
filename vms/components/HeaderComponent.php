@@ -85,7 +85,7 @@ class HeaderComponent
                         <li class="nav-item"><a href="/" class="nav-link">TRANG CHỦ</a></li>
                         <li class="nav-item"><a href="/introduce" class="nav-link">GIỚI THIỆU</a></li>
                         <li class="nav-item"><a href="/product" class="nav-link">SẢN PHẨM</a></li>
-                        <li class="nav-item"><a href="/new" class="nav-link">TIN TỨC</a></li>
+                        <li class="nav-item"><a href="/news" class="nav-link">TIN TỨC</a></li>
                         <li class="nav-item"><a href="/contact" class="nav-link">LIÊN HỆ</a></li>
                     </ul>
                 </div>

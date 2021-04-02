@@ -1,13 +1,22 @@
 <?php
 namespace vms;
 use vms\templates\ContainerTemplate;
+use api\v1\ArticleAPI;
 
 class NewPage {
     public $title;
+    private $rows;
+    private $message;
 
     public function __construct($params = null) {
         // Set title
         $this->title  = "Tin tức";
+        $res = ArticleAPI::gets();
+        if(!$res->status) {
+            $this->message = $res->message;
+        } else {
+            $this->rows = $res->message;
+        }
     }
 
     // Khai báo template và truyền bản thân vào template cha
@@ -20,164 +29,33 @@ class NewPage {
     public function __render() {
 ?>
 <div class="row mb-4 mt-4">
-    <div class="col-lg-3 col-md-12">
-        <div class="menu-news">
-            <h5 class="new-title">TIN TỨC</h5>
-            <ul>
-                <li><i class="fas fa-arrow-circle-right"></i> <a href="./new-promotion">TIN KHUYẾN
-                        MÃI</a></li>
-                <hr />
-                <li><i class="fas fa-arrow-circle-right"></i> <a href="./new-market">TIN THỊ TRƯỜNG</a>
-                </li>
-            </ul>
-        </div>
-        <div class="box-news mt-4">
-            <h4><span>TIN TỨC NỔI BẬT</span></h4>
-            <div class="news-content">
-                <div classs="news-block">
-                    <div class="news-item">
-                        <div class="row">
-                            <div class="col-lg-4 image-box-container-1">
-                                <img src="./assets/img/news/1.jpg" alt="" class="image-box" />
-                            </div>
-                            <div class="col-lg-8 title-news">
-                                <a href="./new-detail">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="row">
-                            <div class="col-lg-4 image-box-container-1">
-                                <img src="./assets/img/news/2.jpg" alt="" class="image-box" />
-                            </div>
-                            <div class="col-lg-8 title-news">
-                                <a href="./new-detail">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO
-                                    HOLLYWOOD</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="row">
-                            <div class="col-lg-4 image-box-container-1">
-                                <img src="./assets/img/news/3.jpg" alt="" class="image-box" />
-                            </div>
-                            <div class="col-lg-8 title-news">
-                                <a href="./new-detail">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="row">
-                            <div class="col-lg-4 image-box-container-1">
-                                <img src="./assets/img/news/4.jpg" alt="" class="image-box" />
-                            </div>
-                            <div class="col-lg-8 title-news">
-                                <a href="./new-detail">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="news-item">
-                        <div class="row">
-                            <div class="col-lg-4 image-box-container-1">
-                                <img src="./assets/img/news/5.jpg" alt="" class="image-box" />
-                            </div>
-                            <div class="col-lg-8 title-news">
-                                <a href="./new-detail">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="col-lg-9 col-md-12">
         <small><a href="/" class="text-dark">Trang chủ</a> <i class="fas fa-angle-double-right"></i> <span
                 class="introduce">Tin tức</span></small>
-        <div class="news-content">
-            <div classs="news-block">
-                <div class="news-item">
-                    <div class="row">
-                        <div class="col-lg-4 image-box-container-2">
-                            <img src="./assets/img/news/1.jpg" alt="" class="image-box" />
-                        </div>
-                        <div class="col-lg-8 title-news">
-                            <a href="./new-detail">NHỮNG CÔ NÀNG TRẺ TRUNG TRONG COMBO MÙA HÈ</a>
-                            <p><small>04/02/2021</small></p>
-                            <p>
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm
-                                Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.
-                                Giá 210.000 VNĐ, Còn 125.000 VNĐ, Giảm 40%.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="row">
-                        <div class="col-lg-4 image-box-container-2">
-                            <img src="./assets/img/news/2.jpg" alt="" class="image-box" />
-                        </div>
-                        <div class="col-lg-8 title-news">
-                            <a href="./new-detail">NHỮNG GÓC KHUẤT CỦA NGHỀ STYLIST CHO SAO
-                                HOLLYWOOD</a>
-                            <p><small>04/02/2021</small></p>
-                            <p>
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm
-                                Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.
-                                Giá 210.000 VNĐ, Còn 125.000 VNĐ, Giảm 40%.
-                            </p>
+        <div class="heading-lg mt-3 mb-3">
+          <h1>TIN TỨC</h1>
+        </div>
+        <?php if($this->message) { ?>
+            <div class="alert alert-danger"><?= $this->message ?></div>
+        <?php } ?>
+        <?php if($this->rows) { ?>
+            <div class="news-content">
+                <div classs="news-block">
+                    <?php foreach($this->rows as $row) { ?>
+                    <div class="news-item">
+                        <div class="row">
+                            <div class="col-lg-8 title-news">
+                                <h4><a href="/news-detail/<?= $row["id"] ?>"><?= $row["title"] ?></a></h4>
+                                <small><?= $row["created_at"] ?></small>
+                                <p><?= substr($row["content"], 0, 100) ?>...</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="news-item">
-                    <div class="row">
-                        <div class="col-lg-4 image-box-container-2">
-                            <img src="./assets/img/news/3.jpg" alt="" class="image-box" />
-                        </div>
-                        <div class="col-lg-8 title-news">
-                            <a href="./new-detail">DIỄM MY 9X GỢI Ý VÁY ÁO CHO MÙA HÈ</a>
-                            <p><small>04/02/2021</small></p>
-                            <p>
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm
-                                Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.
-                                Giá 210.000 VNĐ, Còn 125.000 VNĐ, Giảm 40%.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="row">
-                        <div class="col-lg-4 image-box-container-2">
-                            <img src="./assets/img/news/4.jpg" alt="" class="image-box" />
-                        </div>
-                        <div class="col-lg-8 title-news">
-                            <a href="./new-detail">3 CÁCH MẶC VÁY ĐƯỢC LĂNG XÊ MẠNH HÈ 2015</a>
-                            <p><small>04/02/2021</small></p>
-                            <p>
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm
-                                Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.
-                                Giá 210.000 VNĐ, Còn 125.000 VNĐ, Giảm 40%.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="row">
-                        <div class="col-lg-4 image-box-container-2">
-                            <img src="./assets/img/news/5.jpg" alt="" class="image-box" />
-                        </div>
-                        <div class="col-lg-8 title-news">
-                            <a href="./new-detail">NHỮNG PHONG CÁCH 'ĐÓNG KHUNG' CỦA SAO VIỆT</a>
-                            <p><small>04/02/2021</small></p>
-                            <p>
-                                Áo Công Sở Tay Búp Sang Trọng – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm
-                                Mịn, Gam Màu Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.
-                                Giá 210.000 VNĐ, Còn 125.000 VNĐ, Giảm 40%.
-                            </p>
-                        </div>
-                    </div>
+                    <hr>
+                    <?php } ?>
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </div>
 <?php }}
