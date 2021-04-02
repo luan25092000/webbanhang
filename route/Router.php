@@ -14,6 +14,7 @@ class Router
 
         // Routes
         $this->get('/', "HomePage");
+        $this->post('/', "HomePage");
         $this->get('/search', "SearchPage");
         $this->get('/product-detail/{id}', "ProductDetailPage");
         $this->get('/introduce', "IntroducePage");
@@ -28,11 +29,13 @@ class Router
         $this->get('/female-product', "FemaleProductPage");
         $this->get('/male-product', "MaleProductPage");
         $this->get('/product', "ProductPage");
+        $this->post('/product', "ProductPage");
         $this->get('/register', "RegisterPage");
         $this->post('/register', "RegisterPage");
         $this->get('/login', "LoginPage");
         $this->post('/login', "LoginPage");
-        $this->get('/test', "TestPage");
+        $this->post('/login-with-google', "LoginGooglePage");
+        $this->get('/logout', "LogoutPage");
         $this->get('/verify/{token}', "VerifyEmailPage");
         $this->get('/account', "AccountPage");
         $this->get('/resetpassword/{token}', "ResetPasswordPage");
@@ -58,6 +61,7 @@ class Router
 
         $this->get('/admin/orders', "OrderPage");
         $this->get('/admin/orders/{id}', "OrderDetailPage");
+
         $this->get('/admin/customers', "CustomerPage");
         $this->get('/admin/customers/{username}', "CustomerDetailPage");
         $this->post('/admin/customers', "CustomerPage");

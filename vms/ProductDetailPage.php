@@ -37,23 +37,23 @@ class ProductDetailPage {
                 </h4>
                 <ul class="box-sales-policy">
                     <li>
-                        <span>1</span>Giao hàng TOÀN QUỐC
+                        <span>1. </span>Giao hàng TOÀN QUỐC
                     </li>
                     <li>
-                        <span>2</span>Thanh toán khi nhận hàng
+                        <span>2. </span>Thanh toán khi nhận hàng
                     </li>
                     <li>
-                        <span>3</span>Đổi trả trong
+                        <span>3. </span>Đổi trả trong
                         <span class="color-pink">15 ngày</span>
                     </li>
                     <li>
-                        <span>4</span>Hoàn ngay tiền mặt
+                        <span>4. </span>Hoàn ngay tiền mặt
                     </li>
                     <li>
-                        <span>5</span>Chất lượng đảm bảo
+                        <span>5. </span>Chất lượng đảm bảo
                     </li>
                     <li>
-                        <span>6</span>Miễn phí vận chuyển:
+                        <span>6. </span>Miễn phí vận chuyển:
                         <span class="color-pink">Đơn hàng từ 3 món trở lên</span>
                     </li>
                 </ul>
@@ -61,15 +61,15 @@ class ProductDetailPage {
                     <h3>Hướng Dẫn Mua Hàng</h3>
                     <ul class="buy-guide-policy">
                         <li>
-                            <span>1</span>Gọi điện thoại
+                            <span>1. </span>Gọi điện thoại
                             <b class="color-pink">033 918 1998</b> để mua hàng
                         </li>
                         <li>
-                            <span>2</span>Mua tại Trung tâm CSKH:
+                            <span>2. </span>Mua tại Trung tâm CSKH:
                             <b class="color-pink">17A Cộng Hòa, Tân Bình, Hồ Chí Minh</b>
                         </li>
                         <li>
-                            <span>3</span>Mua sỉ/buôn xin gọi
+                            <span>3. </span>Mua sỉ/buôn xin gọi
                             <b>0908 77 00 95</b> để được hỗ trợ.
                         </li>
                     </ul>

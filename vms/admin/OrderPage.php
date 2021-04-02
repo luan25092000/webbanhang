@@ -61,7 +61,7 @@ class OrderPage
 							<th><?= $row['id'] ?></th>
 							<th><?= AccountAPI::get_by_id($row["customerId"])->message[0]["username"] ?></th>
 							<th><?= $row["code"] ?></th>
-							<th><?= PromotionAPI::getById($row["promotionId"])->message[0]["title"] ?></th>
+							<th><?= $row["promotionId"] != "" ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></th>
 							<th><?= number_format($row['shipping'], 0, '', ',') ?>₫</th>
 							<th><?= number_format($row['total'], 0, '', ',') ?>₫</th>
 							<th><?= $row['status'] == 0 ? "Processing" : "Delivery"; ?></th>

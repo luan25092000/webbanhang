@@ -38,6 +38,7 @@ class ContainerTemplate {
     <!-- Css -->
     <link rel="stylesheet" href="/assets/css/style.css" media="all" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -45,6 +46,7 @@ class ContainerTemplate {
     <!-- Owl carousel -->
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/filter.js"></script>
 </head>
 
 <body>
