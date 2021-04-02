@@ -58,15 +58,15 @@ class ProductPage
                         </h4>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <span>Sản phẩm/ trang </span><select class="form-select">
+                <div class="col-md-6 mb-3">
+                    <span>Sản phẩm/trang </span><select class="form-select">
                         <option selected>12</option>
                         <option value="1">20</option>
                         <option value="2">50</option>
                         <option value="3">100</option>
                     </select>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-6 text-right mb-3">
                     <span>Sắp xếp </span><select class="form-select" id="form-select-filter">
                         <option value="0" selected>Mặc định</option>
                         <option value="1">Giá giảm dần</option>
@@ -91,7 +91,7 @@ class ProductPage
                                 <div class="price-new" name="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</div>
                             </div>
                         </div>
-                        <form class="add-to-cart" action="" method="POST">
+                        <form class="add-to-cart mb-5" action="" method="POST">
                             <div class="col text-center">
                                 <input type="hidden" name="product_id" value="<?= $row['id'] ?>" />
                                 <input type="hidden" name="product_quantity" value="1" />
