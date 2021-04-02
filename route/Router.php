@@ -66,6 +66,9 @@ class Router
         $this->get('/admin/customers/{username}', "CustomerDetailPage");
         $this->post('/admin/customers', "CustomerPage");
 
+        $this->get('/admin/articles', "ArticlePage");
+        $this->post('/admin/articles', "ArticlePage");
+
         // Checkout
         $this->get('/cart', "CartPage");
         $this->post('/cart', "CartPage");

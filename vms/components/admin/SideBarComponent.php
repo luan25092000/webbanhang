@@ -19,14 +19,6 @@ class SideBarComponent {
             $page = end($uriAr);
 
           ?>
-
-
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="/admin">
-                    <span data-feather="home"></span>
-                    Dashboard <span class="sr-only">(current)</span>
-                </a>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="/admin/orders">
                     <span data-feather="file"></span>
@@ -55,6 +47,13 @@ class SideBarComponent {
                 <a class="nav-link" href="/admin/customers">
                     <span data-feather="users"></span>
                     Customers
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/articles">
+                    <span data-feather="home"></span>
+                    Articles <span class="sr-only">(current)</span>
                 </a>
             </li>
         </ul>
