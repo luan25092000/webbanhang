@@ -18,7 +18,7 @@ class OrderPage {
     ?>
       <div class="row">
       	<div class="col-10">
-      		<h2>Customers</h2>
+      		<h2>Orders</h2>
       	</div>
       </div>
       
@@ -27,7 +27,7 @@ class OrderPage {
           <thead>
             <tr>
               <th>#</th>
-              <th>Order #</th>
+              <th>Order</th>
               <th>Product Id</th>
               <th>Product Name</th>
               <th>Quantity</th>

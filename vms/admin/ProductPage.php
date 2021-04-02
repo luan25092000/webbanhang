@@ -72,31 +72,29 @@ class ProductPage
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price</th>
-                <th>Quantity</th>
                 <th>Category</th>
                 <th>sex</th>
                 <th>Action</th>
             </tr>
             <?php foreach ($this->rows->message as $row) : ?>
             <tr class="product-item-admin">
-                <th style="font-size:0.9rem;font-weight:400"><?= $row['id'] ?></th>
-                <th style="font-size:0.9rem;font-weight:400"><?= $row['title'] ?></th>
-                <th>
+                <td style="font-size:0.9rem;font-weight:400"><?= $row['id'] ?></td>
+                <td style="font-size:0.9rem;font-weight:400"><?= $row['title'] ?></td>
+                <td>
                     <img class="img-product" src="<?= $row['imgPath'] ?>" alt="<?= $row['title'] ?>">
-                </th>
-                <th style="font-size:0.9rem;font-weight:400"><?= number_format($row['price'], 0, '', ',') ?>₫</th>
-                <th style="font-size:0.9rem;font-weight:400"><?= $row['quantity'] ?></th>
-                <th style="font-size:0.9rem;font-weight:400">
-                    <?= CategoryAPI::getById($row['catId'])->message[0]["title"] ?></th>
-                <th style="font-size:0.9rem;font-weight:400"><?= $row['sex'] ?></th>
-                <th>
+                </td>
+                <td style="font-size:0.9rem;font-weight:400"><?= number_format($row['price'], 0, '', ',') ?>₫</td>
+                <td style="font-size:0.9rem;font-weight:400">
+                    <?= CategoryAPI::getById($row['catId'])->message[0]["title"] ?></td>
+                <td style="font-size:0.9rem;font-weight:400"><?= $row['sex'] ?></td>
+                <td>
                     <a style="width:40%" href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal"
                         data-target="#edit_product_modal" class="btn btn-sm btn-info">Edit</a>
                     <form style="width:60%;display:inline" id="add-product-form" method="post">
                         <input type="hidden" name="id" value=<?= $row["id"] ?> />
                         <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
                     </form>
-                </th>
+                </td>
             </tr>
             <?php endforeach; ?>
         </thead>
@@ -146,13 +144,6 @@ class ProductPage
                                     <option value="Nũ">Nữ</option>
                                     <option value="Unisex">Unisex</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Qty</label>
-                                <input type="number" name="quantity" class="form-control"
-                                    placeholder="Enter Product Quantity">
                             </div>
                         </div>
                         <div class="col-12">
@@ -224,12 +215,6 @@ class ProductPage
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Product Qty</label>
-                                <input type="number" name="quantity" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
                                 <label>Product Price</label>
                                 <input type="number" name="price" class="form-control"
                                     placeholder="Enter Product Price">
@@ -256,6 +241,10 @@ class ProductPage
 </div>
 
 <script type="text/javascript" src="/assets/js/admin/product.js"></script>
-
+<style>
+.product-item-admin td {
+    vertical-align: middle;
+}
+</style>
 <?php }
 }

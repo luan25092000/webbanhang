@@ -10,7 +10,6 @@ class CategoryModel {
     public function __construct($product) {
         $this->title = $product["title"];
         $this->slug = $product["slug"];
-        $this->content = $product["content"];
     }
 }
 ?>

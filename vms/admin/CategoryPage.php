@@ -59,19 +59,17 @@ class CategoryPage
             <th>#</th>
             <th>Title</th>
             <th>Slug</th>
-            <th>Content</th>
             <th>Action</th>
           </tr>
           <?php foreach ($this->rows->message as $row) : ?>
             <tr>
-              <th><?= $row['id'] ?></th>
-              <th><?= $row['title'] ?></th>
-              <th><?= $row['slug'] ?></th>
-              <th><?= $row['content'] ?></th>
+              <td><?= $row['id'] ?></td>
+              <td><?= $row['title'] ?></td>
+              <td><?= $row['slug'] ?></td>
               <td>
                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_category_modal" class="btn btn-sm btn-info">Edit</a>
-                <form id="add-product-form" method="post">
-                  <input type="hidden" name="id" value=<?= $row["id"] ?> />
+                <form id="add-product-form" class="d-inline-block" method="post">
+                  <input type="hidden" name="id" value=<?= $row["id"] ?>/>
                   <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
                 </form>
               </td>
@@ -111,12 +109,6 @@ class CategoryPage
                     <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="form-group">
-                    <label>Content</label>
-                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
-                  </div>
-                </div>
                 <input type="hidden" name="add_category" value="1">
                 <div class="col-12">
                   <input type="submit" class="btn btn-primary add-category" name="submit" value="Add Category"></button>
@@ -152,12 +144,6 @@ class CategoryPage
                   <div class="form-group">
                     <label>Slug</label>
                     <input type="text" name="slug" class="form-control" placeholder="Enter Category Slug">
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group">
-                    <label>Content</label>
-                    <input type="text" name="content" class="form-control" placeholder="Enter Category Content">
                   </div>
                 </div>
                 <input type="hidden" name="edit_category" value="1">

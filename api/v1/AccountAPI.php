@@ -269,7 +269,7 @@ class AccountAPI {
 
     // Check login return account
     public static function checkAuthRequest() {
-        $false_response = new ResponseModel(false, "Access denied");
+        $false_response = new ResponseModel(false, "Bạn chưa đăng nhập");
 
         // Check cookie
         if (!isset($_COOKIE["jwt"])) {

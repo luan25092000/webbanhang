@@ -65,15 +65,15 @@ class PromotionPage
           </tr>
           <?php foreach ($this->rows->message as $row) : ?>
             <tr>
-              <th><?= $row['id'] ?></th>
-              <th><?= $row['title'] ?></th>
-              <th><?= $row['code'] ?></th>
-              <th><?= $row['price'] ?></th>
-              <th><?= $row['quantity'] ?></th>
+              <td><?= $row['id'] ?></td>
+              <td><?= $row['title'] ?></td>
+              <td><?= $row['code'] ?></td>
+              <td><?= $row['price'] ?></td>
+              <td><?= $row['quantity'] ?></td>
               <td>
                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_promotion_modal" class="btn btn-sm btn-info">Edit</a>
-                <form id="add-product-form" method="post">
-                  <input type="hidden" name="id"  lue=<?= $row["id"] ?> />
+                <form id="add-product-form" class="d-inline-block" method="post">
+                  <input type="hidden" name="id" lue=<?= $row["id"] ?> />
                   <input type="submit" name="d_submit" class="btn btn-sm btn-danger" value="Delete"></input>
                 </form>
               </td>
