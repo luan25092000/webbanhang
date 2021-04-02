@@ -52,8 +52,8 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "INSERT INTO `product`(`title`, `price`, `quantity`, `catId`, `imgPath`, `sex`) 
-                  VALUES ('$product->title',$product->price,$product->quantity,$product->catId,'$path','$product->sex')";
+        $query = "INSERT INTO `product`(`title`, `price`, `catId`, `imgPath`, `sex`) 
+                  VALUES ('$product->title',$product->price,$product->catId,'$path','$product->sex')";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
@@ -67,7 +67,7 @@ class ProductAPI {
         }
         $conn = $conn_resp->message;
         // Query
-        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`quantity`=$product->quantity,`catId`=$product->catId,`sex`='$product->sex' WHERE `id`=$id";
+        $query = "UPDATE `product` SET `title`='$product->title',`price`=$product->price,`catId`=$product->catId,`sex`='$product->sex' WHERE `id`=$id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
 
         if ($res->status && $imgPath !== "" ) {

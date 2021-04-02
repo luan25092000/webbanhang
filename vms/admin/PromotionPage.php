@@ -64,21 +64,21 @@ class PromotionPage
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>code</th>
-            <th>price</th>
-            <th>quantity</th>
+            <th>Code</th>
+            <th>Price</th>
+            <th>Quantity</th>
             <th>Action</th>
           </tr>
           <?php foreach ($this->rows->message as $row) : ?>
             <tr id="promotion-<?= $row['id'] ?>">
-              <th><?= $row['id'] ?></th>
-              <th><?= $row['title'] ?></th>
-              <th><?= $row['code'] ?></th>
-              <th><?= $row['price'] ?></th>
-              <th><?= $row['quantity'] ?></th>
+              <td><?= $row['id'] ?></td>
+              <td><?= $row['title'] ?></td>
+              <td><?= $row['code'] ?></td>
+              <td><?= $row['price'] ?></td>
+              <td><?= $row['quantity'] ?></td>
               <td>
                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_promotion_modal" class="btn btn-sm btn-info">Edit</a>
-                <button data-id="<?= $row["id"] ?>" class="btn btn-danger">Delete</button>
+                <button data-id="<?= $row["id"] ?>" class="btn btn-sm btn-danger">Delete</button>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -106,13 +106,13 @@ class PromotionPage
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                    <label>title</label>
+                    <label>Title</label>
                     <input type="text" name="title" class="form-control" placeholder="Enter Promotion Title">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>code</label>
+                    <label>Code</label>
                     <input type="text" name="code" class="form-control" placeholder="Enter Promotion Code">
                   </div>
                 </div>
@@ -155,13 +155,13 @@ class PromotionPage
               <div class="row">
                 <div class="col-12">
                   <div class="form-group">
-                    <label>title</label>
+                    <label>Title</label>
                     <input type="text" name="title" class="form-control" placeholder="Enter Promotion Title">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
-                    <label>code</label>
+                    <label>Code</label>
                     <input type="text" name="code" class="form-control" placeholder="Enter Promotion Code">
                   </div>
                 </div>

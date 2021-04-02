@@ -49,11 +49,11 @@ class CustomerPage
                 <tbody id="customer_list">
                     <?php foreach ($this->rows->message as $row) : ?>
                         <tr>
-                            <th><?= $row['id'] ?></th>
-                            <th><?= $row['username'] ?></th>
-                            <th><?= $row["admin"] ?></th>
-                            <th><?= $row['email'] ?></th>
-                            <th><button data-name="<?= $row["username"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></th>
+                            <td><?= $row['id'] ?></td>
+                            <td><?= $row['username'] ?></td>
+                            <td><?= $row["admin"] ?></td>
+                            <td><?= $row['email'] ?></td>
+                            <td><button data-name="<?= $row["username"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

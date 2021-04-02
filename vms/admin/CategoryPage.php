@@ -70,12 +70,12 @@ class CategoryPage
                     </tr>
                     <?php foreach ($this->rows->message as $row) : ?>
                         <tr id="category-<?= $row["id"] ?>">
-                            <th><?= $row['id'] ?></th>
-                            <th><?= $row['title'] ?></th>
-                            <th><?= $row['slug'] ?></th>
+                            <td><?= $row['id'] ?></td>
+                            <td><?= $row['title'] ?></td>
+                            <td><?= $row['slug'] ?></td>
                             <td>
                                 <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_category_modal" class="btn btn-sm btn-info">Edit</a>
-                                <button data-id="<?= $row["id"] ?>" class="btn btn-danger">Delete</button>
+                                <button data-id="<?= $row["id"] ?>" class="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -103,7 +103,7 @@ class CategoryPage
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>title</label>
+                                        <label>Title</label>
                                         <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@ class CategoryPage
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>title</label>
+                                        <label>Title</label>
                                         <input type="text" name="title" class="form-control" placeholder="Enter Category Title">
                                     </div>
                                 </div>
