@@ -12,7 +12,7 @@ class CartController {
         $account_id = "";
         $res = AccountAPI::checkAuthRequest();
         if(!$res->status) {
-            echo (new ResponseModel(false, "Access denied"))->to_json();
+            echo (new ResponseModel(false, "Bạn chưa đăng nhập"))->to_json();
             return;
         }
         $account_id = $res->message["id"];

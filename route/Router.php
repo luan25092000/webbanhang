@@ -41,7 +41,7 @@ class Router
         $this->post('/forgetpassword', "ForgetPasswordPage");
 
         // change admin router
-        $this->get('/admin', "HomePage");
+        $this->get('/admin', "OrderPage");
 
         $this->get('/admin/products', "ProductPage");
         $this->post('/admin/products', "ProductPage");
@@ -57,7 +57,10 @@ class Router
 
 
         $this->get('/admin/orders', "OrderPage");
+        $this->get('/admin/orders/{id}', "OrderDetailPage");
         $this->get('/admin/customers', "CustomerPage");
+        $this->get('/admin/customers/{username}', "CustomerDetailPage");
+        $this->post('/admin/customers', "CustomerPage");
 
         // Checkout
         $this->get('/cart', "CartPage");

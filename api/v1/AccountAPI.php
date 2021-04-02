@@ -22,6 +22,19 @@ class AccountAPI {
         return $res;
     }
 
+    public static function get_by_id($id) {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+
+        // Query
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT username FROM customer WHERE id=$id LIMIT 1");
+        return $res;
+    }
+
     public static function get_by_username($username) {
         // Connect db
         $conn_resp = Database::connect_db();
@@ -269,7 +282,7 @@ class AccountAPI {
 
     // Check login return account
     public static function checkAuthRequest() {
-        $false_response = new ResponseModel(false, "Access denied");
+        $false_response = new ResponseModel(false, "Bạn chưa đăng nhập");
 
         // Check cookie
         if (!isset($_COOKIE["jwt"])) {

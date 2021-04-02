@@ -11,6 +11,7 @@ class HeaderComponent {
     public function __construct($params = null) {
         // Get logged account
 		$res = AccountAPI::checkAuthRequest();
+        print_r($res->status);
 		if($res->status) {
 			$this->account = $res->message;
             $res = CartAPI::read($this->account["id"]);
@@ -39,11 +40,17 @@ class HeaderComponent {
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
                         95</a></li>
-                <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
-                        đơn hàng</a></li>
-                <li class="nav-item"><a href="/cart" class="nav-link"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></li>
-                <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
-                <li class="nav-item"><a href="/register" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
+                <?php if($this->account) { ?>
+                    <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
+                            đơn hàng</a></li>
+                    <?php if($this->account["admin"] == 1) { ?>
+                        <li class="nav-item"><a href="/check-order" class="nav-link">
+                            <i class="far fa-edit"></i>Khu vực admin</a></li>
+                    <?php } ?>
+                <?php } else { ?>
+                    <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+                    <li class="nav-item"><a href="/register" class="nav-link"><i class="fas fa-key"></i> Đăng ký</a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
@@ -56,12 +63,15 @@ class HeaderComponent {
             <button type="submit" class="button-search"><i class="fas fa-search"></i></button>
         </div>
     </form>
+    
     <div class="cart">
-        <a href="/cart" class="text-dark cart-child">
-            <img src="/assets/img/cart/cart.png" alt="cart" />
-            <span id="cart-total" class="cart-total ml-2 mr-2 mt-2"><?= $this->count ?> sp - <?= number_format($this->total) ?>đ</span>
-            <i class="fa fa-arrow-right mt-2"></i>
-        </a>
+        <?php if($this->account) { ?>
+            <a href="/cart" class="text-dark cart-child">
+                <img src="/assets/img/cart/cart.png" alt="cart" />
+                <span id="cart-total" class="cart-total ml-2 mr-2 mt-2"><?= $this->count ?> sp - <?= number_format($this->total) ?>đ</span>
+                <i class="fa fa-arrow-right mt-2"></i>
+            </a>
+        <?php } ?>
     </div>
 </div>
 <nav class="navbar navbar-expand-lg text-white bg-dark options">
