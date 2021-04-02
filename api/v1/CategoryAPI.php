@@ -41,6 +41,7 @@ class CategoryAPI {
         $query = "INSERT INTO `category`(`title`, `slug`) 
                   VALUES ('$category->title','$category->slug')";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        
         return $res;
     }
     
