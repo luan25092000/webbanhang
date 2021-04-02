@@ -30,84 +30,30 @@ class ProductDetailPage {
     <div class="row">
         <div class="col-lg-3">
             <div class="menu-about">
-                <h4>
-                    <span>
-                        Chính sách bán hàng
-                    </span>
-                </h4>
-                <ul class="box-sales-policy">
-                    <li>
-                        <span>1. </span>Giao hàng TOÀN QUỐC
-                    </li>
-                    <li>
-                        <span>2. </span>Thanh toán khi nhận hàng
-                    </li>
-                    <li>
-                        <span>3. </span>Đổi trả trong
-                        <span class="color-pink">15 ngày</span>
-                    </li>
-                    <li>
-                        <span>4. </span>Hoàn ngay tiền mặt
-                    </li>
-                    <li>
-                        <span>5. </span>Chất lượng đảm bảo
-                    </li>
-                    <li>
-                        <span>6. </span>Miễn phí vận chuyển:
-                        <span class="color-pink">Đơn hàng từ 3 món trở lên</span>
-                    </li>
+                <div class="heading-lg">
+                    <h1>CHÍNH SÁCH GIAO HÀNG</h1>
+                </div>
+                <ul class="list-group mb-5">
+                    <li class="list-group-item">Giao hàng TOÀN QUỐC</li>
+                    <li class="list-group-item">Thanh toán khi nhận hàng</li>
+                    <li class="list-group-item">Đổi trả trong
+                        <span class="color-pink">15 ngày</span></li>
+                    <li class="list-group-item">Hoàn ngay tiền mặt</li>
+                    <li class="list-group-item">Chất lượng đảm bảo</li>
+                    <li class="list-group-item">Miễn phí vận chuyển:
+                        <span class="color-pink">Đơn hàng từ 3 món trở lên</span></li>
                 </ul>
-                <div class="buy-guide">
-                    <h3>Hướng Dẫn Mua Hàng</h3>
-                    <ul class="buy-guide-policy">
-                        <li>
-                            <span>1. </span>Gọi điện thoại
-                            <b class="color-pink">033 918 1998</b> để mua hàng
-                        </li>
-                        <li>
-                            <span>2. </span>Mua tại Trung tâm CSKH:
-                            <b class="color-pink">17A Cộng Hòa, Tân Bình, Hồ Chí Minh</b>
-                        </li>
-                        <li>
-                            <span>3. </span>Mua sỉ/buôn xin gọi
-                            <b>0908 77 00 95</b> để được hỗ trợ.
-                        </li>
-                    </ul>
+                <div class="heading-lg">
+                    <h1>HƯỚNG DẪN MUA HÀNG</h1>
                 </div>
-            </div>
-            <div class="menu-about">
-                <h4>
-                    <span>
-                        SẢN PHẨM HOT
-                    </span>
-                </h4>
-                <div class="row">
-                    <?php foreach($this->rows->message as $row): ?>
-                    <div class="col-12 mt-3">
-                        <div class="card">
-                            <div class="card-image">
-                                <a href="/product-detail/<?= $row['id'] ?>">
-                                    <img src=<?= $row['imgPath'] ?> class="card-img-top" alt="<?= $row['title'] ?>" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="box-product-block">
-                            <div class="name text-center">
-                                <a href="/product-detail/<?= $row['id'] ?>" title="<?= $row['title'] ?>">
-                                    <b><?= $row['title'] ?></b>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="price text-center">
-                            <span class="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
-                        </div>
-                        <div class="btn-buy text-center">
-                            <button class="btn btn-default">Mua ngay</button>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-
+                <ul class="list-group mb-5">
+                    <li class="list-group-item">Gọi điện thoại
+                        <b class="color-pink">033 918 1998</b> để mua hàng</li>
+                    <li class="list-group-item">Mua tại Trung tâm CSKH:
+                        <b class="color-pink">17A Cộng Hòa, Tân Bình, Hồ Chí Minh</b></li>
+                    <li class="list-group-item">Mua sỉ/buôn xin gọi
+                        <b>0908 77 00 95</b> để được hỗ trợ</li>
+                </ul>
             </div>
         </div>
         <div class="col-lg-9">
@@ -115,7 +61,7 @@ class ProductDetailPage {
                     href="./product" class="text-dark">Sản phẩm</a>
                 <i class="fas fa-angle-double-right"></i> <span class="introduce">Chi tiết sản
                     phẩm</span></small>
-            <div class="row mt-4">
+            <div class="row mt-4 mb-3">
                 <?php foreach($this->product->message as $row): ?>
                 <div class="col-md-6 sp-large">
                     <a href="/product-detail/<?= $row['id'] ?>"><img src=<?= $row['imgPath'] ?>
@@ -126,11 +72,12 @@ class ProductDetailPage {
                     <div class="price">
                         <span class="price-new ng-binding"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
                     </div>
-                    <span class="product-code ng-binding"><b>Mã SP:</b> </span>
-                    <p class="describe-detail">
+                    <span class="product-code ng-binding d-block mb-2"><b>Mã SP:</b> <?= $row['id'] ?></span>
+                    <p class="describe-detail text-justify mb-2">
                         <?= $row['title'] ?> – Kiểu Dáng Thời Trang, Chất Liệu Tơ Gân Mềm Mịn, Gam Màu
                         Tươi Tắn – Mang Đến Vẻ Ngoài Trẻ Trung, Duyên Dáng Cho Bạn Gái.</p>
                     <iframe
+                        class="mb-5"
                         src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fluankma&width=450&layout=standard&action=like&size=small&share=true&height=35&appId=415196006363533"
                         width="450" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                         allowfullscreen="true"
@@ -175,36 +122,66 @@ class ProductDetailPage {
                 </div>
                 <?php endforeach; ?>
             </div>
-            <div class="col-md-12">
-                <div class="menu-about">
-                    <h4>
-                        <span>
-                            Chi tiết sản phẩm
-                        </span>
-                    </h4>
-                    <div class="content-describe">
-                        - Áo công sở được thiết kế đơn giản, nhưng không kém phần tinh tế, với form áo vừa vặn,
-                        cổ bẻ, điểm nhấn ở phần tay búp sen được may cách điệu, đẹp mắt. <br />
-                        Điểm nổi bật
-                        - Chất liệu tơ gân mềm mịn, thông thoáng và thấm hút mồ hôi tốt, nên tạo được cảm giác
-                        thoải mái cho người mặc
-                        - Ba gam màu: hồng, xanh, trắng tươi tắn, trẻ trung, rất dễ để kết hợp với chân váy công
-                        sở, quần tây, jeans,… tạo vẻ ngoài chỉn chu khi đi làm. <br>
-                        - Trọng lượng gói hàng cả bao bì: 150 gram <br>
+            <div class="menu-about">
+                <div class="heading-lg mb-2">
+                    <h1>CHI TIẾT SẢN PHẨM</h1>
+                </div>
+                <div class="content-describe mb-5 text-justify">
+                    - Áo công sở được thiết kế đơn giản, nhưng không kém phần tinh tế, với form áo vừa vặn,
+                    cổ bẻ, điểm nhấn ở phần tay búp sen được may cách điệu, đẹp mắt. <br />
+                    Điểm nổi bật
+                    - Chất liệu tơ gân mềm mịn, thông thoáng và thấm hút mồ hôi tốt, nên tạo được cảm giác
+                    thoải mái cho người mặc
+                    - Ba gam màu: hồng, xanh, trắng tươi tắn, trẻ trung, rất dễ để kết hợp với chân váy công
+                    sở, quần tây, jeans,… tạo vẻ ngoài chỉn chu khi đi làm. <br>
+                    - Trọng lượng gói hàng cả bao bì: 150 gram <br>
 
-                        Điều kiện <br>
-                        - Hotdeal giao sản phẩm theo màu đến tận tay khách hàng. <br>
-                        + Đối với khu vực TP.HCM: Miễn phí. <br>
-                        + Đối với các tỉnh thành khác: Chuyển phát nhanh theo phí bưu điện. <br>
-                        - Áp dụng cho Áo công sở tay búp sang trọng <br>
-                        - Màu sắc: hồng, xanh, trắng <br>
-                        - Kích cỡ: Freesize <br>
-                        - Thời gian cuối giao sản phẩm đến hết 23/05/2015, không giao sản phẩm ngày chủ nhật.
-                        <br>
-                        - Khách hàng không bù thêm tiền khi nhận sản phẩm. <br>
-                        - Khách hàng vui lòng kiểm tra sản phẩm trước khi nhận hàng, Hotdeal không chịu trách
-                        nhiệm đổi trả sản phẩm sau khi giao hàng. <br>
+                    Điều kiện <br>
+                    - Hotdeal giao sản phẩm theo màu đến tận tay khách hàng. <br>
+                    + Đối với khu vực TP.HCM: Miễn phí. <br>
+                    + Đối với các tỉnh thành khác: Chuyển phát nhanh theo phí bưu điện. <br>
+                    - Áp dụng cho Áo công sở tay búp sang trọng <br>
+                    - Màu sắc: hồng, xanh, trắng <br>
+                    - Kích cỡ: Freesize <br>
+                    - Thời gian cuối giao sản phẩm đến hết 23/05/2015, không giao sản phẩm ngày chủ nhật.
+                    <br>
+                    - Khách hàng không bù thêm tiền khi nhận sản phẩm. <br>
+                    - Khách hàng vui lòng kiểm tra sản phẩm trước khi nhận hàng, Hotdeal không chịu trách
+                    nhiệm đổi trả sản phẩm sau khi giao hàng. <br>
+                </div>
+
+                <div class="heading-lg">
+                    <h1>SẢN PHẨM HOT</h1>
+                </div>
+                <div class="row">
+                    <?php foreach($this->rows->message as $row): ?>
+                    <div class="col-3 mt-3">
+                        <div class="card">
+                            <div class="card-image">
+                                <a href="/product-detail/<?= $row['id'] ?>">
+                                    <img src=<?= $row['imgPath'] ?> class="card-img-top" alt="<?= $row['title'] ?>" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-product-block">
+                            <div class="name text-center">
+                                <a href="/product-detail/<?= $row['id'] ?>" title="<?= $row['title'] ?>">
+                                    <b><?= $row['title'] ?></b>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="price text-center">
+                            <span class="price-new"><?= number_format($row['price'], 0, '', ',') ?>₫</span>
+                        </div>
+                        <form class="add-to-cart" action="" method="POST">
+                            <div class="col text-center">
+                                <input type="hidden" name="product_id" value="<?= $row['id'] ?>" />
+                                <input type="hidden" name="product_quantity" value="1" />
+                                <button type="submit" class="buy" name="buy"><i class="fas fa-shopping-cart"></i> Mua</button>
+                            </div>
+                        </form>
                     </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>

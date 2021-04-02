@@ -53,20 +53,21 @@ class OrderPage
 						<th>Total</th>
 						<th>Status</th>
 						<th>Create at</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody id="customer_order_list">
 					<?php foreach ($this->rows->message as $row) : ?>
 						<tr>
-							<th><?= $row['id'] ?></th>
-							<th><?= AccountAPI::get_by_id($row["customerId"])->message[0]["username"] ?></th>
-							<th><?= $row["code"] ?></th>
-							<th><?= $row["promotionId"] != "" ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></th>
-							<th><?= number_format($row['shipping'], 0, '', ',') ?>₫</th>
-							<th><?= number_format($row['total'], 0, '', ',') ?>₫</th>
-							<th><?= $row['status'] == 0 ? "Processing" : "Delivery"; ?></th>
-							<th><?= $row['created_at'] ?></th>
-							<th><button data-id="<?= $row["id"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></th>
+							<td><?= $row['id'] ?></td>
+							<td><?= AccountAPI::get_by_id($row["customerId"])->message[0]["username"] ?></td>
+							<td><?= $row["code"] ?></td>
+							<td><?= $row["promotionId"] != "" ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></td>
+							<td><?= number_format($row['shipping'], 0, '', ',') ?>₫</td>
+							<td><?= number_format($row['total'], 0, '', ',') ?>₫</td>
+							<td><?= $row['status'] == 0 ? "Processing" : "Delivery"; ?></td>
+							<td><?= $row['created_at'] ?></td>
+							<td><button data-id="<?= $row["id"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

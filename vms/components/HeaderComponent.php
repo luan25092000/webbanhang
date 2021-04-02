@@ -24,8 +24,8 @@ class HeaderComponent
                 $this->cart = $res->message[0];
                 foreach ($this->cart["cart_items"] as $item) {
                     $this->total += (int)$item["quantity"] * (int)$item["price"];
+                    $this->count += (int)$item["quantity"];
                 }
-                $this->count = count($this->cart["cart_items"]);
             }
         }
     }

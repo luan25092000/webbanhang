@@ -40,7 +40,7 @@ $(document).ready(function () {
                 dataType: "json",
             }).done(function (data) {
                 if (data.status) {
-                    window.location.href = "/cart";
+                    displayMessageModal("Đã thêm sản phẩm vào giỏ hàng", "success");
                 } else {
                     displayMessageModal(data.message, "danger");
                 }

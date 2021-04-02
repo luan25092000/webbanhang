@@ -43,7 +43,7 @@ class CustomerPage
                         <th>Name</th>
                         <th>Admin</th>
                         <th>Email</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="customer_list">

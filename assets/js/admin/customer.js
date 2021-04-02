@@ -30,7 +30,7 @@ $(document).ready(function () {
                                 <th scope="col">Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
-                                <th scope="col">Promotion</th>
+                                <th scope="col">Promo</th>
                             </tr>
                         </thead>
                         <tbody id="bodyShow_${id}">
@@ -63,12 +63,12 @@ $(document).ready(function () {
                     });
                     $("[class='modal-body']").append(tableTop);
 
-                    var x = Number(res[0].total - res[0].promotion);
+                    var x = Number(res[0].total - res[0].promotion + 25000);
                     x = x.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
 
                     total = $(`
+                        <hr class="d-block w-100">
                         <span><b>Tổng</b>: ${x}</span>
-                        <hr>
                     `)
 
                     $(`[id='bodyShow_${id}']`).append(total);
