@@ -63,6 +63,12 @@ class LoginPage {
                          </a>
                     </li>
                     <li>
+                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
+                              <i class="fas fa-sign-in-alt"></i>
+                              Đăng nhập với Google
+                         </a>
+                    </li>
+                    <li>
                          <a href="/register">
                               <i class="fas fa-sign-in-alt"></i>
                               Đăng ký
@@ -100,6 +106,8 @@ class LoginPage {
                          </div>
                     </div>
                </form>
+               <!-- <button class="btn-login" onclick="window.location.href='/accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto'">Đăng nhập với Google</button> -->
+               
           </div>
      </div>
 </div>

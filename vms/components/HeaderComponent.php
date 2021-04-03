@@ -45,8 +45,9 @@ class HeaderComponent
                         <li class="nav-item"><a class="nav-link"><i class="fas fa-phone-alt"></i> Hotline:0908 77 00
                                 95</a></li>
                         <?php if ($this->statusLogout) : ?>
-                            <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
-                                đơn hàng</a></li>
+                            <!-- <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
+                                đơn hàng</a></li> -->
+                                <li class="nav-item"><a href="/account      " class="nav-link"><i class="far fa-edit"></i>Tài Khoản</a></li>
                             <li class="nav-item"><a href="/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
                         <?php else : ?>
                             <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>

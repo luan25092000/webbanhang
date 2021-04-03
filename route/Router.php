@@ -19,7 +19,7 @@ class Router
         $this->get('/product-detail/{id}', "ProductDetailPage");
         $this->get('/introduce', "IntroducePage");
         $this->get('/field', "FieldPage");
-        $this->get('/check-order', "CheckOrderPage");
+        $this->get('/account', "CheckOrderPage");
         $this->get('/order-detail/{id}', "OrderDetailPage");
         $this->get('/contact', "ContactPage");
         $this->get('/new', "NewPage");
@@ -34,10 +34,10 @@ class Router
         $this->post('/register', "RegisterPage");
         $this->get('/login', "LoginPage");
         $this->post('/login', "LoginPage");
-        $this->post('/login-with-google', "LoginGooglePage");
+        // $this->get('/login-with-google', "LoginGooglePage");
         $this->get('/logout', "LogoutPage");
         $this->get('/verify/{token}', "VerifyEmailPage");
-        $this->get('/account', "AccountPage");
+        // $this->get('/account', "AccountPage");
         $this->get('/resetpassword/{token}', "ResetPasswordPage");
         $this->post('/resetpassword/{token}', "ResetPasswordPage");
         $this->get('/forgetpassword', "ForgetPasswordPage");
@@ -150,7 +150,7 @@ class Router
 
                 if (preg_match($reg, $url, $params)) {
 
-                    if ($url === "/admin" || $url === "/account" || explode("/", $url)[1] === "admin") {
+                    if ($url === "/admin" || explode("/", $url)[1] === "admin") {
 
                         $router = Middleware::check_router($url);
                         
@@ -160,10 +160,6 @@ class Router
                                 array_shift($params); // Loại bỏ rác trong params
                                 $this->__call_admin_route($route['action'], $params); // Call action
                                 return;
-                            } elseif ($router->status && $url === "/account") {
-
-                                echo $router->message[0]["username"];
-                                return true;
                             } else {
 
                                 $this->__call_action_route("AccessDeniedPage", []);
@@ -209,6 +205,7 @@ class Router
 
         // Nếu action là một view-model
         if (is_string($action)) {
+            
             $vm_name = 'vms\\' . $action;
             $vm = new $vm_name($params);
             $vm->render();

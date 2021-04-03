@@ -10,7 +10,7 @@ class SendMail
     $mail = new \mail\PHPMailer();
     $mail->IsSMTP();
     $mail->Mailer = "smtp";
-    $mail->SMTPDebug  = 1;
+    // $mail->SMTPDebug  = 1;
     $mail->SMTPAuth   = TRUE;
     $mail->SMTPSecure = "STARTTLS";
     $mail->Port       = 587;

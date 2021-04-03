@@ -64,10 +64,10 @@ class CheckoutDonePage {
                               <p class="descrip-pay">Vui lòng chuẩn bị số tiền cần thanh toán</p>
                               <p class="total-pay"> <span><?= number_format($this->order["total"]) ?>đ</span></p>
                               <p class="code-product">Mã Đơn Hàng <span class="code"><?= $this->order["code"] ?>. </span></p>
-                              <p class="info-product">Xem thông tin đơn hàng <span> <a href="/check-order">tại đây</a></span></p>
+                              <p class="info-product">Xem thông tin đơn hàng <span> <a href="/account">tại đây</a></span></p>
                               <div class="support-check">
-                                   <p class="info-cont">Để được hỗ trợ vui lòng gọi vào hotline <span class="number-phone">1111111111</span></p>
-                                   <p class="info-cont">hoặc Zalo <span class="number-phone">22222222222 </span></p>
+                                   <p class="info-cont">Để được hỗ trợ vui lòng gọi vào hotline <span class="number-phone">0909259719</span></p>
+                                   <p class="info-cont">hoặc Zalo <span class="number-phone">0909259719 </span></p>
                               </div>
                          </div>
                     </div>

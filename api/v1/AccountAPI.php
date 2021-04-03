@@ -44,7 +44,8 @@ class AccountAPI {
         $conn = $conn_resp->message;
 
         // Query
-        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * FROM customer WHERE username=$username LIMIT 1");
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * FROM customer WHERE username='$username' LIMIT 1");
+
         return $res;
     }
 
