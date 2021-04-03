@@ -10,6 +10,13 @@ class ArticlePage
     private $message;
 
     public function __construct($param = null) {
+        if(isset($_POST["delete_id"])) {
+            $res = ArticleAPI::delete($_POST["delete_id"]);
+            if(!$res->status) {
+                $this->message = $res->message;
+            }
+        }
+
         $res = ArticleAPI::gets();
         if(!$res->status) {
             $this->message = $res->message;
@@ -32,15 +39,15 @@ class ArticlePage
                 <h2>Manage Articles</h2>
             </div>
             <div class="col-2">
-                <a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-primary btn-sm">Add article</a>
+                <a href="/admin/articles/create" class="btn btn-sm btn-primary">Add article</a>
             </div>
         </div>
 
-        <?php if($this->message != NULL) { ?>
+        <?php if($this->message) { ?>
             <div class="alert alert-danger" role="alert">
-                <?= $message ?>
+                <?= $this->message ?>
             </div>
-        <?php } else { ?>
+        <?php } if($this->rows) { ?>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
@@ -52,18 +59,31 @@ class ArticlePage
                         <?php foreach ($this->rows as $row) : ?>
                             <tr id="category-<?= $row["id"] ?>">
                                 <td><?= $row['id'] ?></td>
-                                <td><?= $row['title'] ?></td>
+                                <td><a><?= $row['title'] ?></a></td>
                                 <td>
-                                    <a href="#myModal" data-id=<?= $row["id"] ?> data-toggle="modal" data-target="#edit_category_modal" class="btn btn-sm btn-info">Edit</a>
-                                    <button data-id="<?= $row["id"] ?>" class="btn btn-sm btn-danger">Delete</button>
+                                    <a href="/admin/articles/update/<?= $row["id"] ?>" class="btn btn-sm btn-info">Edit</a>
+                                    <button onclick="deleteArticle(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </thead>
                 </table>
             </div>
+            <script>
+                function deleteArticle(id) {
+                    let res = confirm("Chắc chắn xóa bài viết?");
+                    if(res) {
+                        var newForm = $('<form>', {
+                            'action': '/admin/articles',
+                            'method': 'POST'
+                        }).append($('<input>', {
+                            'name': 'delete_id',
+                            'value': id,
+                            'type': 'hidden'
+                        })).appendTo('body').submit();
+                    }
+                }
+            </script>
         <?php } ?>
-        <script type="text/javascript" src="/assets/js/admin/category.js"></script>
-
 <?php }
 }

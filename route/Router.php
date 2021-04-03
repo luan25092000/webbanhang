@@ -22,9 +22,10 @@ class Router
         $this->get('/account', "CheckOrderPage");
         $this->get('/order-detail/{id}', "OrderDetailPage");
         $this->get('/contact', "ContactPage");
-        $this->get('/new', "NewPage");
-        $this->get('/new-detail', "NewDetailPage");
-        $this->get('/new-market', "NewMarketPage");
+        $this->get('/news', "NewPage");
+        $this->get('/news-detail/{id}', "NewDetailPage");
+        // $this->get('/new-detail', "NewDetailPage");
+        // $this->get('/new-market', "NewMarketPage");
         $this->get('/new-promotion', "NewPromotionPage");
         $this->get('/female-product', "FemaleProductPage");
         $this->get('/male-product', "MaleProductPage");
@@ -68,6 +69,10 @@ class Router
 
         $this->get('/admin/articles', "ArticlePage");
         $this->post('/admin/articles', "ArticlePage");
+        $this->get('/admin/articles/create', "ArticleCreatePage");
+        $this->post('/admin/articles/create', "ArticleCreatePage");
+        $this->get('/admin/articles/update/{id}', "ArticleUpdatePage");
+        $this->post('/admin/articles/update/{id}', "ArticleUpdatePage");
 
         // Checkout
         $this->get('/cart', "CartPage");
