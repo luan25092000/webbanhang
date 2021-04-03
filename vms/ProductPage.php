@@ -17,19 +17,24 @@ class ProductPage
         // Tất cả sản phẩm
         // $this->rows = null;
         if (isset($_POST["filter"])) {
-            if ($_POST["filter"] != 0) {
-                $this->rows = ProductAPI::filter($_POST["filter"]);
-                echo ("<script>location.href = 'product#form-select-filter';</script>");
+            if (isset($_POST["key"])) {
+                if ($_POST["filter"] != 0) {
+                    $this->rows = ProductAPI::filter($_POST["filter"], $_POST["key"]);
+                } else {
+                    $this->rows = ProductAPI::getProductByKey($_POST["key"]);
+                }
             } else {
-                $this->rows = ProductAPI::gets();
+                if ($_POST["filter"] != 0) {
+                    $this->rows = ProductAPI::filter($_POST["filter"]);
+                } else {
+                    $this->rows = ProductAPI::gets();
+                }
             }
+        } else if (isset($_POST["key"])) {
+            $this->rows = ProductAPI::getProductByKey($_POST["key"]);
+            // echo ("<script>location.href = 'product#form-select-filter';</script>");
         } else {
             $this->rows = ProductAPI::gets();
-        }
-
-        if (isset($_POST["key"])) {
-            $this->rows = ProductAPI::getProductByKey($_POST["key"]);
-            echo ("<script>location.href = 'product#form-select-filter';</script>");
         }
     }
 
@@ -51,20 +56,21 @@ class ProductPage
             <div class="row">
                 <div class="col-12 mt-4">
                     <div class="menu-about">
-                        <h4>
-                            <span>
-                                SẢN PHẨM
-                            </span>
-                        </h4>
+                        <div class="heading-lg mb-3">
+                            <h1>SẢN PHẨM <?php if(isset($_POST["key"])) { ?>
+                                : TÌM KIẾM VỚI TỪ KHÓA "<?= strtoupper($_POST["key"]) ?>"
+                                <input id="key" type="hidden" value="<?= strtoupper($_POST["key"]) ?>"/>
+                            <?php } ?></h1>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <span>Sản phẩm/trang </span><select class="form-select">
+                    <!-- <span>Sản phẩm/trang </span><select class="form-select">
                         <option selected>12</option>
                         <option value="1">20</option>
                         <option value="2">50</option>
                         <option value="3">100</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="col-md-6 text-right mb-3">
                     <span>Sắp xếp </span><select class="form-select" id="form-select-filter">

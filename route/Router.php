@@ -61,6 +61,7 @@ class Router
 
 
         $this->get('/admin/orders', "OrderPage");
+        $this->post('/admin/orders', "OrderPage");
         $this->get('/admin/orders/{id}', "OrderDetailPage");
 
         $this->get('/admin/customers', "CustomerPage");

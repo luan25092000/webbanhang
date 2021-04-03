@@ -17,6 +17,10 @@ class OrderPage
 
 	public function __construct($param = null)
 	{
+		if(isset($_POST["pay_id"])) {
+			OrderAPI::pay($_POST["pay_id"]);
+		}
+
 		$this->rows = OrderAPI::gets();
 		if (count($this->rows->message)) {
 			// $this->customer = AccountAPI::get_by_id($this->rows->message[0]["customerId"]);
@@ -42,7 +46,7 @@ class OrderPage
 		</div>
 
 		<div class="table-responsive">
-			<table class="table table-striped table-sm">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -65,9 +69,14 @@ class OrderPage
 							<td><?= $row["promotionId"] != "" ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></td>
 							<td><?= number_format($row['shipping'], 0, '', ',') ?>₫</td>
 							<td><?= number_format($row['total'], 0, '', ',') ?>₫</td>
-							<td><?= $row['status'] == 0 ? "Processing" : "Delivery"; ?></td>
+							<td><?= $row['status'] == 0 ? "Processing" : "Delivered"; ?></td>
 							<td><?= $row['created_at'] ?></td>
-							<td><button data-id="<?= $row["id"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></td>
+							<td>
+								<button	button data-id="<?= $row["id"] ?>" data-toggle="modal" class="btn btn-primary mb-3" data-target="#show_modal">Hiển thị</button>
+								<?php if(!$row["status"]) { ?>
+									<button class="btn btn-success" onclick="pay(<?= $row["id"] ?>)">Thanh toán</button>
+								<?php } ?>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>
@@ -111,6 +120,25 @@ class OrderPage
 
 		<script type="text/javascript" src="/assets/js/admin/order.js"></script>
 
-
+<style>
+#customer_order_list td {
+	vertical-align: middle;
+}
+</style>
+<script>
+function pay(id) {
+	let res = confirm("Xác nhận thanh toán hóa đơn?");
+	if(res) {
+		var newForm = $('<form>', {
+			'action': '/admin/orders',
+			'method': 'POST'
+		}).append($('<input>', {
+			'name': 'pay_id',
+			'value': id,
+			'type': 'hidden'
+		})).appendTo('body').submit();
+	}
+}
+</script>
 <?php }
 }

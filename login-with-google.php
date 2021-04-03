@@ -43,19 +43,16 @@ if (isset($_GET['code'])) {
     $AccountModel->email = $email;
     $AccountModel->status = "unverified";
     $AccountModel->fullname = $name;
-    $AccountModel->sex = "male";
-    $AccountModel->country = "26";
-    $AccountModel->district = "248";
-    $AccountModel->commune = "08911";
-    $AccountModel->phone = "1234567890";
+    $AccountModel->sex = "";
+    $AccountModel->country = "";
+    $AccountModel->district = "";
+    $AccountModel->commune = "";
+    $AccountModel->phone = "";
     $user = new AccountAPI();
-    $jwt = $user->post($AccountModel);
+    $jwt = $user->postGoogle($AccountModel);
     
     if($jwt->status){
         $user->setcookieJWT($jwt->message);
-        
-        header("Location: /");
     }
-
     header("Location: /");
 }

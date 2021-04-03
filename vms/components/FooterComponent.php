@@ -54,7 +54,7 @@ class FooterComponent {
         <div class="col-lg-3">
             <h6>THÔNG TIN CÔNG TY</h6>
             <div class="items">
-                <p>NHÓM LẬP TRÌNH WEB</p>
+                <p>NHÓM DEEP WEB</p>
                 <p><i class="fas fa-map-marker-alt"></i> Học viện kĩ thuật mật mã</p>
             </div>
         </div>

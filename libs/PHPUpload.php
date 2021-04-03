@@ -8,7 +8,7 @@ class PHPUpload {
 
     public static function upload($FILES) {
 
-        $target_dir = "/var/www/php/assets/img/product/";
+        $target_dir = $_SERVER["DOCUMENT_ROOT"]."/assets/img/product/";
         $target_file = $target_dir . basename($FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

@@ -23,13 +23,12 @@ class ContactPage {
     <div class="col-lg-9">
         <small><a href="/" class="text-dark">Trang chủ</a> <i class="fas fa-angle-double-right"></i> <span
                 class="introduce">Liên hệ</span></small>
-        <h4 class="mt-4"><span>THÔNG TIN LIÊN HỆ</span></h4>
+        <div class="heading-lg mt-3">
+            <h1>THÔNG TIN LIÊN HỆ</h1>
+        </div>
         <div class="row mt-4">
-            <div class="col-lg-3">
-                <a href="/"><img src="./img/logo/logo.png" alt="" width=200 /></a>
-            </div>
             <div class="col-lg-9">
-                <h5>NHÓM LẬP TRÌNH WEB</h5>
+                <h5>NHÓM DEEP WEB</h5>
                 <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: Học viện kĩ thuật mật mã</p>
                 <p><i class="fas fa-phone-alt"></i> Điện thoại: (08) 89 810 3236</p>
                 <p><i class="fas fa-envelope-open"></i> Mail: nguyenhuuluan17@gmail.com</p>
@@ -39,12 +38,12 @@ class ContactPage {
         <div class="row">
             <div class="col-lg-12">
                 <h6 class="mt-4"><span>GỬI THÔNG TIN LIÊN HỆ</span></h6>
-                <small>
+                <small class="d-block mb-3">
                     <p>Xin vui lòng điền các yêu cầu vào mẫu dưới đây và gửi cho chúng tôi. Chúng tôi sẽ trả
                         lời bạn ngay sau khi nhận được. Xin chân thành cảm ơn!</p>
                 </small>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 mb-5">
                 <form action="" method="get">
                     <div class="input-group mb-3 input-group-sm">
                         <div class="input-group-prepend">

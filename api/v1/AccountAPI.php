@@ -55,9 +55,54 @@ class AccountAPI {
         $token = base64_encode(str_shuffle($permitted_chars) . $rand_chars);
         return $token;
     }
+    public static function postGoogle(AccountModel $account) {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+
+        // Login if account existed
+        $query = "SELECT * from `customer` WHERE `email`='$account->email' LIMIT 1";
+        $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        if ($res->status) {
+            if(count($res->message)) {
+                return new ResponseModel(true, $res->message[0]["jwt"]);
+            }
+        }
+
+        $password_hash = password_hash($account->password, PASSWORD_DEFAULT);
+        $jwt = static::createJWT($conn->real_escape_string($account->username));
+        $token = static::createToken();
+
+        // Query
+        $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `phone`, `status`, `token`, `jwt`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )", 
+            $conn->real_escape_string($account->username),
+            $password_hash,
+            $conn->real_escape_string($account->email),
+            $conn->real_escape_string($account->phone),
+            $account->status,
+            $token,
+            $jwt,
+            $conn->real_escape_string($account->fullname),
+            $conn->real_escape_string($account->sex),
+            $conn->real_escape_string($account->country),
+            $conn->real_escape_string($account->district),
+            $conn->real_escape_string($account->commune)
+        );
+
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+
+        if ($res->status) {
+            SendMail::post($token, $conn->real_escape_string($account->username), $conn->real_escape_string($account->email));
+            return new ResponseModel(true, $jwt);
+        }else{
+            return new ResponseModel(false);
+        }
+    }
 
     public static function post(AccountModel $account) {
-
         // Connect db
         $conn_resp = Database::connect_db();
         if(!$conn_resp->status) {
@@ -68,7 +113,15 @@ class AccountAPI {
 
         $jwt = static::createJWT($conn->real_escape_string($account->username));
         $token = static::createToken();
-        
+
+        // $query = "SELECT * from `customer` WHERE username='$account->username'";
+        // $res = Mysqllib::mysql_get_data_from_query($conn, $query);
+        // if ($res->status) {
+        //     if(count($res->message)) {
+        //         return new ResponseModel(true, $jwt);
+        //     }
+        // }
+
         // Query
         $query = sprintf("INSERT INTO `customer`(`username`, `password`, `email`, `phone`, `status`, `token`, `jwt`, `fullName`, `sex`, `city`, `district`, `commune`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )", 
             $conn->real_escape_string($account->username),

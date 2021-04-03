@@ -59,7 +59,7 @@ class PromotionPage
     </div>
 
     <div class="table-responsive">
-      <table class="table table-striped table-sm">
+      <table class="table">
         <thead>
           <tr>
             <th>#</th>

@@ -28,13 +28,17 @@ $(document).ready(function () {
     $(document.body).on('change', '#form-select-filter', function () {
 
         var select = $( "select#form-select-filter option:checked" ).val();
-
         var productPath = '/product';
-
+        var data = {filter: select};
+        var key = $( "#key" ).val();
+        if(key.length) {
+            data["key"] = key;
+        }
+        
         $.ajax({
             url: productPath,
             method: 'POST',
-            data:{filter: select},
+            data:data,
             success: function (response) {
                 $(".wrapper").html(response);
                 $(`select#form-select-filter option[value=${select}]`).attr('selected', 'selected');

@@ -125,7 +125,7 @@ class ProductAPI
         return $res;
     }
 
-    public static function filter(String $type)
+    public static function filter(String $type, String $key = null)
     {
         // Connect db
         $conn_resp = Database::connect_db();
@@ -138,23 +138,23 @@ class ProductAPI
         $query = null;
         switch ($type) {
             case 1:
-                $query = "SELECT * from product WHERE price > 0 ORDER BY price DESC";
+                $query = "SELECT * from product WHERE price > 0 " . ($key ? " AND title LIKE '%$key%' " : "") . " ORDER BY price DESC";
                 break;
 
             case 2:
-                $query = "SELECT * from product WHERE price > 0 ORDER BY price ASC";
+                $query = "SELECT * from product WHERE price > 0 " . ($key ? " AND title LIKE '%$key%' " : "") . " ORDER BY price ASC";
                 break;
 
             case 3:
-                $query = "SELECT * from product WHERE price > 0 ORDER BY title ASC";
+                $query = "SELECT * from product WHERE price > 0 " . ($key ? " AND title LIKE '%$key%' " : "") . " ORDER BY title ASC";
                 break;
 
             case 4:
-                $query = "SELECT * from product WHERE price > 0 ORDER BY title DESC";
+                $query = "SELECT * from product WHERE price > 0 " . ($key ? " AND title LIKE '%$key%' " : "") . " ORDER BY title DESC";
                 break;
 
             default:
-                $query = "SELECT * from product";
+                $query = "SELECT * from product " . ($key ? ` WHERE title LIKE '%$key%' ` : ``);
                 break;
         }
 

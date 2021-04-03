@@ -105,10 +105,121 @@ class LoginPage {
                               <a href="">Quên mật khẩu</a>
                          </div>
                     </div>
+                    <div class="ml-3">
+                         <span style="line-height: 3rem; vertical-align: top;">Hoặc đăng nhập với </span>
+                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
+                         <div id="logo">
+                              <div class="g-line"></div>
+                              <span class="red"></span>
+                              <span class="yellow"></span>
+                              <span class="green"></span>
+                              <span class="blue"></span>
+                         </div>
+                         </a>
+                    </div>
                </form>
                <!-- <button class="btn-login" onclick="window.location.href='/accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto'">Đăng nhập với Google</button> -->
                
           </div>
      </div>
 </div>
+<style>
+#logo {
+  display: inline-block;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  border: .2rem solid #f1f1f1;
+  box-shadow: 0 0px 4px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.24);
+}
+#logo::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    background: #f1f1f1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 4;
+  }
+  #logo::before{
+    position: absolute;
+    content: '';
+    display: block;
+    width: 35%;
+    height: 32%;
+    background: #f1f1f1;
+    right: 0;
+    z-index: 10;
+    bottom: 50%;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+  }
+  #logo .g-line{
+    width: 50%;
+    height: 20%;
+    background: #0091ea;
+    position: absolute;
+    right: 0;
+    margin: auto;
+    border-bottom-right-radius: 4px 20px;
+    top: 0;
+    bottom: 0;
+    z-index: 15;
+  }
+  
+  #logo .yellow{
+    width: 40%;
+    height: 40%;
+    position: absolute;
+    left: -15%;
+    bottom: 32%;
+    margin: auto;
+    background:  #ffc107;
+    transform: rotateZ(-48deg);
+    -webkit-transform: rotateZ(-48deg);
+    z-index: 3;
+  }
+  #logo .green{
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    border-radius: 0 0 100% 100%;
+    background: #4caf50;
+    z-index: 2;
+  }
+  #logo .blue{
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    right: 0;
+    z-index: 30;
+    top: 50%;   
+    z-index: 2;
+    width: 35%;
+    height: 32%;
+    background: #0091ea;
+    right: 0;
+    z-index: 2;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+  }  
+  #logo .red{
+    width: 81%;
+    height: 50%;
+    position: absolute;
+    top: 0px;
+    background: #f44336;
+  }
+</style>
 <?php }}

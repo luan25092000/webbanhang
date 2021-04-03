@@ -47,7 +47,10 @@ class HeaderComponent
                         <?php if ($this->statusLogout) : ?>
                             <!-- <li class="nav-item"><a href="/check-order" class="nav-link"><i class="far fa-edit"></i> Kiểm tra
                                 đơn hàng</a></li> -->
-                                <li class="nav-item"><a href="/account      " class="nav-link"><i class="far fa-edit"></i>Tài Khoản</a></li>
+                            <li class="nav-item"><a href="/account" class="nav-link"><i class="far fa-edit"></i>Tài Khoản</a></li>
+                            <?php if($this->account["admin"]) { ?>
+                                <li class="nav-item"><a href="/admin" class="nav-link"><i class="far fa-edit"></i>Khu vực admin</a></li>
+                            <?php } ?>
                             <li class="nav-item"><a href="/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
                         <?php else : ?>
                             <li class="nav-item"><a href="/login" class="nav-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>

@@ -77,6 +77,10 @@ class CheckoutPage {
         <template>
             <div class="checkout_mb-1 mb-5">
                 <div class="section_form">
+                    <input name="email" type="hidden" value="<?php echo $this->account["email"]; ?>">
+                    <div class="single-input bg-light"><span><img src="/assets/img/checkout-mb-1/email.svg"></span>
+                        <input class="hover-input bg-light" disabled type="text" placeholder="Email" value="<?php echo $this->account["email"]; ?>">
+                    </div>
                     <div class="single-input">
                         <span><img src="/assets/img/checkout-mb-1/user-plus.svg"></span>
                         <input name="fullName" class="hover-input" type="text" placeholder="Họ và tên" value="<?php echo $this->account["fullName"]; ?>">
@@ -84,9 +88,6 @@ class CheckoutPage {
                     <div class="single-input">
                         <span><img src="/assets/img/checkout-mb-1/phone.svg"></span>
                         <input name="phone" class="hover-input" type="text" placeholder="Số điện thoại" value="<?php echo $this->account["phone"]; ?>">
-                    </div>
-                    <div class="single-input"><span><img src="/assets/img/checkout-mb-1/email.svg"></span>
-                        <input name="email" class="hover-input" type="text" placeholder="Email" value="<?php echo $this->account["email"]; ?>">
                     </div>
                     <div class="single-input"><span><img src="/assets/img/checkout-mb-1/map.svg"></span>
                         <select name="city" id="country" class="hover-input form-control"
