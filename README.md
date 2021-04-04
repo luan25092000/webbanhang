@@ -1,5 +1,5 @@
 # webbanhang
-
+PORT: 8088  
 ## Pattern: MVVM (Model - View - ViewModel)
 
 ### 1. Hướng dẫn tạo page
