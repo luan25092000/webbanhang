@@ -57,40 +57,20 @@ class ArticleUpdatePage {
                 </div>
                 <div class="input-group">
                     <textarea class="form-control" name="content" id="editor" placeholder="Content">
-                        <?= $this->article["content"] ?>
+                        <?= html_entity_decode(htmlspecialchars_decode($this->article["content"])) ?>
                     </textarea>
                 </div>
             </form>
             <?php
         }
 ?>
-<script src="/assets/ckeditor5/ckeditor.js"></script>
+<script src="/assets/ckeditor/ckeditor.js"></script>
 <script>
-	var ceditor = ClassicEditor
-		.create( document.querySelector( '#editor' ), {
-			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-            ckfinder: {
-                options: {
-                    height: 500,
-                    width: "100%"
-                }
-		    },
-            width: "100%",
-		} )
-		.then( editor => {
-			window.editor = editor;
-		} )
-		.catch( err => {
-			console.error( err.stack );
-		} );
-
-    ceditor.Width = "100%";
+	CKEDITOR.replace('editor', {
+      height: 350
+    });
 </script>
 <style>
-    .ck-editor__editable_inline {
-        min-height: 400px;
-    }
-
     .ck-editor {
         width: 100%!important;
     }

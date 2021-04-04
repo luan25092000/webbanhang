@@ -20,6 +20,9 @@ class OrderPage
 		if(isset($_POST["pay_id"])) {
 			OrderAPI::pay($_POST["pay_id"]);
 		}
+		if(isset($_POST["unpay_id"])) {
+			OrderAPI::unpay($_POST["unpay_id"]);
+		}
 
 		$this->rows = OrderAPI::gets();
 		if (count($this->rows->message)) {
@@ -65,16 +68,17 @@ class OrderPage
 						<tr>
 							<td><?= $row['id'] ?></td>
 							<td><?= AccountAPI::get_by_id($row["customerId"])->message[0]["username"] ?></td>
-							<td><?= $row["code"] ?></td>
-							<td><?= $row["promotionId"] != "" ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></td>
+							<td><a href="/order-detail/<?= $row["code"] ?>" style="white-space: nowrap;"><?= $row["code"] ?></a></td>
+							<td><?= $row["promotionId"] ? PromotionAPI::getById($row["promotionId"])->message[0]["title"] : ""; ?></td>
 							<td><?= number_format($row['shipping'], 0, '', ',') ?>₫</td>
 							<td><?= number_format($row['total'], 0, '', ',') ?>₫</td>
 							<td><?= $row['status'] == 0 ? "Processing" : "Delivered"; ?></td>
 							<td><?= $row['created_at'] ?></td>
 							<td>
-								<button	button data-id="<?= $row["id"] ?>" data-toggle="modal" class="btn btn-primary mb-3" data-target="#show_modal">Hiển thị</button>
 								<?php if(!$row["status"]) { ?>
 									<button class="btn btn-success" onclick="pay(<?= $row["id"] ?>)">Thanh toán</button>
+								<?php } else { ?>
+									<button style="white-space: nowrap;" class="btn btn-danger" onclick="unpay(<?= $row["id"] ?>)">Hủy thanh toán</button>
 								<?php } ?>
 							</td>
 						</tr>
@@ -134,6 +138,20 @@ function pay(id) {
 			'method': 'POST'
 		}).append($('<input>', {
 			'name': 'pay_id',
+			'value': id,
+			'type': 'hidden'
+		})).appendTo('body').submit();
+	}
+}
+
+function unpay(id) {
+	let res = confirm("Xác nhận hủy thanh toán hóa đơn?");
+	if(res) {
+		var newForm = $('<form>', {
+			'action': '/admin/orders',
+			'method': 'POST'
+		}).append($('<input>', {
+			'name': 'unpay_id',
 			'value': id,
 			'type': 'hidden'
 		})).appendTo('body').submit();

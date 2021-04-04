@@ -60,7 +60,7 @@ class CategoryPage
         </div>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>#</th>

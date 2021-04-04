@@ -121,6 +121,36 @@ class CheckoutAPI {
         return $res;
     }
 
+    public static function readByCode($order_code) {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+
+        // Get order record
+        $res = Mysqllib::mysql_get_data_from_query($conn, "SELECT * FROM `order` WHERE code='$order_code' LIMIT 1");
+        if(!$res->status) {
+            return new ResponseModel(false, "Error");
+        }
+        if(!count($res->message)) {
+            return new ResponseModel(false, "Error");
+        }
+        
+        // Get order items
+        $res->message[0]["items"] = [];
+        $res2 = Mysqllib::mysql_get_data_from_query($conn, "SELECT order_item.*, product.title, product.imgPath FROM `order_item` INNER JOIN `product` ON order_item.productId=product.id AND order_item.orderId={$res->message[0]['id']}");
+        if(!$res2->status) {
+            return new ResponseModel(false, "Error");
+        }
+        if(count($res2->message)) {
+            $res->message[0]["items"] = $res2->message;
+        }
+
+        return $res;
+    }
+
     public static function checkOwned($account_id, $order_code) {
         // Connect db
         $conn_resp = Database::connect_db();

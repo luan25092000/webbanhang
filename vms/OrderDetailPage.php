@@ -21,22 +21,43 @@ class OrderDetailPage {
 		}
 		$this->account = $res->message;
 
-		// Check order is owned by account
-		$res = CheckoutAPI::checkOwned($this->account["id"], $params[0]);
-		if(!$res->status) {
-			$this->message = $res->message;
-		} else {
+		// If admin then go
+		if($this->account["admin"]) {
+			$res = CheckoutAPI::readByCode($params[0]);
+			if(!$res->status) {
+				$this->message = $res->message;
+				return;
+			}
+			if(!count($res->message)) {
+				$this->message = "Không tìm thấy đơn hàng";
+				return;
+			}
 			$this->order = $res->message[0];
-		}
-
-		// Get order
-		if($this->order) {
-			$this->order = CheckoutAPI::read($this->order["id"])->message[0];
 			// Get promotion
 			if($this->order["promotionId"]) {
 				$res = CheckoutAPI::getPromotion($this->order["promotionId"]);
 				if($res->status) {
 					$this->promotion = $res->message[0]["price"];
+				}
+			}
+		} else {
+			// Check order is owned by account
+			$res = CheckoutAPI::checkOwned($this->account["id"], $params[0]);
+			if(!$res->status) {
+				$this->message = $res->message;
+			} else {
+				$this->order = $res->message[0];
+			}
+
+			// Get order
+			if($this->order) {
+				$this->order = CheckoutAPI::read($this->order["id"])->message[0];
+				// Get promotion
+				if($this->order["promotionId"]) {
+					$res = CheckoutAPI::getPromotion($this->order["promotionId"]);
+					if($res->status) {
+						$this->promotion = $res->message[0]["price"];
+					}
 				}
 			}
 		}

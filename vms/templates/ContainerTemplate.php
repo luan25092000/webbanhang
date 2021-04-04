@@ -26,6 +26,8 @@ class ContainerTemplate {
     <title><?php print $this->child->title; ?> - WOMEN STORE</title>
     <!-- Title -->
     <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap" rel="stylesheet">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Owl carousel -->

@@ -31,7 +31,7 @@ $(document).ready(function () {
         var productPath = '/product';
         var data = {filter: select};
         var key = $( "#key" ).val();
-        if(key.length) {
+        if(key) {
             data["key"] = key;
         }
         

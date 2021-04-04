@@ -44,8 +44,8 @@ class NewDetailPage {
             <div class="new-detail-content">
                 <h3 class="mt-3"><?= $this->article["title"] ?></h3><small><?= $this->article["created_at"] ?></small>
                 <hr>
-                <div class="new-detail-content-child">
-                    <?= $this->article["content"] ?>
+                <div class="new-detail-content-child text-justify">
+                    <?= html_entity_decode(htmlspecialchars_decode($this->article["content"])) ?>
                 </div>
                 <hr>
                 <iframe

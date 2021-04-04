@@ -36,14 +36,14 @@ class CustomerPage
         </div>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Admin</th>
                         <th>Email</th>
-                        <th>Action</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody id="customer_list">
@@ -53,7 +53,7 @@ class CustomerPage
                             <td><?= $row['username'] ?></td>
                             <td><?= $row["admin"] ?></td>
                             <td><?= $row['email'] ?></td>
-                            <td><button data-name="<?= $row["username"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></td>
+                            <!-- <td><button data-name="<?= $row["username"] ?>" data-toggle="modal" class="btn btn-success" data-target="#show_modal">Hiển thị</button></td> -->
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -63,7 +63,7 @@ class CustomerPage
         </div>
         </div>
 
-        <div class="modal fade" id="show_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="show_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -77,9 +77,9 @@ class CustomerPage
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <script type="text/javascript" src="/assets/js/admin/customer.js"></script>
+        <!-- <script type="text/javascript" src="/assets/js/admin/customer.js"></script> -->
 
 
 <?php }

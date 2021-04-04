@@ -59,7 +59,7 @@ class ArticlePage
                         <?php foreach ($this->rows as $row) : ?>
                             <tr id="category-<?= $row["id"] ?>">
                                 <td><?= $row['id'] ?></td>
-                                <td><a><?= $row['title'] ?></a></td>
+                                <td><a href="/news-detail/<?= $row['id'] ?>"><?= $row['title'] ?></a></td>
                                 <td>
                                     <a href="/admin/articles/update/<?= $row["id"] ?>" class="btn btn-sm btn-info">Edit</a>
                                     <button onclick="deleteArticle(<?= $row['id'] ?>)" class="btn btn-sm btn-danger">Delete</button>

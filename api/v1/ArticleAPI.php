@@ -43,7 +43,8 @@ class ArticleAPI {
             return $conn_resp;
         }
         $conn = $conn_resp->message;
-        $query = "INSERT INTO article (title, content) VALUES ('{$article->title}', '{$article->content}')";
+        $content = htmlentities(htmlspecialchars($article->content));
+        $query = "INSERT INTO article (title, content) VALUES ('{$article->title}', \"$content\")";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
@@ -55,7 +56,8 @@ class ArticleAPI {
             return $conn_resp;
         }
         $conn = $conn_resp->message;
-        $query = "UPDATE article SET title='{$article->title}', content='{$article->content}' WHERE id=$article->id";
+        $content = htmlentities(htmlspecialchars($article->content));
+        $query = "UPDATE article SET title='{$article->title}', content=\"$content\" WHERE id=$article->id";
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }

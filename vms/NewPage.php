@@ -44,10 +44,10 @@ class NewPage {
                     <?php foreach($this->rows as $row) { ?>
                     <div class="news-item">
                         <div class="row">
-                            <div class="col-lg-8 title-news">
+                            <div class="col-lg-12 title-news">
                                 <h4><a href="/news-detail/<?= $row["id"] ?>"><?= $row["title"] ?></a></h4>
                                 <small><?= $row["created_at"] ?></small>
-                                <p><?= substr($row["content"], 0, 100) ?>...</p>
+                                <p class="text-justify"><?= strip_tags(html_entity_decode(htmlspecialchars_decode(substr($row["content"], 0, 500)))) ?>...</p>
                             </div>
                         </div>
                     </div>

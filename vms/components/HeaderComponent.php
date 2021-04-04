@@ -61,7 +61,10 @@ class HeaderComponent
             </div>
         </nav>
         <div class="container mt-4 mb-4 logo">
-            <a href="/"><img src="/assets/img/logo/logo.png" alt="logo" /></a>
+            <a href="/">
+                <h1 style="font-family: 'Exo 2', sans-serif; color: gray">UNISEX 
+                <span style="color: #f46164">STORE</span></h1>
+            </a>
             <form method="post" action="/product" class="form-search">
                 <div class="form-group d-flex">
                     <input type="text" placeholder="Tìm kiếm..." class="search-text-box" name="key" />

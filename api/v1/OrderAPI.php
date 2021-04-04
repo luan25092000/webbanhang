@@ -124,5 +124,18 @@ class OrderAPI {
         $res = Mysqllib::mysql_post_data_from_query($conn, $query);
         return $res;
     }
+
+    public static function unpay(String $id) {
+        // Connect db
+        $conn_resp = Database::connect_db();
+        if(!$conn_resp->status) {
+            return $conn_resp;
+        }
+        $conn = $conn_resp->message;
+        // Query
+        $query = "UPDATE `order` SET `status`=0 WHERE `id`=$id";
+        $res = Mysqllib::mysql_post_data_from_query($conn, $query);
+        return $res;
+    }
 }
 ?>
