@@ -15,6 +15,8 @@ class SendMail
     $mail->SMTPSecure = "STARTTLS";
     $mail->Port       = 587;
     $mail->Host       = "51.79.221.80";
+    // $mail->Add
+    // $mail->Host       = "mail.kaito.ninja";
     $mail->Username   = "noreply@kaito.ninja";
     $mail->Password   = "kaito1@3";
     $mail->IsHTML(true);

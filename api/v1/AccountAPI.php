@@ -192,7 +192,7 @@ class AccountAPI {
 
         if ($res->status) {
             SendMail::post($token, $conn->real_escape_string($account->username), $conn->real_escape_string($account->email));
-            return new ResponseModel(true, $jwt);
+            // return new ResponseModel(true, $jwt);
         }else{
             return new ResponseModel(false);
         }
