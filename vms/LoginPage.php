@@ -63,9 +63,15 @@ class LoginPage {
                          </a>
                     </li>
                     <li>
-                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
+                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fstore.kaito.ninja%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
                               <i class="fas fa-sign-in-alt"></i>
                               Đăng nhập với Google
+                         </a>
+                    </li>
+                    <li>
+                         <a href="https://www.facebook.com/v2.10/dialog/oauth?client_id=446677652971923&state=17258e491c73a929ff58a5d16993198d&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https%3A%2F%2Fstore.kaito.ninja%2Flogin-with-fb.php&scope=email">
+                              <i class="fas fa-sign-in-alt"></i>
+                              Đăng nhập với FB
                          </a>
                     </li>
                     <li>
@@ -107,7 +113,7 @@ class LoginPage {
                     </div>
                     <div class="ml-3">
                          <span style="line-height: 3rem; vertical-align: top;">Hoặc đăng nhập với </span>
-                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
+                         <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fstore.kaito.ninja%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto">
                          <div id="logo">
                               <div class="g-line"></div>
                               <span class="red"></span>
@@ -116,9 +122,10 @@ class LoginPage {
                               <span class="blue"></span>
                          </div>
                          </a>
+                         <!-- https://www.facebook.com/v2.10/dialog/oauth?client_id=921130358246916&state=fb7fba695614825d17acaf52cddb2880&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https%3A%2F%2Fstore.kaito.ninja%2F&scope=email -->
                     </div>
                </form>
-               <!-- <button class="btn-login" onclick="window.location.href='/accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Flogin-with-google.php&state&scope=email%20profile&approval_prompt=auto'">Đăng nhập với Google</button> -->
+               
                
           </div>
      </div>

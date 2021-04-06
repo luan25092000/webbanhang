@@ -1090,3 +1090,7 @@ section.product-4 {
 .table.table-cus th{
     border:none !important;
 }
+
+#facebook a{
+    background-image: url('http://paksef.com/wp-content/uploads/2015/08/facebook-icon-hover.png');
+}

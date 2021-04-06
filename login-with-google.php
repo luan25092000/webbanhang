@@ -16,7 +16,7 @@ use api\v1\AccountAPI;
 
 define('GOOGLE_APP_ID', '164347036653-ktgchofs0isrkp6fdpombkirmvdhvsmk.apps.googleusercontent.com');
 define('GOOGLE_APP_SECRET', '4hdG_4fsSuxbNb9MLRZqMoc-');
-define('GOOGLE_APP_CALLBACK_URL', 'http://localhost:8088/login-with-google.php');
+define('GOOGLE_APP_CALLBACK_URL', 'https://store.kaito.ninja/login-with-google.php');
 
 $client = new Google_Client();
 $client->setClientId(GOOGLE_APP_ID);

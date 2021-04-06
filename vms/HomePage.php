@@ -16,7 +16,7 @@ class HomePage
         $this->title  = "Trang chủ";
         // $this->female_products = ProductAPI::getBySex('Nữ');
         // $this->male_products = ProductAPI::getBySex('Nam');
-
+        
         if (isset($_POST["filter"])) {
             $category = $_POST["filter"];
             if ($_POST["filter"] != "Thời Trang Nữ" && $_POST["type"] == "female") {
